@@ -1,8 +1,8 @@
 # CEPath roadmap
 
-Updated: 2026-10-13. M0 and M1 are authorized. Later milestones are proposals to scope and approve individually; their order may change. No dates or launch commitments have been set.
+Updated: 2026-10-14. M0, M1, and M2 Design Foundation are authorized. Later milestones remain proposals to scope and approve individually; no dates or launch commitments have been set.
 
-CE-NAV-001 constrains future curriculum implementation; it does not authorize that implementation. Preserve existing IDs and map the earlier supplied milestone numbers by feature: Milestone 04 Subject Catalog → M1a (deferred from the original M1); 05 Module and Lesson Navigation → M2; 06 Lesson Reader → M3; 08 Progress Tracking → M6; 09 Student Dashboard → M7. M4 here is practice, M5 is accounts, and M8 is hosting; their scopes remain unchanged.
+CE-NAV-001 constrains future curriculum implementation; it does not authorize it. The Product Owner's current Milestone 02 is Design Foundation. The previously planned M2 module-navigation scope is preserved as M2a. Earlier feature mappings are now: Subject Catalog → M1a; Module and Lesson Navigation → M2a; Lesson Reader → M3; Progress Tracking → M6; Student Dashboard → M7. Practice (M4), accounts (M5), and hosting (M8) retain their scopes.
 
 ## Phase 0 — Project context
 
@@ -19,16 +19,23 @@ CE-NAV-001 constrains future curriculum implementation; it does not authorize th
 - Outcome: the Product Owner can install dependencies, run the application locally, and open a temporary homepage.
 - Approved scope (2026-10-13): smallest Next.js/TypeScript/Tailwind scaffold, minimal App Router layout and homepage, development/check/build commands, and concise README. The current instruction narrows the original M1; curriculum overview and subject access move to planned M1a below.
 - Acceptance: stable compatible dependencies and reproducible lockfile; lint and type checks pass; production build succeeds; development and production servers serve the homepage locally. Verify Tailwind styles, semantic heading/main structure, desktop/mobile rendering, and default missing-route handling. No full landing design, authentication, database, curriculum, progress, quizzes, or premium features.
-- Completion evidence (2026-10-13): npm ci succeeded with zero reported vulnerabilities; npm run check passed (lint and strict types); npm run build passed. Development and production HTTP checks returned 200 for / and 404 for an unknown route; compiled Tailwind CSS served successfully. Browser checks at 1280×800 and 375×812 showed applied styles and no horizontal overflow, with no console warnings/errors; final production render also checked. Development preserves AGENTS.md with agentRules disabled. Source/configuration inspection completed locally; no unit-test framework or full multi-agent review was introduced. The design detector's Arial warning is an intentional temporary-style exception, not approved branding. No commit or deployment; M1a and M2 remain Planned.
+- Completion evidence (2026-10-13): npm ci succeeded with zero reported vulnerabilities; npm run check passed (lint and strict types); npm run build passed. Development and production HTTP checks returned 200 for / and 404 for an unknown route; compiled Tailwind CSS served successfully. Browser checks at 1280×800 and 375×812 showed applied styles and no horizontal overflow, with no console warnings/errors; final production render also checked. Development preserves AGENTS.md with agentRules disabled. Source/configuration inspection completed locally; no unit-test framework or full multi-agent review was introduced. The design detector's Arial warning was an intentional temporary-style exception, not approved branding. Subsequently committed and pushed to main at the Product Owner's request (cb8e7d3); no deployment. M1a remains Planned; M2's later authorization and completion are recorded below.
+
+### M2: Design Foundation — Completed
+
+- Outcome: a distinctive, accessible visual foundation for the Filipino civil engineering learning platform, demonstrated on the existing public page.
+- Approved scope (2026-10-14): coherent color, typography, spacing and reading-layout tokens; responsive header/navigation, page container and footer; subtle engineering identity; design documentation. The Product Owner selected the engineering faculty bulletin direction with direct code implementation.
+- Acceptance: actual navigation and keyboard skip/section links work; readable desktop/mobile layout; normal text contrast meets 4.5:1; responsive reflow, focus, and reduced-motion support; lint/types/build pass; Impeccable finish review and DESIGN.md/design sidecar completed. No dashboard, lesson reader, or curriculum catalog.
+- Completion evidence (2026-10-14): npm run check and production build passed. Production browser inspection at 1440×900, 1280×720, and 390×844 showed loaded local fonts, visible navigation, and no horizontal overflow; an additional 320px-width check passed. Keyboard skip, approach/about anchors, and return-to-top transferred focus correctly. Main navigation targets measured at least 44px; normal text contrast measured at least 5.89:1 across the implemented pairings. Homepage and both local font assets returned 200; an unknown route returned 404 without falsely marking Home current. No browser warnings/errors. Reduced-motion CSS was inspected but not browser-emulated. Impeccable's detector returned no findings; its source/screenshot finish review returned ship against the approved textual direction (no raster-comp or catalog-image benchmark). DESIGN.md and the schemaVersion 2 sidecar were checked for token/narrative consistency; the official schema linter/live panel were not run. No new dependencies or unit-test framework. Changes remain uncommitted; no push or deployment. M1a, M2a, and later milestones remain Planned.
 
 ### M1a: Public curriculum overview and subject catalog — Planned
 
 - Outcome: a student can open a responsive public page, read the platform's purpose, and access each of the three subject overviews.
-- Proposed scope: build on M1 with accessible public subject overviews and separate subject data with stable IDs. Agree on visual direction before coding; update PRODUCT.md and create DESIGN.md only as choices are established.
+- Proposed scope: build on M1 and M2 with accessible public subject overviews and separate subject data with stable IDs. Reuse the established visual foundation and update relevant product/design context when behavior expands.
 - Acceptance: page loads on desktop and mobile; heading structure, contrast, and keyboard navigation checked; applicable type, lint, and production-build checks pass. No accounts, lesson catalog, or nonfunctional study links.
 - CE-NAV-001 acceptance (Subject Catalog): PSAD, MSTE, and HGE are independently accessible anonymously. No subject requires another subject's completion; the catalog does not create lesson-unlocking rules.
 
-### M2: One subject-to-module path — Planned
+### M2a: One subject-to-module path — Planned
 
 - Outcome: a student can open one agreed subject, inspect one sample module's lesson sequence, and return to the overview.
 - Acceptance: predictable routes and stable IDs; useful missing-content handling; unavailable content is clearly labeled; navigation works by keyboard. Agree on the sample module and lesson titles first; do not create a bulk catalog.

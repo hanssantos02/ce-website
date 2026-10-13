@@ -1,6 +1,14 @@
 # CEPath product behavior
 
-Updated: 2026-10-13. The application scaffold contains only a temporary homepage. Curriculum and progress behavior below is approved future behavior, not implemented features. See [STRATEGY.md](STRATEGY.md) for product direction and [CE-NAV-001](docs/DECISIONS.md#ce-nav-001--guided-but-flexible-curriculum-navigation--approved) for rationale.
+Updated: 2026-10-14. The application has a design foundation and a public page explaining CEPath's purpose and learning approach. Curriculum and progress behavior below remains approved future behavior, not implemented features. See [STRATEGY.md](STRATEGY.md) for direction, [DESIGN.md](DESIGN.md) for the visual system, and [CE-NAV-001](docs/DECISIONS.md#ce-nav-001--guided-but-flexible-curriculum-navigation--approved) for curriculum rationale.
+
+## Design Foundation — Milestone 02
+
+The Product Owner selected an engineering faculty bulletin identity: white reading surfaces, deep blue ink, academic headings, and a compact section index. This is a shared visual foundation for future learning surfaces, demonstrated on the existing public homepage.
+
+The shared header offers Home, Our approach, and About CEPath. All destinations exist; section links move to focusable content. Navigation stays visible on mobile, wrapping as needed instead of hiding a three-link menu. A skip link bypasses the header. The shared footer returns to the main content. Home is marked current only on the homepage, including when the shell appears on a missing route.
+
+The page introduces the project, states that curriculum and progress tracking are not yet available, and explains the existing four-part learning philosophy. These statements describe intended learning behavior, not an interactive lesson or dashboard. The implemented reusable layout set is a page container, header, and footer. Visual tokens and usage rules belong in DESIGN.md.
 
 ## Guided but flexible curriculum — CE-NAV-001
 

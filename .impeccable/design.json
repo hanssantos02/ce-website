@@ -1,0 +1,249 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-13T16:40:34.856122Z",
+  "title": "Design System: CEPath",
+  "extensions": {
+    "colorMeta": {
+      "accent-blue": {
+        "role": "primary",
+        "displayName": "Faculty Blue",
+        "tonalRamp": [
+          "oklch(0.150 0.10658 256.06)",
+          "oklch(0.264 0.10658 256.06)",
+          "oklch(0.379 0.10658 256.06)",
+          "oklch(0.493 0.10658 256.06)",
+          "oklch(0.607 0.10658 256.06)",
+          "oklch(0.721 0.10658 256.06)",
+          "oklch(0.836 0.10658 256.06)",
+          "oklch(0.950 0.10658 256.06)"
+        ]
+      },
+      "accent-soft": {
+        "role": "primary",
+        "displayName": "Blue Wash",
+        "tonalRamp": [
+          "oklch(0.150 0.01312 251.56)",
+          "oklch(0.264 0.01312 251.56)",
+          "oklch(0.379 0.01312 251.56)",
+          "oklch(0.493 0.01312 251.56)",
+          "oklch(0.607 0.01312 251.56)",
+          "oklch(0.721 0.01312 251.56)",
+          "oklch(0.836 0.01312 251.56)",
+          "oklch(0.950 0.01312 251.56)"
+        ]
+      },
+      "focus-color": {
+        "role": "primary",
+        "displayName": "Focus Blue",
+        "tonalRamp": [
+          "oklch(0.150 0.16175 258.78)",
+          "oklch(0.264 0.16175 258.78)",
+          "oklch(0.379 0.16175 258.78)",
+          "oklch(0.493 0.16175 258.78)",
+          "oklch(0.607 0.16175 258.78)",
+          "oklch(0.721 0.16175 258.78)",
+          "oklch(0.836 0.16175 258.78)",
+          "oklch(0.950 0.16175 258.78)"
+        ]
+      },
+      "surface-paper": {
+        "role": "neutral",
+        "displayName": "Cool Paper",
+        "tonalRamp": [
+          "oklch(0.150 0.00453 258.32)",
+          "oklch(0.264 0.00453 258.32)",
+          "oklch(0.379 0.00453 258.32)",
+          "oklch(0.493 0.00453 258.32)",
+          "oklch(0.607 0.00453 258.32)",
+          "oklch(0.721 0.00453 258.32)",
+          "oklch(0.836 0.00453 258.32)",
+          "oklch(0.950 0.00453 258.32)"
+        ]
+      },
+      "surface-reading": {
+        "role": "neutral",
+        "displayName": "Reading White",
+        "tonalRamp": [
+          "oklch(0.150 0.00000 0.00)",
+          "oklch(0.264 0.00000 0.00)",
+          "oklch(0.379 0.00000 0.00)",
+          "oklch(0.493 0.00000 0.00)",
+          "oklch(0.607 0.00000 0.00)",
+          "oklch(0.721 0.00000 0.00)",
+          "oklch(0.836 0.00000 0.00)",
+          "oklch(0.950 0.00000 0.00)"
+        ]
+      },
+      "text-ink": {
+        "role": "neutral",
+        "displayName": "Deep Blue Ink",
+        "tonalRamp": [
+          "oklch(0.150 0.05072 250.88)",
+          "oklch(0.264 0.05072 250.88)",
+          "oklch(0.379 0.05072 250.88)",
+          "oklch(0.493 0.05072 250.88)",
+          "oklch(0.607 0.05072 250.88)",
+          "oklch(0.721 0.05072 250.88)",
+          "oklch(0.836 0.05072 250.88)",
+          "oklch(0.950 0.05072 250.88)"
+        ]
+      },
+      "text-muted": {
+        "role": "neutral",
+        "displayName": "Slate Text",
+        "tonalRamp": [
+          "oklch(0.150 0.03904 251.31)",
+          "oklch(0.264 0.03904 251.31)",
+          "oklch(0.379 0.03904 251.31)",
+          "oklch(0.493 0.03904 251.31)",
+          "oklch(0.607 0.03904 251.31)",
+          "oklch(0.721 0.03904 251.31)",
+          "oklch(0.836 0.03904 251.31)",
+          "oklch(0.950 0.03904 251.31)"
+        ]
+      },
+      "rule-color": {
+        "role": "neutral",
+        "displayName": "Measured Rule",
+        "tonalRamp": [
+          "oklch(0.150 0.02045 250.40)",
+          "oklch(0.264 0.02045 250.40)",
+          "oklch(0.379 0.02045 250.40)",
+          "oklch(0.493 0.02045 250.40)",
+          "oklch(0.607 0.02045 250.40)",
+          "oklch(0.721 0.02045 250.40)",
+          "oklch(0.836 0.02045 250.40)",
+          "oklch(0.950 0.02045 250.40)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Bounded page heading, with balanced wrapping and an 18ch cap."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headings, with balanced wrapping and an 18ch cap."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Study-row headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Sustained reading prose, capped at 68ch."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Opening explanation, capped at 54ch."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Navigation, index, numbering, notes, and footer; the index heading uses weight 600."
+      },
+      "wordmark": {
+        "displayName": "Wordmark",
+        "purpose": "Compact CEPath name beside the structural mark."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "anchor-scroll",
+        "value": "scroll-behavior: smooth",
+        "purpose": "Native section navigation; the reduced-motion media query changes this to auto."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }",
+        "purpose": "Respect reduced motion without introducing animation."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "stacked-reading-layout",
+        "value": "48rem"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Wordmark",
+      "kind": "custom",
+      "refersTo": "wordmark",
+      "description": "Home link with the compact academic name and structural portal-frame mark.",
+      "html": "<a class=\"ds-brand\" href=\"/\" aria-label=\"CEPath home\"><svg viewBox=\"0 0 40 36\" width=\"40\" height=\"36\" aria-hidden=\"true\"><path d=\"M6 30V6h28v24M6 6l28 24M0 31h12m16 0h12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"/></svg><span class=\"ds-brand-name\">CEPath</span></a>",
+      "css": ".ds-brand{display:inline-flex;align-items:center;gap:var(--space-3,.75rem);color:var(--accent-blue,#234f88);flex-shrink:0;text-decoration:none;}.ds-brand-name{font-family:var(--font-source-serif,\"Source Serif 4\"),serif;font-size:1.875rem;font-weight:600;line-height:1.2;}.ds-brand:focus-visible{outline:3px solid var(--focus-color,#1c5cba);outline-offset:4px;}"
+    },
+    {
+      "name": "Main Navigation",
+      "kind": "nav",
+      "refersTo": "navigation-link",
+      "description": "Visible wrapping navigation with a ruled current-page state and blue hover field.",
+      "html": "<nav class=\"ds-main-nav\" aria-label=\"Main navigation\"><a href=\"/\" aria-current=\"page\">Home</a><a href=\"/#approach\">Our approach</a><a href=\"/#about\">About CEPath</a></nav>",
+      "css": ".ds-main-nav{display:flex;gap:var(--space-8,2rem);font-family:var(--font-source-sans,\"Source Sans 3\"),sans-serif;color:var(--text-ink,#182e45);line-height:1.7;}.ds-main-nav a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;padding-inline:var(--space-2,.5rem);font-size:1rem;font-weight:400;color:inherit;text-decoration:none;border-bottom:2px solid transparent;}.ds-main-nav a:hover,.ds-main-nav a[aria-current=\"page\"]{color:var(--accent-blue,#234f88);border-bottom-color:var(--accent-blue,#234f88);}.ds-main-nav a:hover{background:var(--accent-soft,#e9f0f8);}.ds-main-nav a:focus-visible{outline:3px solid var(--focus-color,#1c5cba);outline-offset:4px;}@media(max-width:48rem){.ds-main-nav{width:100%;gap:var(--space-6,1.5rem);flex-wrap:wrap;}}"
+    },
+    {
+      "name": "Text Link",
+      "kind": "custom",
+      "refersTo": "text-link",
+      "description": "Underlined reading action with a generous vertical target and stronger hover underline.",
+      "html": "<a class=\"ds-text-link\" href=\"#approach\">Read our learning approach</a>",
+      "css": ".ds-text-link{display:inline-flex;align-items:center;min-height:44px;margin-top:var(--space-6,1.5rem);font-family:var(--font-source-sans,\"Source Sans 3\"),sans-serif;font-size:1.125rem;line-height:1.7;color:var(--accent-blue,#234f88);text-decoration:underline;font-weight:600;text-underline-offset:.22em;text-decoration-thickness:1px;}.ds-text-link:hover{text-decoration-thickness:2px;}.ds-text-link:focus-visible{outline:3px solid var(--focus-color,#1c5cba);outline-offset:4px;}"
+    },
+    {
+      "name": "Section Index",
+      "kind": "nav",
+      "refersTo": "section-index",
+      "description": "A compact native section index with a separated development notice.",
+      "html": "<aside class=\"ds-page-index\"><nav aria-label=\"On this page\"><h2 class=\"ds-index-title\">On this page</h2><a href=\"#approach\">Our learning approach</a><a href=\"#about\">About CEPath</a></nav><p class=\"ds-development-note\">In development. Curriculum and progress tracking are not yet available.</p></aside>",
+      "css": ".ds-page-index{border-top:2px solid var(--accent-blue,#234f88);padding-top:var(--space-4,1rem);font-family:var(--font-source-sans,\"Source Sans 3\"),sans-serif;font-size:1rem;line-height:1.7;color:var(--text-ink,#182e45);}.ds-index-title{margin:0 0 var(--space-2,.5rem);font-size:1rem;font-weight:600;}.ds-page-index a{display:flex;align-items:center;min-height:44px;color:var(--accent-blue,#234f88);text-decoration:underline;text-underline-offset:.22em;text-decoration-thickness:1px;}.ds-page-index a:hover{text-decoration-thickness:2px;}.ds-page-index a:focus-visible{outline:3px solid var(--focus-color,#1c5cba);outline-offset:4px;}.ds-development-note{padding-top:var(--space-6,1.5rem);margin:var(--space-4,1rem) 0 0;border-top:1px solid var(--rule-color,#cbd6e2);color:var(--text-muted,#506276);}@media(max-width:48rem){.ds-page-index{max-width:68ch;}.ds-page-index nav{display:flex;flex-wrap:wrap;gap:var(--space-2,.5rem) var(--space-6,1.5rem);}.ds-index-title{width:100%;margin-bottom:0;}.ds-development-note{padding-top:var(--space-4,1rem);margin-top:var(--space-3,.75rem);}}"
+    },
+    {
+      "name": "Ordered Study Rows",
+      "kind": "custom",
+      "refersTo": "study-row",
+      "description": "Semantic numbered study rows with thin dividers, academic titles, and readable explanations.",
+      "html": "<ol class=\"ds-approach-list\"><li><span class=\"ds-step-number\" aria-hidden=\"true\">01</span><div><h3>Learn the concept.</h3><p>Start with clear explanations and the ideas behind each formula.</p></div></li><li><span class=\"ds-step-number\" aria-hidden=\"true\">02</span><div><h3>Understand the engineering.</h3><p>Connect the mathematics to the forces, materials, and systems it describes.</p></div></li></ol>",
+      "css": ".ds-approach-list{list-style:none;margin:0;padding:0;font-family:var(--font-source-sans,\"Source Sans 3\"),sans-serif;font-size:1.125rem;line-height:1.7;color:var(--text-ink,#182e45);}.ds-approach-list li{display:grid;grid-template-columns:2rem minmax(0,1fr);gap:var(--space-6,1.5rem);padding-block:var(--space-6,1.5rem);border-bottom:1px solid var(--rule-color,#cbd6e2);}.ds-approach-list li:first-child{padding-top:0;}.ds-approach-list li:last-child{padding-bottom:0;border-bottom:0;}.ds-step-number{color:var(--accent-blue,#234f88);font-size:1rem;font-variant-numeric:tabular-nums;padding-top:var(--space-1,.25rem);}.ds-approach-list h3{margin:0;font-family:var(--font-source-serif,\"Source Serif 4\"),serif;font-size:1.5rem;font-weight:500;line-height:1.35;}.ds-approach-list p{margin:var(--space-2,.5rem) 0 0;color:var(--text-muted,#506276);max-width:68ch;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Engineering faculty bulletin — white reading surfaces, deep blue ink, academic headings, and a compact section index.",
+    "overview": "CEPath uses the clarity of an engineering faculty bulletin: open reading sheets, academic headings, measured rules, and a small structural mark. The character is modern, calm, and precise, with enough space to read beside notes under ordinary study light.\n\nEngineering identity comes from geometry and orderly typography. Flat surfaces and a restrained blue accent keep attention on the text; oversized promotional heroes, generic SaaS styling, glass effects, and distracting animation are outside the selected direction.",
+    "keyCharacteristics": [
+      "White reading surfaces and lightly tinted supporting fields.",
+      "Serif academic hierarchy with clear sans-serif prose and navigation.",
+      "Compact visible navigation, a ruled section index, and ordered study rows."
+    ],
+    "rules": [
+      {
+        "name": "The One Accent Rule",
+        "body": "Use the existing blue family for identity and interaction; keep reading surfaces neutral.",
+        "section": "colors"
+      },
+      {
+        "name": "The Reading Measure Rule",
+        "body": "Cap sustained prose at 68ch and keep headings distinct through the serif hierarchy.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Sheet Rule",
+        "body": "Group content with spacing, neutral fields, and rules; preserve the open reading sheet.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use white reading sheets, the existing blue family, and measured neutral rules.",
+      "Do pair Source Serif 4 headings with Source Sans 3 prose and preserve the 68ch reading cap.",
+      "Do keep navigation visible on narrow screens, with 44px targets and clear keyboard focus.",
+      "Do retain semantic headings, ordered lists, native anchors, the skip link, and reduced-motion support."
+    ],
+    "donts": [
+      "Don't introduce generic SaaS card grids, oversized empty heroes, excessive gradients, or glass effects.",
+      "Don't add decorative shadows, distracting animation, or a second accent family to this selected world.",
+      "Don't present future controls or fabricated progress as part of the existing component system."
+    ]
+  }
+}

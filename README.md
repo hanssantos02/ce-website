@@ -3,8 +3,9 @@
 An original learning platform for Filipino civil engineering students preparing
 for the CELE. CEPath is a working title.
 
-Milestone 01 provides only an application scaffold and temporary homepage.
-Curriculum navigation, accounts, and progress are future work.
+Milestone 01 established the application scaffold. Milestone 02 adds the shared
+design foundation and a public page explaining CEPath's purpose and learning
+approach. Curriculum, accounts, and progress remain future work.
 
 ## Run locally
 
@@ -36,16 +37,21 @@ run `npm run dev -- --port 3001` or `npm start -- --port 3001`.
 
 ## Code structure
 
-- `app/page.tsx` defines the `/` homepage. App Router folders will define future routes.
-- `app/layout.tsx` provides the shared HTML document, language, metadata, and global CSS import.
-- `app/globals.css` loads Tailwind and temporary base styles; utility classes in the page provide spacing and typography.
+- `app/page.tsx` defines `/`, with working links to the learning approach and project context.
+- `app/layout.tsx` provides the document, metadata, local fonts, shared header/footer, and skip-to-content main region.
+- `app/globals.css` loads Tailwind and defines the design tokens, typography, spacing, responsive layout, and focus/reduced-motion rules.
+- `components/layout/` contains the reused page container, header/navigation, and footer.
+- `app/fonts/` contains self-hosted Adobe fonts, upstream references, and SIL OFL licenses; no runtime font requests leave the site.
+- `DESIGN.md` documents the implemented visual system; `.impeccable/design.json` supports Impeccable's design preview.
 - `postcss.config.mjs` enables Tailwind's CSS compilation.
 - `next.config.ts` disables generated agent instructions so running development does not rewrite AGENTS.md.
 - `tsconfig.json` enables strict type checking; `eslint.config.mjs` configures recommended JavaScript/TypeScript lint rules.
 - `package-lock.json` records the exact installed dependency tree. Use `npm ci` to reproduce it.
 
-The homepage is a Server Component by default: no client state or browser event
-handlers are needed. Next.js supplies the default missing-route page. There is no
+The homepage and main layout are Server Components. The header uses a small client
+component to identify the current route correctly, including on a missing page.
+Native section anchors preserve browser focus behavior. Next.js supplies the
+default missing-route page. There is no
 API, database, or test framework in this scaffold.
 `next-env.d.ts`, `.next/`, and TypeScript's build cache are generated and ignored.
 Do not edit generated files.
@@ -58,6 +64,7 @@ Next.js type generation and the production build still check framework integrati
 ## Project context
 
 Read [AGENTS.md](AGENTS.md), [STRATEGY.md](STRATEGY.md),
-[PRODUCT.md](PRODUCT.md), [docs/ROADMAP.md](docs/ROADMAP.md), and
+[PRODUCT.md](PRODUCT.md), [DESIGN.md](DESIGN.md), [docs/ROADMAP.md](docs/ROADMAP.md), and
 [docs/DECISIONS.md](docs/DECISIONS.md) before starting another milestone.
-Visual branding and curriculum implementation remain unapproved.
+The bulletin visual direction is selected; curriculum implementation requires
+separate approval.

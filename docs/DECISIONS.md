@@ -1,6 +1,6 @@
 # CEPath decision record
 
-Updated: 2026-10-13. **Established** means supplied by the Product Owner's brief or directly observed. **Proposed** means awaiting an explicit decision. M1 authorizes only the minimal application scaffold; curriculum and account architecture remain deferred.
+Updated: 2026-10-14. **Established** means supplied by the Product Owner or directly observed. **Proposed** means awaiting a decision. M1 authorized the scaffold; M2 authorizes the design foundation. Curriculum and account architecture remain deferred.
 
 ## D001 — Documentation first; one milestone at a time — Established
 
@@ -36,9 +36,9 @@ Preferred defaults from the brief: Next.js, TypeScript, Tailwind CSS, Supabase P
 
 When accounts and progress are introduced, enforce server-side authorization and Supabase RLS for user-owned data; keep secrets out of client code. Browser local storage cannot be the authoritative store for authenticated progress. CE-NAV-001 settles independent lesson statuses, preservation on revisit, and the Continue Learning behavior; remaining schema and event details will be settled in the relevant milestones. Personal progress authorization does not restrict published free lessons; no tables or APIs are created now.
 
-## D007 — Accessible reading and coherent engineering identity — Established principles; visual choices deferred
+## D007 — Accessible reading and coherent engineering identity — Established
 
-Use Impeccable for new UI surfaces and major frontend work. Prioritize technical readability, math, clear sequence and status, keyboard access, contrast, and responsive layouts. Keep engineering motifs subtle; avoid clutter, generic SaaS templates, huge empty heroes, excessive gradients and glass effects, or distracting animation. Palette, typography, layouts, and components are not yet approved. PRODUCT.md now records CE-NAV-001's approved behavior; DESIGN.md remains deferred until visual decisions justify it.
+Use Impeccable for new UI surfaces and major frontend work. Prioritize technical readability, math, clear sequence and status, keyboard access, contrast, and responsive layouts. Keep engineering motifs subtle; avoid clutter, generic SaaS templates, huge empty heroes, excessive gradients and glass effects, or distracting animation. The Product Owner selected the engineering faculty bulletin direction in M2; see D011 and DESIGN.md for its built expression. PRODUCT.md records behavior, including CE-NAV-001, separately from visual tokens.
 
 ## D008 — Monetization and advanced features deferred — Established
 
@@ -62,6 +62,8 @@ Approved by the Product Owner on 2026-10-13. Documentation updated; implementati
 
 **Compatibility and open details:** This clarifies the existing structured-learning strategy without changing the content-quality, security, or monetization constraints. D006's previously open resume rule is now settled as above; schema, visit events, progress denominator, and recommendation selection details still need milestone-specific planning. Supplied Milestones 04/05/06/08/09 originally mapped by feature to M1/M2/M3/M6/M7; subject catalog now moves to M1a under D010. CE-NAV-001's approval covered documentation only; subsequent M1 approval covers the scaffold, not curriculum implementation.
 
+The later M2 Design Foundation assignment moves the original module-navigation plan to M2a without changing its curriculum requirements.
+
 ## D010 — Minimal application scaffold — Established
 
 Approved 2026-10-13: narrow M1 to a working Next.js/TypeScript/Tailwind application with a temporary homepage and reliable local commands. Move the originally proposed curriculum overview/subject access to planned M1a; leave M2 and subsequent implementation unstarted.
@@ -73,3 +75,13 @@ Use supported ESLint 10.12.0 with @eslint/js 10.0.1 and typescript-eslint 8.71.1
 App Router's app/layout.tsx owns the shared document and metadata; app/page.tsx owns /. Keep the page a Server Component and use system fonts with temporary neutral styles. No external font downloads, client state, service credentials, or unused routes are required. Default Next.js handling supplies missing-route behavior. The only Next.js configuration disables agentRules: its development default appends generated instructions to AGENTS.md, while our durable project instructions should stay under project control.
 
 For this scaffold, lint, generated route types/TypeScript checks, production build, local HTTP checks, and bounded browser inspection replace unit-test setup. There is no business logic to unit-test yet; introducing Vitest/Playwright as repository dependencies is deferred until a feature needs them. This minimizes setup while still verifying the actual runnable application.
+
+## D011 — Engineering faculty bulletin design foundation — Established
+
+On 2026-10-14 the Product Owner requested Milestone 02 Design Foundation and selected white reading surfaces, deep blue ink, academic headings, and a compact section index, with direct code implementation. This establishes the visual identity without implementing curriculum, a lesson reader, or a dashboard. The previous M2 module-navigation scope is retained as planned M2a; the new design foundation is M2.
+
+Use a restrained blue accent, clear reading hierarchy, flat surfaces/rules, and a small geometric structural mark. Source Serif 4 headings and Source Sans 3 body/navigation are self-hosted through next/font/local with their upstream SIL OFL licenses. The two unmodified upright variable files total about 585 KiB; this avoids runtime third-party requests and preserves upstream glyph coverage, at the cost of a larger first-visit font transfer. Fonts are visible above the fold and remain preloaded; optimization can be assessed against an actual workload later.
+
+Keep the reusable layout set to a page container, shared header, and shared footer. The root layout owns the main/skip-link landmark. The header's small client boundary reads the pathname so Home is not falsely marked current on a missing route; page content, main layout, and footer remain server-rendered. Native section anchors provide browser scrolling and focus without custom event handlers. Three navigation links stay visible and wrap on small screens; no menu state or unused control library is needed.
+
+CSS custom properties are the implementation source for design tokens; DESIGN.md and .impeccable/design.json document that source and must stay synchronized. The existing page demonstrates the system with the approved product purpose and learning philosophy, explicitly identifying curriculum/progress as unavailable. No new package dependency is introduced.

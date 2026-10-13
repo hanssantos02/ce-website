@@ -49,6 +49,7 @@
 ## Interface and skills
 
 - Use Impeccable for new UI surfaces and major frontend design work. Follow its actual workflow and maintain appropriate design context once choices are established.
+- Preserve the Product Owner's engineering faculty bulletin direction from Milestone 02. Read DESIGN.md and the matching .impeccable surface brief before UI work; use existing color/spacing/font tokens and the three layout components instead of inventing a new identity. Keep documented tokens synchronized with app/globals.css. Do not add unavailable-feature navigation links.
 - Favor technical-documentation readability, clear learning order, responsive layouts, visible lesson status, accessible contrast, keyboard access, and readable math.
 - Use a coherent professional identity with subtle engineering motifs. Avoid generic SaaS layouts, oversized empty heroes, excessive gradients or glass effects, clutter, and distracting animation.
 - Use relevant installed Compound Engineering skills selectively: ce-strategy for direction, ce-brainstorm for unresolved requirements, ce-plan for implementation plans, ce-work for approved implementation, ce-debug for diagnosis, and review/testing skills when appropriate.
