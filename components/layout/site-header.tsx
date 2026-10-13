@@ -25,8 +25,8 @@ export function SiteHeader() {
           <Link href="/" aria-current={pathname === "/" ? "page" : undefined}>
             Home
           </Link>
-          <a href="/#approach">Our approach</a>
-          <a href="/#about">About CEPath</a>
+          <a href="/#curriculum">Curriculum</a>
+          <a href="/#how-it-works">How it works</a>
         </nav>
       </PageContainer>
     </header>

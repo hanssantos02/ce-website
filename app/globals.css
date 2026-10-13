@@ -371,3 +371,324 @@ a {
     scroll-behavior: auto;
   }
 }
+
+/* Landing page: the faculty bulletin's reading sheets, expanded for discovery. */
+.landing-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: var(--space-16);
+  align-items: start;
+}
+
+.hero-audience {
+  color: var(--text-muted);
+  margin-top: var(--space-4);
+  max-width: 54ch;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4) var(--space-6);
+  margin-top: var(--space-8);
+}
+
+.primary-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: 48px;
+  padding: var(--space-3) var(--space-6);
+  background: var(--accent-blue);
+  color: var(--surface-reading);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.primary-link:hover {
+  background: var(--text-ink);
+  text-decoration: underline;
+}
+
+.primary-link svg {
+  flex-shrink: 0;
+}
+
+.hero-actions .text-link {
+  margin-top: 0;
+  font-size: 1rem;
+}
+
+.availability-note {
+  max-width: 54ch;
+  margin-top: var(--space-6);
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.hero-support {
+  min-width: 0;
+}
+
+.engineering-figure {
+  color: var(--accent-blue);
+  margin-bottom: var(--space-8);
+}
+
+.structure-drawing {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.drawing-secondary {
+  color: var(--text-muted);
+}
+
+.engineering-figure figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding-top: var(--space-2);
+  font-size: 1rem;
+}
+
+.drawing-caption-note {
+  color: var(--text-muted);
+}
+
+.hero-support .page-index nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-6);
+}
+
+.hero-support .index-title {
+  width: 100%;
+}
+
+.curriculum-section {
+  background: var(--surface-paper);
+}
+
+.curriculum-introduction {
+  margin-bottom: var(--space-12);
+}
+
+.subject-previews {
+  list-style: none;
+  border-top: 1px solid var(--rule-color);
+}
+
+.subject-preview {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-8);
+  padding-block: var(--space-8);
+  border-bottom: 1px solid var(--rule-color);
+}
+
+.subject-identity {
+  color: var(--accent-blue);
+}
+
+.subject-identity p {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: var(--space-4);
+}
+
+.subject-heading h3, .value-list h3 {
+  font-family: var(--font-source-serif), serif;
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1.35;
+  text-wrap: balance;
+}
+
+.subject-heading .project-note {
+  margin-top: var(--space-4);
+}
+
+.subject-details {
+  color: var(--text-muted);
+  max-width: var(--reading-width);
+}
+
+.topic-label {
+  color: var(--text-ink);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: var(--space-4);
+}
+
+.subject-details ul {
+  list-style: disc;
+  padding-left: var(--space-4);
+  font-size: 1rem;
+  margin-top: var(--space-2);
+}
+
+.subject-details li + li {
+  margin-top: var(--space-1);
+}
+
+.curriculum-source {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin-top: var(--space-6);
+  max-width: var(--reading-width);
+}
+
+.curriculum-source a {
+  color: var(--accent-blue);
+  text-decoration: underline;
+}
+
+.curriculum-source a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.how-section {
+  background: var(--surface-reading);
+}
+
+.anchor-target {
+  scroll-margin-top: var(--space-6);
+}
+
+.journey-note {
+  padding-top: var(--space-6);
+  margin-top: var(--space-8);
+  border-top: 2px solid var(--accent-blue);
+  max-width: var(--reading-width);
+  color: var(--accent-blue);
+}
+
+.about-section {
+  background: var(--surface-paper);
+}
+
+.value-list {
+  list-style: none;
+}
+
+.value-list li + li {
+  margin-top: var(--space-8);
+}
+
+.value-list p {
+  color: var(--text-muted);
+  max-width: var(--reading-width);
+  margin-top: var(--space-2);
+}
+
+.closing-section {
+  background: var(--accent-soft);
+}
+
+.closing-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+}
+
+.closing-inner .section-title {
+  max-width: 28ch;
+}
+
+.closing-inner p {
+  color: var(--text-muted);
+  margin-top: var(--space-4);
+  max-width: var(--reading-width);
+}
+
+.closing-inner .primary-link {
+  flex-shrink: 0;
+}
+
+.site-footer {
+  background: var(--surface-reading);
+}
+
+.footer-description {
+  max-width: 36ch;
+}
+
+.footer-brand {
+  font-family: var(--font-source-serif), serif;
+  font-size: 1.875rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--accent-blue);
+  margin-bottom: var(--space-3);
+}
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-6);
+}
+
+.footer-disclaimer {
+  border-top: 1px solid var(--rule-color);
+  padding-top: var(--space-6);
+  margin-top: var(--space-6);
+  max-width: var(--reading-width);
+}
+
+@media (max-width: 64rem) {
+  .subject-preview {
+    grid-template-columns: 6rem minmax(0, 1fr);
+  }
+  .subject-details {
+    grid-column: 2;
+  }
+  .subject-heading .project-note {
+    margin-top: var(--space-2);
+  }
+  .closing-inner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 48rem) {
+  .landing-hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-12);
+  }
+  .hero-support {
+    width: 100%;
+    max-width: 30rem;
+  }
+  .subject-preview {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+  .subject-identity {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+  .subject-identity p {
+    margin-top: 0;
+  }
+  .subject-details {
+    grid-column: auto;
+  }
+  .subject-heading h3 {
+    text-wrap: pretty;
+  }
+  .curriculum-introduction {
+    margin-bottom: var(--space-8);
+  }
+  .footer-inner {
+    gap: var(--space-6);
+  }
+}

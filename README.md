@@ -4,8 +4,9 @@ An original learning platform for Filipino civil engineering students preparing
 for the CELE. CEPath is a working title.
 
 Milestone 01 established the application scaffold. Milestone 02 adds the shared
-design foundation and a public page explaining CEPath's purpose and learning
-approach. Curriculum, accounts, and progress remain future work.
+design foundation. Milestone 03 expands the homepage into a landing page with
+static subject previews and the planned learning journey. Subject pages, lessons,
+accounts, practice, and progress remain future work.
 
 ## Run locally
 
@@ -37,7 +38,9 @@ run `npm run dev -- --port 3001` or `npm start -- --port 3001`.
 
 ## Code structure
 
-- `app/page.tsx` defines `/`, with working links to the learning approach and project context.
+- `app/page.tsx` defines `/`, with a hero, curriculum preview, planned journey, values, and working section CTAs.
+- `content/landing.ts` keeps descriptive subject previews, journey steps, and values separate from UI; it is not a curriculum database.
+- `components/landing/engineering-visual.tsx` contains the authored geometric diagram and subject symbols.
 - `app/layout.tsx` provides the document, metadata, local fonts, shared header/footer, and skip-to-content main region.
 - `app/globals.css` loads Tailwind and defines the design tokens, typography, spacing, responsive layout, and focus/reduced-motion rules.
 - `components/layout/` contains the reused page container, header/navigation, and footer.

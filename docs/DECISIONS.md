@@ -1,6 +1,6 @@
 # CEPath decision record
 
-Updated: 2026-10-14. **Established** means supplied by the Product Owner or directly observed. **Proposed** means awaiting a decision. M1 authorized the scaffold; M2 authorizes the design foundation. Curriculum and account architecture remain deferred.
+Updated: 2026-10-14. **Established** means supplied by the Product Owner or directly observed. **Proposed** means awaiting a decision. M1 authorized the scaffold; M2 authorizes the design foundation; M3 authorizes the landing page. Curriculum and account architecture remain deferred.
 
 ## D001 — Documentation first; one milestone at a time — Established
 
@@ -85,3 +85,15 @@ Use a restrained blue accent, clear reading hierarchy, flat surfaces/rules, and 
 Keep the reusable layout set to a page container, shared header, and shared footer. The root layout owns the main/skip-link landmark. The header's small client boundary reads the pathname so Home is not falsely marked current on a missing route; page content, main layout, and footer remain server-rendered. Native section anchors provide browser scrolling and focus without custom event handlers. Three navigation links stay visible and wrap on small screens; no menu state or unused control library is needed.
 
 CSS custom properties are the implementation source for design tokens; DESIGN.md and .impeccable/design.json document that source and must stay synchronized. The existing page demonstrates the system with the approved product purpose and learning philosophy, explicitly identifying curriculum/progress as unavailable. No new package dependency is introduced.
+
+## D012 — Landing page with truthful curriculum previews — Established
+
+Approved 2026-10-14: implement M03 Landing Page within the existing faculty bulletin design. The specified seven-section brief fixes the page structure; extend it directly without a replacement-identity tournament, raster comps, dependencies, or backend work. Use authored geometric SVG linework for the engineering visual and three subject identifiers, not a dashboard mockup. The visual is explicitly illustrative, not an engineering design or worked problem.
+
+The homepage primary CTA opens its curriculum preview; the secondary CTA opens the planned learning journey. Subject previews are static list rows, without pointer/hover affordances or subject-route links. Native anchors target focusable sections; keep #approach and #about from M2. Header navigation and footer links point only to existing destinations. Metadata describes the platform as in development. Hero and journey notices name the unavailable features; every statement of future lessons, practice, accounts, and progress stays prospective. CE-NAV-001 remains a permanent product requirement.
+
+Rechecked PRC’s latest linked program on 2026-10-14: [September 2026 CELE program](https://www.prc.gov.ph/sites/default/files/exam%20program%20Sept%202026%20%28CE%29.pdf), linked from [PRC Downloads](https://www.prc.gov.ph/downloads). PDF pages 1–2 confirm the existing D003 subject groups and representative topics. Normalize its “APPIED” typo to “Applied” and keep the full MSTE group title; MSTE is familiar student shorthand. Use a dated source link and representative topics, without weights, completeness promises, or official endorsement. This extends the March baseline for this preview only; recheck sources when future curriculum scope changes.
+
+The current user numbering makes M3 the landing page and M4 the proposed subject catalog. Preserve original sample-lesson and practice scopes as M3a and M4a; module navigation remains deferred M2a. This mapping authorizes only the landing page now.
+
+No new client boundary, packages, routes, or font assets are needed. Structured preview/journey/value content lives in content/landing.ts, separate from presentation. Existing local fonts retain their documented M2 tradeoff. Browser/HTTP navigation and responsive checks, lint, types, and production build provide verification; no unit-test framework is added for this static page.
