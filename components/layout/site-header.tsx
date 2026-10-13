@@ -25,7 +25,7 @@ export function SiteHeader() {
           <Link href="/" aria-current={pathname === "/" ? "page" : undefined}>
             Home
           </Link>
-          <a href="/#curriculum">Curriculum</a>
+          <Link href="/curriculum" aria-current={pathname === "/curriculum" ? "page" : pathname.startsWith("/curriculum/") ? "location" : undefined}>Curriculum</Link>
           <a href="/#how-it-works">How it works</a>
         </nav>
       </PageContainer>

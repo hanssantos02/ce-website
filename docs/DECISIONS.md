@@ -1,6 +1,6 @@
 # CEPath decision record
 
-Updated: 2026-10-14. **Established** means supplied by the Product Owner or directly observed. **Proposed** means awaiting a decision. M1 authorized the scaffold; M2 authorizes the design foundation; M3 authorizes the landing page. Curriculum and account architecture remain deferred.
+Updated: 2026-10-14. **Established** means supplied by the Product Owner or directly observed. **Proposed** means awaiting a decision. M1 authorized the scaffold; M2 authorizes the design foundation; M3 authorizes the landing page; M4 authorizes the public subject catalog. Curriculum and account architecture remain deferred.
 
 ## D001 — Documentation first; one milestone at a time — Established
 
@@ -97,3 +97,15 @@ Rechecked PRC’s latest linked program on 2026-10-14: [September 2026 CELE prog
 The current user numbering makes M3 the landing page and M4 the proposed subject catalog. Preserve original sample-lesson and practice scopes as M3a and M4a; module navigation remains deferred M2a. This mapping authorizes only the landing page now.
 
 No new client boundary, packages, routes, or font assets are needed. Structured preview/journey/value content lives in content/landing.ts, separate from presentation. Existing local fonts retain their documented M2 tradeoff. Browser/HTTP navigation and responsive checks, lint, types, and production build provide verification; no unit-test framework is added for this static page.
+
+## D013 — Typed public subject catalog and shared overviews — Established
+
+Approved 2026-10-14: create /curriculum and /curriculum/[slug] for PSAD, MSTE, and HGE using the existing design foundation. The current brief supplies representative topic groupings; each receives a concise introductory description and explicit advisory ordering. These are CEPath learning areas, not independently prescribed PRC examination categories or a complete syllabus. Reused the September 2026 PRC full titles checked in D012; the MSTE title retains “Principles of Transportation and Highway Engineering” and its shorthand explanation.
+
+One readonly typed source, content/curriculum.ts, contains subject IDs/slugs, titles/abbreviations, descriptions, displayOrder, curated preview topics, and topics with stable IDs/slugs/title/shortDescription/displayOrder. Preserve the M03 preview wording in that shared source rather than duplicate subject metadata in landing components. Small lookup/order helpers support the real routes and return sorted copies; no CMS, publication schema, accounts, progress fields, or database is introduced.
+
+One Server Component template renders all three subject overviews. generateStaticParams creates known routes and dynamicParams=false keeps unknown slugs unavailable; the template also validates lookup with notFound. Breadcrumbs and explicit return links work independently of subject order. Topic entries are informational; native anchors target actual focusable descriptions, with no lesson routes or unlock conditions. The Product Owner chose an index plus ordered list; a native disclosure keeps the index compact without client state. Subject → module → lesson is described as future organization, not implemented content.
+
+Preserve the homepage composition, changing only real catalog/subject destinations and outdated availability copy. Move the existing subject symbol into a shared curriculum component without altering its geometry. Reuse fonts/colors/layout and add restrained whole-card hover/focus, breadcrumbs, and reading layouts. Header Curriculum is aria-current=page on the catalog and aria-current=location within its route area; unknown routes must never invent a current catalog page.
+
+Add four focused Node built-in tests for independent exact-slug lookup, rejected slugs, stable unique topic IDs/anchors, and explicit non-mutating ordering. npm test uses Node 24’s native TypeScript support; package.json now explicitly declares ESM, matching existing source/config syntax and avoiding ambiguous module inference in the test runner. No dependencies installed; lockfile unchanged. Production HTTP and real-browser flows verify routing, rendered order, keyboard navigation, and missing slugs.

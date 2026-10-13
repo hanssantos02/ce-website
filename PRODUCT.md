@@ -1,6 +1,6 @@
 # CEPath product behavior
 
-Updated: 2026-10-14. The application has a design foundation and a landing page introducing CEPath, its planned curriculum, and its learning approach. Curriculum and progress behavior below remains approved future behavior, not implemented features. See [STRATEGY.md](STRATEGY.md) for direction, [DESIGN.md](DESIGN.md) for the visual system, and [CE-NAV-001](docs/DECISIONS.md#ce-nav-001--guided-but-flexible-curriculum-navigation--approved) for curriculum rationale.
+Updated: 2026-10-14. The application has a design foundation and a landing page introducing CEPath, its planned curriculum, and its learning approach, plus a public subject catalog. Subject overview browsing is implemented; lesson navigation and progress behavior below remain approved future behavior. See [STRATEGY.md](STRATEGY.md) for direction, [DESIGN.md](DESIGN.md) for the visual system, and [CE-NAV-001](docs/DECISIONS.md#ce-nav-001--guided-but-flexible-curriculum-navigation--approved) for curriculum rationale.
 
 ## Design Foundation — Milestone 02
 
@@ -10,13 +10,23 @@ The implemented reusable layout set is a page container, header, and footer. Vis
 
 ## Landing Page — Milestone 03
 
-The homepage introduces the planned concept-first learning platform and clearly names lessons, practice, accounts, and progress tracking as unavailable. Primary “Explore the curriculum” links lead to #curriculum; “How it works” links lead to #how-it-works. Subject previews are descriptive content, not interactive subject cards or a full catalog.
+The homepage introduces the planned concept-first learning platform and clearly names lessons, practice, accounts, and progress tracking as unavailable. Primary “Explore the curriculum” links now lead to /curriculum; “How it works” links lead to #how-it-works. Landing subject previews retain their visual layout and now provide explicit links to the implemented overviews.
 
-The three groups use full examination names and representative topics from PRC’s dated September 2026 program, with MSTE identified as student shorthand. The page links the source and does not promise a complete syllabus. Preview content has stable subject IDs and lives separately from UI in content/landing.ts.
+The three groups use full examination names and representative topics from PRC’s dated September 2026 program, with MSTE identified as student shorthand. The page links the source and does not promise a complete syllabus. Subject metadata and representative preview topics now come from content/curriculum.ts, shared with the catalog. Landing-only journey and values remain in content/landing.ts.
 
 The learning journey describes planned behavior: freely choose a subject, follow or skip the recommended sequence, learn through future explanations/examples/practice, and later resume using account-backed progress. It explicitly says that prerequisites offer guidance without locks and every published free lesson will remain accessible anonymously, revisitable, and independent of subject order.
 
-The header offers Home, Curriculum, and How it works. Navigation remains visible and wraps on mobile. The hero includes a compact section index; native anchors move focus to real content. M2’s #approach and #about anchors remain meaningful. Values and closing sections explain the intended approach and return to the preview. The footer includes working navigation, independent-platform/PRC non-affiliation language, and the temporary-name/development notice. There are no authentication, subject, lesson, or legal-page routes.
+The header offers Home, Curriculum, and How it works. Navigation remains visible and wraps on mobile. The hero includes a compact section index; native anchors move focus to real content. M2’s #approach and #about anchors remain meaningful. Values and closing sections explain the intended approach and link to the catalog. The footer includes working navigation, independent-platform/PRC non-affiliation language, and the temporary-name/development notice. The catalog and subject routes are implemented; authentication, lesson, and legal-page routes remain absent.
+
+## Subject Catalog — Milestone 04
+
+/curriculum presents PSAD, MSTE, and HGE in explicit display order. Each whole subject card is one accessible link, with a symbol, abbreviation, full title, description, representative topics, and explore action. Subject overviews and topic descriptions are available without an account; lessons are clearly coming soon.
+
+/curriculum/[slug] uses one Server Component template for the three known slugs. It includes full subject naming, learning overview, breadcrumb navigation, advisory topic ordering, a compact native index disclosure, and a return link. The Product Owner selected the index plus ordered list. Index links transfer focus to real on-page descriptions; topics have no lesson routes or completion controls. The index starts collapsed so long lists remain compact on mobile, and opens using standard keyboard/browser behavior.
+
+One typed source in content/curriculum.ts owns stable subject/topic IDs and slugs, descriptions, explicit displayOrder, and curated landing-preview labels. Ordered helpers do not mutate the source. The existing three subject symbols are shared with the landing page. generateStaticParams prebuilds known subject routes; dynamicParams=false and notFound reject unknown slugs. No database, authentication, or new client boundary.
+
+These are representative CEPath groupings and suggested study order, not a complete official syllabus or prescribed examination sequence. Official full subject titles retain the dated PRC September 2026 source; MSTE is student shorthand. Each page explains the planned subject → module → lesson structure without constructing it. Header Curriculum leads to /curriculum and marks the catalog page or curriculum location current appropriately; footer and homepage routes also lead to real destinations.
 
 ## Guided but flexible curriculum — CE-NAV-001
 

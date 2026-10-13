@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { PageContainer } from "./page-container";
 
 export function SiteFooter() {
@@ -10,7 +11,7 @@ export function SiteFooter() {
             <p>Concept-first civil engineering learning for Filipino students.</p>
           </div>
           <nav className="footer-nav" aria-label="Footer navigation">
-            <a href="/#curriculum">Curriculum preview</a>
+            <Link href="/curriculum">Curriculum</Link>
             <a href="/#how-it-works">How it works</a>
             <a href="#main-content">Back to top</a>
           </nav>

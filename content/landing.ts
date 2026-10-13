@@ -1,34 +1,7 @@
-// Introductory previews, not lesson availability or a curriculum catalog.
-// Names/topics: PRC September 2026 CELE program; see D012 in docs/DECISIONS.md.
-export const curriculumPreviews = [
-  {
-    id: "psad",
-    shorthand: "PSAD",
-    name: "Principles of Structural Analysis and Design",
-    description: "Understand how forces move through a structure, and how its members resist them.",
-    topics: ["Engineering mechanics", "Strength of materials", "Concrete and steel design"],
-  },
-  {
-    id: "mste",
-    shorthand: "MSTE",
-    name: "Applied Mathematics, Surveying, Principles of Transportation and Highway Engineering, Construction Management and Methods",
-    description: "Connect mathematical tools with the work of measuring, planning, and building.",
-    topics: ["Calculus and differential equations", "Surveying and highway engineering", "Construction management"],
-    note: "MSTE is the familiar student shorthand.",
-  },
-  {
-    id: "hge",
-    shorthand: "HGE",
-    name: "Hydraulics and Principles of Geotechnical Engineering",
-    description: "Explore the behavior of water and soil, from fluid flow to the ground beneath a foundation.",
-    topics: ["Hydrostatics and fluid flow", "Soil properties and strength", "Bearing capacity and settlement"],
-  },
-] as const;
-
 export const learningJourney = [
   {
     title: "Choose your subject.",
-    description: "Start with PSAD, MSTE, or HGE. The planned curriculum will keep every subject independently accessible.",
+    description: "Explore PSAD, MSTE, or HGE. Every subject overview is open without an account.",
   },
   {
     title: "Find your way through.",

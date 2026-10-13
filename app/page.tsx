@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageContainer } from "../components/layout/page-container";
-import { EngineeringVisual, SubjectSymbol } from "../components/landing/engineering-visual";
-import { curriculumPreviews, learningJourney, learningValues } from "../content/landing";
+import { EngineeringVisual } from "../components/landing/engineering-visual";
+import { SubjectSymbol } from "../components/curriculum/subject-symbol";
+import { getSubjects, curriculumSource } from "../content/curriculum";
+import { learningJourney, learningValues } from "../content/landing";
 
 export const metadata: Metadata = {
   title: "CEPath — Concept-first civil engineering learning",
@@ -21,7 +24,7 @@ export default function HomePage() {
             </p>
             <p className="hero-audience">A learning platform being built for Filipino civil engineering students.</p>
             <div className="hero-actions">
-              <a className="primary-link" href="#curriculum">Explore the curriculum <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M10 3v14m-5-5 5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.5" /></svg></a>
+              <Link className="primary-link" href="/curriculum">Explore the curriculum <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M3 10h14m-5-5 5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.5" /></svg></Link>
               <a className="text-link" href="#how-it-works">How it works</a>
             </div>
             <p className="availability-note">In development. Lessons, practice, accounts, and progress tracking are not yet available.</p>
@@ -46,29 +49,30 @@ export default function HomePage() {
             <h2 id="curriculum-title" className="section-title">Three subjects.<br />One solid foundation.</h2>
             <div className="reading-copy">
               <p>From the forces in a structure to the water and soil around it, explore the subject groups that shape civil engineering study.</p>
-              <p className="project-note">A preview of the planned curriculum. Subject pages and lessons are still to come.</p>
+              <p className="project-note">A preview of the planned curriculum. Subject overviews are available. Lessons are still to come.</p>
             </div>
           </div>
           <ul className="subject-previews">
-            {curriculumPreviews.map((subject) => (
+            {getSubjects().map((subject) => (
               <li key={subject.id} className="subject-preview">
                 <div className="subject-identity">
                   <SubjectSymbol subject={subject.id} />
-                  <p>{subject.shorthand}</p>
+                  <p>{subject.abbreviation}</p>
                 </div>
                 <div className="subject-heading">
-                  <h3>{subject.name}</h3>
-                  {"note" in subject && <p className="project-note">{subject.note}</p>}
+                  <h3>{subject.title}</h3>
+                  {subject.note && <p className="project-note">{subject.note}</p>}
+                  <Link href={`/curriculum/${subject.slug}`} className="text-link preview-subject-link">Explore {subject.abbreviation}</Link>
                 </div>
                 <div className="subject-details">
                   <p>{subject.description}</p>
                   <p className="topic-label">Representative topics</p>
-                  <ul>{subject.topics.map((topic) => <li key={topic}>{topic}</li>)}</ul>
+                  <ul>{subject.previewTopics.map((topic) => <li key={topic}>{topic}</li>)}</ul>
                 </div>
               </li>
             ))}
           </ul>
-          <p className="curriculum-source">Subject names and topic examples follow the <a href="https://www.prc.gov.ph/sites/default/files/exam%20program%20Sept%202026%20%28CE%29.pdf">PRC September 2026 examination program</a>. This preview is not a complete syllabus.</p>
+          <p className="curriculum-source">Subject names and topic examples follow the <a href={curriculumSource.url}>{curriculumSource.label}</a>. This preview is not a complete syllabus.</p>
         </PageContainer>
       </section>
 
@@ -77,7 +81,7 @@ export default function HomePage() {
           <div className="section-introduction">
             <h2 id="approach" className="section-title anchor-target" tabIndex={-1}>How CEPath will work.</h2>
             <p>A guided path, with room to make it your own.</p>
-            <p className="project-note">The learning experience below is planned. For now, you can explore the subject preview.</p>
+            <p className="project-note">Explore subject overviews today. Lessons, practice, and personal progress are still in development.</p>
           </div>
           <div>
             <ol className="approach-list">
@@ -113,7 +117,7 @@ export default function HomePage() {
             <h2 id="closing-title" className="section-title">A clearer way to study<br />starts with the foundations.</h2>
             <p>Get to know the subjects and the approach we’re building.</p>
           </div>
-          <a className="primary-link" href="#curriculum">Explore the curriculum <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M10 17V3m-5 5 5-5 5 5" fill="none" stroke="currentColor" strokeWidth="1.5" /></svg></a>
+          <Link className="primary-link" href="/curriculum">Explore the curriculum <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M3 10h14m-5-5 5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.5" /></svg></Link>
         </PageContainer>
       </section>
     </>

@@ -2,7 +2,7 @@
 version: 1
 slug: "app-page-tsx"
 primary_target: "app/page.tsx"
-related_targets: ["app/globals.css","components/layout/site-header.tsx","components/layout/site-footer.tsx","components/landing/engineering-visual.tsx","content/landing.ts"]
+related_targets: ["app/globals.css","components/layout/site-header.tsx","components/layout/site-footer.tsx","components/landing/engineering-visual.tsx","content/landing.ts","content/curriculum.ts","components/curriculum/subject-symbol.tsx"]
 ---
 
 # Milestone 03: CEPath landing page
@@ -26,3 +26,5 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 Proof: descriptive static curriculum previews grounded in PRC's September 2026 program; no weights or comprehensive scope promises. Clearly distinguish MSTE student shorthand. No shipping raster imagery. Preserve legacy #approach and #about anchors. Verify lint/types/build, routes, focus, text contrast, responsive reflow, and desktop/mobile captures together. No commit/push or future feature implementation.
 
 Completion (2026-10-14): independent finish review returned ship; no material fixes. DESIGN.md and .impeccable/design.json preserve primitive tokens/North Star and document the actual landing patterns. Lint/types/build, both local servers, asset/route/metadata HTTP assertions, all navigation/focus paths, and five responsive viewport checks passed. Detector findings: none. Normal text contrast minimum 5.46:1. Reduced motion was source-inspected; official design-panel/schema-linter and screen-reader checks were not run. No shipping raster assets or new dependencies/routes/client boundary; M03 complete, future milestones unstarted. The Product Owner subsequently authorized committing and pushing the verified milestone to main; no deployment.
+
+M04 integration (2026-10-14): preserve the M03 composition. Primary curriculum CTAs and shared navigation now lead to /curriculum; existing preview rows have explicit subject-overview links. Shared subject metadata, source and preview labels live in content/curriculum.ts, and existing SVG symbols moved to components/curriculum/subject-symbol.tsx. The local #curriculum index still targets the real preview section. Subject overviews are available; lessons, practice, accounts and progress remain future work. Homepage regression checks passed at desktop/mobile, with keyboard navigation and no overflow.

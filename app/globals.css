@@ -127,7 +127,7 @@ a {
   border-bottom: 2px solid transparent;
 }
 
-.main-nav a:hover, .main-nav a[aria-current="page"] {
+.main-nav a:hover, .main-nav a[aria-current] {
   color: var(--accent-blue);
   border-bottom-color: var(--accent-blue);
 }
@@ -690,5 +690,308 @@ a {
   }
   .footer-inner {
     gap: var(--space-6);
+  }
+}
+
+/* Curriculum overview: academic reading sheets and real subject choices. */
+.catalog-introduction {
+  background: var(--surface-reading);
+  padding-block: var(--space-8) var(--space-12);
+}
+
+.breadcrumbs {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: var(--space-8);
+}
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  list-style: none;
+}
+
+.breadcrumbs li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 44px;
+}
+
+.breadcrumbs li + li::before {
+  content: "/";
+  color: var(--text-muted);
+}
+
+.breadcrumbs a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--accent-blue);
+  text-decoration: underline;
+}
+
+.catalog-title {
+  font-family: var(--font-source-serif), serif;
+  font-size: 2.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  max-width: 28ch;
+  text-wrap: balance;
+}
+
+.catalog-lead {
+  color: var(--text-muted);
+  max-width: var(--reading-width);
+  margin-top: var(--space-6);
+}
+
+.subject-cards {
+  display: grid;
+  gap: var(--space-6);
+  list-style: none;
+}
+
+.subject-card {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: var(--space-8);
+  padding: var(--space-8);
+  background: var(--surface-reading);
+  border: 1px solid var(--rule-color);
+  color: var(--text-ink);
+}
+
+.subject-card:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent-blue);
+}
+
+.subject-card:active {
+  background: var(--surface-paper);
+}
+
+.subject-card-heading h2 {
+  font-family: var(--font-source-serif), serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.35;
+  text-wrap: balance;
+}
+
+.subject-card-heading p {
+  margin-top: var(--space-4);
+  color: var(--text-muted);
+  max-width: var(--reading-width);
+}
+
+.subject-card-topics .topic-label {
+  margin-top: 0;
+}
+
+.subject-card-topics ul {
+  list-style: disc;
+  padding-left: var(--space-4);
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-top: var(--space-2);
+}
+
+.subject-card-topics li + li {
+  margin-top: var(--space-1);
+}
+
+.subject-explore {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  color: var(--accent-blue);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: var(--space-6);
+  min-height: 44px;
+  text-decoration: underline;
+}
+
+.subject-card:hover .subject-explore, .breadcrumbs a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.preview-subject-link {
+  font-size: 1rem;
+}
+
+.subject-page-title {
+  font-size: 2rem;
+  max-width: 38ch;
+}
+
+.subject-name-note {
+  margin-top: var(--space-4);
+}
+
+.subject-content {
+  background: var(--surface-reading);
+}
+
+.subject-reading-grid {
+  display: grid;
+  grid-template-columns: 17rem minmax(0, 1fr);
+  gap: var(--space-16);
+  align-items: start;
+}
+
+.subject-context {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.subject-context p {
+  margin-top: 0;
+}
+
+.topic-index {
+  border-top: 2px solid var(--accent-blue);
+  border-bottom: 1px solid var(--rule-color);
+  padding-block: var(--space-2);
+  font-size: 1rem;
+}
+
+.topic-index summary {
+  cursor: pointer;
+  color: var(--accent-blue);
+  font-weight: 600;
+  padding-block: var(--space-3);
+  min-height: 44px;
+}
+
+.topic-index summary:hover {
+  text-decoration: underline;
+}
+
+.topic-index ol {
+  list-style: none;
+}
+
+.topic-index a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding-block: var(--space-2);
+  color: var(--accent-blue);
+  text-decoration: underline;
+}
+
+.topic-index a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.subject-navigation > .project-note {
+  margin-top: var(--space-4);
+}
+
+.subject-reading-content {
+  min-width: 0;
+}
+
+.subject-learning-overview {
+  color: var(--text-muted);
+  max-width: var(--reading-width);
+  margin-top: var(--space-4);
+}
+
+.topic-order-note {
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-8);
+  max-width: var(--reading-width);
+}
+
+.topic-list li, .future-structure {
+  scroll-margin-top: var(--space-6);
+}
+
+.topic-list li:target h3, .future-structure:target h2 {
+  color: var(--accent-blue);
+}
+
+.future-structure {
+  border-top: 1px solid var(--rule-color);
+  margin-top: var(--space-12);
+  padding-top: var(--space-12);
+}
+
+.future-structure > p {
+  margin-top: var(--space-6);
+  color: var(--text-muted);
+  max-width: var(--reading-width);
+}
+
+.future-structure dl {
+  display: grid;
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+  max-width: var(--reading-width);
+}
+
+.future-structure dt {
+  font-weight: 600;
+}
+
+.future-structure dd {
+  color: var(--text-muted);
+  margin-top: var(--space-2);
+}
+
+.subject-back-link {
+  margin-top: var(--space-8);
+}
+
+@media (max-width: 64rem) {
+  .subject-card {
+    grid-template-columns: 5rem minmax(0, 1fr);
+  }
+  .subject-card-topics {
+    grid-column: 2;
+  }
+  .subject-reading-grid {
+    grid-template-columns: 14rem minmax(0, 1fr);
+    gap: var(--space-8);
+  }
+}
+
+@media (max-width: 48rem) {
+  .catalog-introduction {
+    padding-block: var(--space-4) var(--space-8);
+  }
+  .catalog-title {
+    font-size: 2rem;
+    text-wrap: pretty;
+  }
+  .subject-card {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-6);
+    padding: var(--space-6);
+  }
+  .subject-card .subject-identity {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+  .subject-card .subject-identity p {
+    margin-top: 0;
+  }
+  .subject-card-heading h2 {
+    text-wrap: pretty;
+  }
+  .subject-card-topics {
+    grid-column: auto;
+  }
+  .subject-reading-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-12);
   }
 }

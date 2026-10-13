@@ -5,7 +5,8 @@ for the CELE. CEPath is a working title.
 
 Milestone 01 established the application scaffold. Milestone 02 adds the shared
 design foundation. Milestone 03 expands the homepage into a landing page with
-static subject previews and the planned learning journey. Subject pages, lessons,
+static subject previews and the planned learning journey. Milestone 04 adds
+`/curriculum` and three public subject overviews. Lessons,
 accounts, practice, and progress remain future work.
 
 ## Run locally
@@ -28,7 +29,8 @@ service accounts are required. Stop the server with Ctrl+C.
 | `npm run dev` | Start the development server with automatic updates. |
 | `npm run lint` | Check recommended JavaScript/TypeScript lint rules; warnings fail the check. |
 | `npm run typecheck` | Generate Next.js route types, then check TypeScript without emitting code. |
-| `npm run check` | Run lint and type checking. |
+| `npm test` | Run focused curriculum lookup, identifier, and ordering tests with Node 24. |
+| `npm run check` | Run lint, type checking, and the focused tests. |
 | `npm run build` | Create and type-check the production build. |
 | `npm start` | Serve an existing production build locally. |
 
@@ -39,8 +41,12 @@ run `npm run dev -- --port 3001` or `npm start -- --port 3001`.
 ## Code structure
 
 - `app/page.tsx` defines `/`, with a hero, curriculum preview, planned journey, values, and working section CTAs.
-- `content/landing.ts` keeps descriptive subject previews, journey steps, and values separate from UI; it is not a curriculum database.
-- `components/landing/engineering-visual.tsx` contains the authored geometric diagram and subject symbols.
+- `content/curriculum.ts` owns typed subject/topic metadata, ordering helpers, and landing preview content.
+- `content/landing.ts` keeps the landing journey and values separate from UI.
+- `app/curriculum/page.tsx` defines the catalog; `app/curriculum/[slug]/page.tsx` renders all three static subject overviews from shared data.
+- `components/curriculum/` holds shared breadcrumbs and the existing subject symbols.
+- `tests/curriculum.test.mjs` uses Node’s built-in runner and native TypeScript support; no test dependency is needed.
+- `components/landing/engineering-visual.tsx` contains the authored geometric diagram; subject symbols now live in components/curriculum/.
 - `app/layout.tsx` provides the document, metadata, local fonts, shared header/footer, and skip-to-content main region.
 - `app/globals.css` loads Tailwind and defines the design tokens, typography, spacing, responsive layout, and focus/reduced-motion rules.
 - `components/layout/` contains the reused page container, header/navigation, and footer.
@@ -55,7 +61,7 @@ The homepage and main layout are Server Components. The header uses a small clie
 component to identify the current route correctly, including on a missing page.
 Native section anchors preserve browser focus behavior. Next.js supplies the
 default missing-route page. There is no
-API, database, or test framework in this scaffold.
+API, database, or external test framework. The package explicitly uses ES modules, matching the existing TypeScript/configuration syntax.
 `next-env.d.ts`, `.next/`, and TypeScript's build cache are generated and ignored.
 Do not edit generated files.
 
@@ -69,5 +75,5 @@ Next.js type generation and the production build still check framework integrati
 Read [AGENTS.md](AGENTS.md), [STRATEGY.md](STRATEGY.md),
 [PRODUCT.md](PRODUCT.md), [DESIGN.md](DESIGN.md), [docs/ROADMAP.md](docs/ROADMAP.md), and
 [docs/DECISIONS.md](docs/DECISIONS.md) before starting another milestone.
-The bulletin visual direction is selected; curriculum implementation requires
-separate approval.
+The bulletin visual direction and subject catalog are implemented. Module and
+lesson development requires separate approval.
