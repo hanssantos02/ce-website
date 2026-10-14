@@ -237,7 +237,7 @@ a {
   list-style: none;
 }
 
-.approach-list li {
+.approach-list > li {
   display: grid;
   grid-template-columns: 2rem minmax(0, 1fr);
   gap: var(--space-6);
@@ -245,11 +245,11 @@ a {
   border-bottom: 1px solid var(--rule-color);
 }
 
-.approach-list li:first-child {
+.approach-list > li:first-child {
   padding-top: 0;
 }
 
-.approach-list li:last-child {
+.approach-list > li:last-child {
   padding-bottom: 0;
   border-bottom: 0;
 }
@@ -995,3 +995,98 @@ a {
     gap: var(--space-12);
   }
 }
+
+/* Module and lesson navigation extends the same open reading sheet. */
+.curriculum-reading {
+  max-width: var(--reading-width);
+}
+
+.subject-modules {
+  margin-bottom: var(--space-12);
+  padding-bottom: var(--space-12);
+  border-bottom: 1px solid var(--rule-color);
+  scroll-margin-top: var(--space-6);
+}
+
+.subject-modules:target h2 { color: var(--accent-blue); }
+
+.curriculum-entry-link {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 44px;
+  color: var(--accent-blue);
+  text-decoration: underline;
+}
+
+.curriculum-entry-link:hover, .prerequisite-recommendations a:hover, .lesson-neighbors a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.curriculum-entry-link:active { color: var(--text-ink); }
+
+.entry-action {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--font-source-sans), sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.7;
+}
+
+.approach-list .entry-availability {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-top: var(--space-3);
+}
+
+.prerequisite-recommendations {
+  font-size: 1rem;
+  margin-top: var(--space-4);
+}
+
+.prerequisite-recommendations ul {
+  list-style: disc;
+  padding-left: var(--space-6);
+  margin-top: var(--space-2);
+}
+
+.prerequisite-recommendations a, .lesson-neighbors a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--accent-blue);
+  text-decoration: underline;
+}
+
+.recommendation-note { margin-top: var(--space-8); }
+
+.curriculum-empty {
+  border-block: 1px solid var(--rule-color);
+  padding-block: var(--space-8);
+}
+
+.curriculum-empty h3 {
+  font-family: var(--font-source-serif), serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.curriculum-empty p { margin-top: var(--space-4); color: var(--text-muted); }
+
+.lesson-overview > .project-note { margin-top: var(--space-4); }
+
+.lesson-neighbors {
+  border-top: 1px solid var(--rule-color);
+  padding-top: var(--space-8);
+  margin-top: var(--space-12);
+}
+
+.lesson-neighbors > p { margin-top: var(--space-4); }
+
+.lesson-neighbors dl { display: grid; gap: var(--space-6); margin-top: var(--space-8); }
+.lesson-neighbors dt { font-size: 1rem; font-weight: 600; }
+.lesson-neighbors dd { margin-top: var(--space-2); }
+.neighbor-availability { display: block; margin-top: var(--space-2); }

@@ -1,6 +1,6 @@
 // CEPath-authored representative learning areas, not a complete PRC syllabus.
 // Full subject titles: PRC September 2026 CELE program, checked 2026-10-14.
-// Ordering is suggested study guidance; no lesson availability or progress is encoded.
+// Ordering and prerequisites are guidance. Availability describes content, never student progress.
 // IDs are persistent keys; retain them if a title or URL slug is renamed.
 export type SubjectId = "psad" | "mste" | "hge";
 
@@ -10,6 +10,32 @@ export type Topic = {
   readonly title: string;
   readonly shortDescription: string;
   readonly displayOrder: number;
+};
+
+// Full lesson publication and MDX rendering will be introduced with the lesson reader.
+export type ContentAvailability = "planned" | "overview";
+
+export type Lesson = {
+  readonly id: string;
+  readonly slug: string;
+  readonly moduleId: string;
+  readonly title: string;
+  readonly shortDescription: string;
+  readonly displayOrder: number;
+  readonly prerequisiteIds?: readonly string[];
+  readonly availability: ContentAvailability;
+  readonly source?: { readonly label: string; readonly url: string };
+};
+
+export type Module = {
+  readonly id: string;
+  readonly slug: string;
+  readonly subjectId: SubjectId;
+  readonly title: string;
+  readonly description: string;
+  readonly displayOrder: number;
+  readonly availability: ContentAvailability;
+  readonly lessons: readonly Lesson[];
 };
 
 export type Subject = {
@@ -22,6 +48,7 @@ export type Subject = {
   readonly displayOrder: number;
   readonly previewTopics: readonly string[];
   readonly topics: readonly Topic[];
+  readonly modules: readonly Module[];
   readonly note?: string;
 };
 
@@ -30,7 +57,7 @@ export const curriculumSource = {
   url: "https://www.prc.gov.ph/sites/default/files/exam%20program%20Sept%202026%20%28CE%29.pdf",
 };
 
-const subjects: readonly Subject[] = [
+const subjectOverviews: readonly Omit<Subject, "modules">[] = [
   {
     "id": "psad",
     "slug": "psad",
@@ -306,6 +333,62 @@ const subjects: readonly Subject[] = [
   }
 ];
 
+const staticsModule: Module = {
+  id: "psad-statics",
+  slug: "engineering-mechanics-statics",
+  subjectId: "psad",
+  title: "Engineering Mechanics — Statics",
+  description: "An introductory sequence connecting forces and free body diagrams with particle and rigid-body equilibrium.",
+  displayOrder: 1,
+  availability: "overview",
+  lessons: [
+    {
+      id: "psad-statics-forces-vectors", slug: "forces-and-vectors", moduleId: "psad-statics",
+      title: "Forces and Vectors",
+      shortDescription: "Represent forces by their magnitude and direction, and combine them using vector components.",
+      displayOrder: 1, availability: "overview",
+      source: { label: "OpenStax University Physics: Forces and vector algebra", url: "https://openstax.org/books/university-physics-volume-1/pages/2-3-algebra-of-vectors" },
+    },
+    {
+      id: "psad-statics-free-body-diagrams", slug: "free-body-diagrams", moduleId: "psad-statics",
+      title: "Free Body Diagrams", shortDescription: "Isolate a body and identify the external forces acting on it.",
+      displayOrder: 2, availability: "planned", prerequisiteIds: ["psad-statics-forces-vectors"],
+    },
+    {
+      id: "psad-statics-equilibrium-particles", slug: "equilibrium-of-particles", moduleId: "psad-statics",
+      title: "Equilibrium of Particles", shortDescription: "Use force balance to describe the equilibrium of a particle.",
+      displayOrder: 3, availability: "planned", prerequisiteIds: ["psad-statics-forces-vectors", "psad-statics-free-body-diagrams"],
+    },
+    {
+      id: "psad-statics-equilibrium-rigid-bodies", slug: "equilibrium-of-rigid-bodies", moduleId: "psad-statics",
+      title: "Equilibrium of Rigid Bodies", shortDescription: "Consider both force and moment balance for a rigid body in equilibrium.",
+      displayOrder: 4, availability: "planned", prerequisiteIds: ["psad-statics-equilibrium-particles"],
+    },
+  ],
+};
+
+// One representative module per subject. Reuse existing topic copy for empty overviews;
+// these are not an automatically populated curriculum or a complete module sequence.
+const subjects: readonly Subject[] = subjectOverviews.map(subject => {
+  if (subject.id === "psad") return { ...subject, modules: [staticsModule] };
+  const topicId = subject.id === "mste" ? "mste-engineering-mathematics" : "hge-fluid-properties";
+  const topic = subject.topics.find(topic => topic.id === topicId);
+  if (!topic) throw new Error(`Representative module topic missing: ${topicId}`);
+  return {
+    ...subject,
+    modules: [{
+      id: subject.id === "mste" ? "mste-mathematics" : "hge-fluid-properties",
+      slug: topic.slug,
+      subjectId: subject.id,
+      title: topic.title,
+      description: topic.shortDescription,
+      displayOrder: 1,
+      availability: "overview",
+      lessons: [],
+    }],
+  };
+});
+
 export function getSubjects(): Subject[] {
   return [...subjects].sort((a, b) => a.displayOrder - b.displayOrder);
 }
@@ -316,4 +399,72 @@ export function getSubjectBySlug(slug: string): Subject | undefined {
 
 export function getOrderedTopics(subject: Subject): Topic[] {
   return [...subject.topics].sort((a, b) => a.displayOrder - b.displayOrder);
+}
+
+export function getOrderedModules(subject: Subject): Module[] {
+  return [...subject.modules].sort((a, b) => a.displayOrder - b.displayOrder);
+}
+
+export function getModuleBySlug(subject: Subject, slug: string): Module | undefined {
+  return subject.modules.find(module => module.slug === slug);
+}
+
+export function getOrderedLessons(module: Module): Lesson[] {
+  return [...module.lessons].sort((a, b) => a.displayOrder - b.displayOrder);
+}
+
+export function getLessonBySlug(module: Module, slug: string): Lesson | undefined {
+  return module.lessons.find(lesson => lesson.slug === slug);
+}
+
+export function getLessonById(id: string): { subject: Subject; module: Module; lesson: Lesson } | undefined {
+  for (const subject of subjects) {
+    for (const module of subject.modules) {
+      const lesson = module.lessons.find(lesson => lesson.id === id);
+      if (lesson) return { subject, module, lesson };
+    }
+  }
+}
+
+export function getModuleHref(subject: Subject, module: Module): string | undefined {
+  if (module.subjectId !== subject.id || module.availability === "planned") return undefined;
+  return `/curriculum/${subject.slug}/${module.slug}`;
+}
+
+export function getLessonHref(subject: Subject, module: Module, lesson: Lesson): string | undefined {
+  const moduleHref = getModuleHref(subject, module);
+  if (!moduleHref || lesson.moduleId !== module.id || lesson.availability === "planned") return undefined;
+  return `${moduleHref}/${lesson.slug}`;
+}
+
+export function getRecommendedNeighbors(module: Module, lessonId: string) {
+  const ordered = getOrderedLessons(module);
+  const index = ordered.findIndex(lesson => lesson.id === lessonId);
+  if (index < 0) return undefined;
+  return { previous: ordered[index - 1], next: ordered[index + 1] };
+}
+
+// Editorial validation only: this never runs as an access or prerequisite gate.
+export function validatePrerequisites(lessons: readonly Lesson[]): string[] {
+  const errors: string[] = [];
+  const byId = new Map(lessons.map(lesson => [lesson.id, lesson]));
+  if (byId.size !== lessons.length) errors.push("Duplicate lesson IDs");
+  for (const lesson of lessons) {
+    for (const id of lesson.prerequisiteIds ?? []) {
+      if (id === lesson.id) errors.push(`${lesson.id} recommends itself`);
+      else if (!byId.has(id)) errors.push(`${lesson.id} has missing prerequisite ${id}`);
+    }
+  }
+  const visiting = new Set<string>();
+  const visited = new Set<string>();
+  function visit(id: string) {
+    if (visiting.has(id)) { errors.push(`Circular prerequisite at ${id}`); return; }
+    if (visited.has(id) || !byId.has(id)) return;
+    visiting.add(id);
+    for (const prerequisite of byId.get(id)?.prerequisiteIds ?? []) visit(prerequisite);
+    visiting.delete(id);
+    visited.add(id);
+  }
+  for (const lesson of lessons) visit(lesson.id);
+  return errors;
 }

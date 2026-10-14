@@ -1,6 +1,6 @@
 # CEPath decision record
 
-Updated: 2026-10-14. **Established** means supplied by the Product Owner or directly observed. **Proposed** means awaiting a decision. M1 authorized the scaffold; M2 authorizes the design foundation; M3 authorizes the landing page; M4 authorizes the public subject catalog. Curriculum and account architecture remain deferred.
+Updated: 2026-10-14. **Established** means supplied by the Product Owner or directly observed. **Proposed** means awaiting a decision. M1 authorized the scaffold; M2 authorizes the design foundation; M3 authorizes the landing page; M4 authorizes the public subject catalog. M5 authorizes representative module/lesson navigation and one metadata overview. Full lesson and account architecture remain deferred.
 
 ## D001 — Documentation first; one milestone at a time — Established
 
@@ -12,7 +12,7 @@ CEPath is a temporary working title. Serve civil engineering students building f
 
 ## D003 — Curriculum hierarchy and dated official baseline — Established
 
-Use subject → module → lesson, with explanation, worked example, practice, and eventual completion inside a lesson. Give content stable identifiers and keep it separate from UI code; the content schema and exact route patterns are not yet chosen.
+Use subject → module → lesson, with explanation, worked example, practice, and eventual completion inside a lesson. Give content stable identifiers and keep it separate from UI code. The initial schema and route choices were deferred; implemented subject and module/lesson-overview choices are recorded in D013 and D014.
 
 Baseline: [PRC revised March 2026 CELE examination program](https://www.prc.gov.ph/sites/default/files/RevisedExamProgramMarch2026CivilEngg.pdf), dated March 6, 2026; first-page subject names and weights checked against the source on 2026-10-13:
 
@@ -109,3 +109,13 @@ One Server Component template renders all three subject overviews. generateStati
 Preserve the homepage composition, changing only real catalog/subject destinations and outdated availability copy. Move the existing subject symbol into a shared curriculum component without altering its geometry. Reuse fonts/colors/layout and add restrained whole-card hover/focus, breadcrumbs, and reading layouts. Header Curriculum is aria-current=page on the catalog and aria-current=location within its route area; unknown routes must never invent a current catalog page.
 
 Add four focused Node built-in tests for independent exact-slug lookup, rejected slugs, stable unique topic IDs/anchors, and explicit non-mutating ordering. npm test uses Node 24’s native TypeScript support; package.json now explicitly declares ESM, matching existing source/config syntax and avoiding ambiguous module inference in the test runner. No dependencies installed; lockfile unchanged. Production HTTP and real-browser flows verify routing, rendered order, keyboard navigation, and missing slugs.
+
+## D014 — Representative modules and truthful lesson-overview navigation — Established
+
+Approved 2026-10-14: M05 is Module & Lesson Navigation, replacing the older deferred M2a label. Proposed M06 is Lesson Reader; accounts and progress remain unapproved under M5a/M6a. The Product Owner confirmed one representative module per subject while retaining all existing topic groupings. Define only the supplied four PSAD Statics lessons; Forces and Vectors has one metadata overview, and the other three remain planned. MSTE and HGE demonstrate reusable empty-module behavior with existing topic copy, not repetitive lesson placeholders.
+
+Extend the authoritative TypeScript source with modules and lessons, independent stable IDs, explicit parent IDs and order, optional ID-based prerequisite recommendations and content availability. Current states planned/overview accurately describe what exists; no full lesson is published and no MDX import/reader or progress state is added. Source-check the sample description against [OpenStax Forces](https://openstax.org/books/university-physics-volume-1/pages/5-1-forces) and [Algebra of Vectors](https://openstax.org/books/university-physics-volume-1/pages/2-3-algebra-of-vectors). This check covers introductory metadata, not academic approval of future articles or prerequisite choices.
+
+Use shared module and lesson-overview Server Components under the existing [slug] subject segment. Each page enumerates complete route parameters because a sibling subject page’s generateStaticParams is not a parent layout parameter generator. Build output and HTTP checks must verify actual destinations, not compilation alone. Available destinations derive from metadata and correct parent IDs; planned routes return 404. Previous/next refers to immediate ordered neighbors without inventing routes or skipping ahead. Prerequisites resolve by stable lesson ID; missing destinations remain text. A small testable reference/cycle validator enforces data integrity only, never access.
+
+Reuse the faculty bulletin, breadcrumbs, ordered rows, native topic index and shared shell. Add one module section to subjects, distinguish linked overview titles from plain planned lesson titles, and label every content state honestly. No accounts, lesson locking, completion/progress controls, new client JavaScript, dependencies, database or CMS. Full publication metadata and MDX delivery will be scoped with M06.

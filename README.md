@@ -7,7 +7,7 @@ Milestone 01 established the application scaffold. Milestone 02 adds the shared
 design foundation. Milestone 03 expands the homepage into a landing page with
 static subject previews and the planned learning journey. Milestone 04 adds
 `/curriculum` and three public subject overviews. Lessons,
-accounts, practice, and progress remain future work.
+accounts, practice, and progress remain future work. Milestone 05 adds three representative module overviews and one Forces and Vectors metadata overview; it does not include a full lesson reader.
 
 ## Run locally
 
@@ -29,7 +29,7 @@ service accounts are required. Stop the server with Ctrl+C.
 | `npm run dev` | Start the development server with automatic updates. |
 | `npm run lint` | Check recommended JavaScript/TypeScript lint rules; warnings fail the check. |
 | `npm run typecheck` | Generate Next.js route types, then check TypeScript without emitting code. |
-| `npm test` | Run focused curriculum lookup, identifier, and ordering tests with Node 24. |
+| `npm test` | Run focused curriculum lookup, ordering, availability, parent and prerequisite tests with Node 24. |
 | `npm run check` | Run lint, type checking, and the focused tests. |
 | `npm run build` | Create and type-check the production build. |
 | `npm start` | Serve an existing production build locally. |
@@ -41,11 +41,12 @@ run `npm run dev -- --port 3001` or `npm start -- --port 3001`.
 ## Code structure
 
 - `app/page.tsx` defines `/`, with a hero, curriculum preview, planned journey, values, and working section CTAs.
-- `content/curriculum.ts` owns typed subject/topic metadata, ordering helpers, and landing preview content.
+- `content/curriculum.ts` owns typed subject/topic/module/lesson metadata, stable prerequisite references, ordering/lookup/availability helpers, validation, and landing preview content.
 - `content/landing.ts` keeps the landing journey and values separate from UI.
 - `app/curriculum/page.tsx` defines the catalog; `app/curriculum/[slug]/page.tsx` renders all three static subject overviews from shared data.
-- `components/curriculum/` holds shared breadcrumbs and the existing subject symbols.
-- `tests/curriculum.test.mjs` uses Node’s built-in runner and native TypeScript support; no test dependency is needed.
+- `app/curriculum/[slug]/[moduleSlug]/page.tsx` renders all three representative modules; its `[lessonSlug]/page.tsx` serves the one available metadata overview. Planned lesson URLs return 404.
+- `components/curriculum/` holds shared breadcrumbs, the existing subject symbols, and prerequisite recommendations.
+- `tests/curriculum.test.mjs` and `tests/curriculum-navigation.test.mjs` use Node’s built-in runner and native TypeScript support; no test dependency is needed.
 - `components/landing/engineering-visual.tsx` contains the authored geometric diagram; subject symbols now live in components/curriculum/.
 - `app/layout.tsx` provides the document, metadata, local fonts, shared header/footer, and skip-to-content main region.
 - `app/globals.css` loads Tailwind and defines the design tokens, typography, spacing, responsive layout, and focus/reduced-motion rules.
@@ -75,5 +76,4 @@ Next.js type generation and the production build still check framework integrati
 Read [AGENTS.md](AGENTS.md), [STRATEGY.md](STRATEGY.md),
 [PRODUCT.md](PRODUCT.md), [DESIGN.md](DESIGN.md), [docs/ROADMAP.md](docs/ROADMAP.md), and
 [docs/DECISIONS.md](docs/DECISIONS.md) before starting another milestone.
-The bulletin visual direction and subject catalog are implemented. Module and
-lesson development requires separate approval.
+The bulletin visual direction and subject catalog are implemented. The representative module navigation is implemented. Full lesson-reader development requires separate approval.
