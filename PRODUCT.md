@@ -1,6 +1,6 @@
 # CEPath product behavior
 
-Updated: 2026-10-14. The application has a design foundation and a landing page introducing CEPath, its planned curriculum, and its learning approach, plus a public subject catalog. Subject, module, and one lesson metadata overview are implemented. Full lesson reading and progress remain future behavior. See [STRATEGY.md](STRATEGY.md) for direction, [DESIGN.md](DESIGN.md) for the visual system, and [CE-NAV-001](docs/DECISIONS.md#ce-nav-001--guided-but-flexible-curriculum-navigation--approved) for curriculum rationale.
+Updated: 2026-10-14. The application has a design foundation and a landing page introducing CEPath, its planned curriculum, and its learning approach, plus a public subject catalog. Subject and module navigation and one complete Forces and Vectors lesson reader are implemented. Accounts and saved progress remain future behavior. See [STRATEGY.md](STRATEGY.md) for direction, [DESIGN.md](DESIGN.md) for the visual system, and [CE-NAV-001](docs/DECISIONS.md#ce-nav-001--guided-but-flexible-curriculum-navigation--approved) for curriculum rationale.
 
 ## Design Foundation — Milestone 02
 
@@ -10,17 +10,17 @@ The implemented reusable layout set is a page container, header, and footer. Vis
 
 ## Landing Page — Milestone 03
 
-The homepage introduces the planned concept-first learning platform and clearly names lessons, practice, accounts, and progress tracking as unavailable. Primary “Explore the curriculum” links now lead to /curriculum; “How it works” links lead to #how-it-works. Landing subject previews retain their visual layout and now provide explicit links to the implemented overviews.
+The homepage introduces the planned concept-first learning platform and identifies one available sample lesson and names accounts, saved progress and interactive practice as future work. Primary “Explore the curriculum” links now lead to /curriculum; “How it works” links lead to #how-it-works. Landing subject previews retain their visual layout and now provide explicit links to the implemented overviews.
 
 The three groups use full examination names and representative topics from PRC’s dated September 2026 program, with MSTE identified as student shorthand. The page links the source and does not promise a complete syllabus. Subject metadata and representative preview topics now come from content/curriculum.ts, shared with the catalog. Landing-only journey and values remain in content/landing.ts.
 
-The learning journey describes planned behavior: freely choose a subject, follow or skip the recommended sequence, learn through future explanations/examples/practice, and later resume using account-backed progress. It explicitly says that prerequisites offer guidance without locks and every published free lesson will remain accessible anonymously, revisitable, and independent of subject order.
+The learning journey describes planned behavior: freely choose a subject, follow or skip the recommended sequence, read the first sample with explanations/examples/static practice, and later resume using account-backed progress. It explicitly says that prerequisites offer guidance without locks and every published free lesson will remain accessible anonymously, revisitable, and independent of subject order.
 
-The header offers Home, Curriculum, and How it works. Navigation remains visible and wraps on mobile. The hero includes a compact section index; native anchors move focus to real content. M2’s #approach and #about anchors remain meaningful. Values and closing sections explain the intended approach and link to the catalog. The footer includes working navigation, independent-platform/PRC non-affiliation language, and the temporary-name/development notice. Catalog, subject, representative module and one lesson-overview route are implemented; authentication, full lesson content and legal-page routes remain absent.
+The header offers Home, Curriculum, and How it works. Navigation remains visible and wraps on mobile. The hero includes a compact section index; native anchors move focus to real content. M2’s #approach and #about anchors remain meaningful. Values and closing sections explain the intended approach and link to the catalog. The footer includes working navigation, independent-platform/PRC non-affiliation language, and the temporary-name/development notice. Catalog, subject, representative module and one published lesson route are implemented; authentication, additional lesson content and legal-page routes remain absent.
 
 ## Subject Catalog — Milestone 04
 
-/curriculum presents PSAD, MSTE, and HGE in explicit display order. Each whole subject card is one accessible link, with a symbol, abbreviation, full title, description, representative topics, and explore action. Subject overviews and topic descriptions are available without an account; lessons are clearly coming soon.
+/curriculum presents PSAD, MSTE, and HGE in explicit display order. Each whole subject card is one accessible link, with a symbol, abbreviation, full title, description, representative topics, and explore action. Subject overviews and topic descriptions are available without an account; lesson availability is stated within each module.
 
 /curriculum/[slug] uses one Server Component template for the three known slugs. It includes full subject naming, learning overview, breadcrumb navigation, advisory topic ordering, a compact native index disclosure, and a return link. The Product Owner selected the index plus ordered list. Index links transfer focus to real on-page descriptions; topic descriptions retain their existing anchors and no completion controls; a separate module section opens the representative module. The index starts collapsed so long lists remain compact on mobile, and opens using standard keyboard/browser behavior.
 
@@ -32,13 +32,19 @@ These are representative CEPath groupings and suggested study order, not a compl
 
 Each subject retains its existing topic list and adds one representative module overview. PSAD demonstrates Engineering Mechanics — Statics with four defined lesson entries. MSTE’s Engineering mathematics and HGE’s Fluid properties reuse existing topic metadata and have no defined lesson sequence yet; their shared module template gives an honest empty state. These are small navigation examples, not complete curricula.
 
-The Statics sequence contains Forces and Vectors, Free Body Diagrams, Equilibrium of Particles, and Equilibrium of Rigid Bodies. Only Forces and Vectors has a navigable metadata overview. Other lessons are labeled planned, without links or pages. There are no fully published lessons, exercises, progress controls or completion requirements. The overview’s brief topic description is source-checked against OpenStax; it is not a reviewed full lesson.
+The Statics sequence contains Forces and Vectors, Free Body Diagrams, Equilibrium of Particles, and Equilibrium of Rigid Bodies. Milestone 06 replaces the first lesson’s metadata overview with complete content at the same URL. Other lessons remain planned, without links or pages; module entries and prerequisite recommendations reflect that availability. There are no progress controls or completion requirements.
 
 content/curriculum.ts remains authoritative. Module IDs/slugs, parent subject ID, descriptions, explicit order, availability and lessons sit beside the existing subject/topic data. Lesson records contain stable ID/slug, parent module ID, short description, order, optional prerequisite lesson IDs and content availability. The current availability states are planned and overview; publication of complete MDX content waits for M06. Stable IDs remain independent of title/slug edits.
 
-ID lookup resolves prerequisites across curriculum metadata; only destinations backed by available overviews are linked. Planned recommendations show their title; a missing reference is defensively displayed as unavailable and rejected by data validation tests. A small validator rejects missing IDs, self references, duplicates and cycles; it never participates in access checks. Immediate previous/next metadata follows explicit order without skipping planned lessons; unavailable neighbors are plain text, and module boundaries are explained.
+ID lookup resolves prerequisites across curriculum metadata; only destinations backed by available overviews or published lessons are linked. Planned recommendations show their title; a missing reference is defensively displayed as unavailable and rejected by data validation tests. A small validator rejects missing IDs, self references, duplicates and cycles; it never participates in access checks. Immediate previous/next metadata follows explicit order without skipping planned lessons; unavailable neighbors are plain text, and module boundaries are explained.
 
-Each new page enumerates complete route parameters from authoritative metadata and scopes lookup to its real subject/module parents. generateStaticParams and dynamicParams=false prebuild only existing overviews, while notFound rejects unknown or planned lesson destinations. Existing shared breadcrumbs, reading styles and native links provide navigation without a new client boundary, database or packages.
+Each new page enumerates complete route parameters from authoritative metadata and scopes lookup to its real subject/module parents. generateStaticParams and dynamicParams=false prebuild only available module and lesson destinations, while notFound rejects unknown or planned lesson destinations. Existing shared breadcrumbs, reading styles and native links provide navigation without a new client boundary or database. M06 introduces the MDX/KaTeX packages for the reader.
+
+## Lesson Reader — Milestone 06
+
+Forces and Vectors is complete at its existing URL and stable lesson ID. Trusted repository MDX owns objectives, nine section headings and educational prose; shared curriculum data continues to own titles, description, ordering and prerequisite references. KaTeX server output includes visual notation and MathML. A proportional 500 N/30° diagram, ruled worked example, quiet notes and one optional 600 N/120° exercise with a native solution disclosure support study. No grading or learner state is stored.
+
+The Product Owner selected a compact native section index. Its anchors focus real sections; reading content remains visible when the index is closed. All content is publicly accessible. Publication means a complete body is available; visible editorial status records source/calculation checks separately from pending independent academic review. Planned next lessons remain plain recommendations, with no active links. Authentication and progress require separate approval.
 
 ## Guided but flexible curriculum — CE-NAV-001
 
@@ -58,7 +64,7 @@ For example, Equilibrium of Particles may recommend Forces and Vectors and Free 
 
 ### Lesson reader
 
-The eventual reader provides curriculum breadcrumbs, recommended previous/next lessons, a module lesson list, prerequisite links where applicable, and a clear return to the curriculum. Previous/next controls follow recommended order while every published free lesson remains independently selectable. Handle sequence boundaries without links to nonexistent lessons.
+The implemented reader provides curriculum breadcrumbs, recommended previous/next lesson references, prerequisite links where applicable, and a return to the module’s ordered lesson list. Previous/next controls follow recommended order while every published free lesson remains independently selectable. Handle sequence boundaries without links to nonexistent lessons.
 
 When progress tracking is available, show lesson completion status and the student's actual progress. Account-backed status is personal information; it must not gate public lesson content. Do not display fabricated progress before that feature exists.
 
@@ -81,7 +87,7 @@ Continuing an out-of-order lesson must not redirect the student into a forced li
 
 ### Curriculum metadata boundary
 
-When implemented, curriculum content supports stable subject/module/lesson identifiers, module and lesson ordering metadata, optional prerequisite references, and lesson publication status. Publication status is distinct from academic editorial review status. Ordering and prerequisites must never be interpreted as progress records or access-control rules.
+Curriculum content supports stable subject/module/lesson identifiers, module and lesson ordering metadata, optional prerequisite references, and lesson publication status. Publication status is distinct from academic editorial review status. Ordering and prerequisites must never be interpreted as progress records or access-control rules.
 
 ## Documentation acceptance examples
 

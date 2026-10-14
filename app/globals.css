@@ -1090,3 +1090,41 @@ a {
 .lesson-neighbors dt { font-size: 1rem; font-weight: 600; }
 .lesson-neighbors dd { margin-top: var(--space-2); }
 .neighbor-availability { display: block; margin-top: var(--space-2); }
+
+/* Long-form lessons share the faculty bulletin's type, rules and reading measure. */
+.lesson-reading-column { max-width: var(--reading-width); margin-inline: auto; min-width: 0; }
+.lesson-context { margin-top: var(--space-6); font-size: 1rem; color: var(--text-muted); }
+.lesson-index { margin-bottom: var(--space-12); }
+.lesson-index ol { padding-block: var(--space-2); }
+.lesson-objectives { border-bottom: 1px solid var(--rule-color); padding-bottom: var(--space-12); }
+.lesson-objectives, .lesson-section { scroll-margin-top: var(--space-6); }
+.lesson-section { margin-top: var(--space-16); }
+.lesson-prose { line-height: 1.8; overflow-wrap: break-word; }
+.lesson-prose h2 { font-family: var(--font-source-serif), serif; font-size: 2rem; font-weight: 500; line-height: 1.25; text-wrap: pretty; }
+.lesson-prose h3 { font-family: var(--font-source-serif), serif; font-size: 1.5rem; font-weight: 500; line-height: 1.35; margin-top: var(--space-8); }
+.lesson-prose h4 { font-size: 1.125rem; font-weight: 600; line-height: 1.5; margin-top: var(--space-8); }
+.lesson-prose p, .lesson-prose ul, .lesson-prose ol { margin-top: var(--space-4); }
+.lesson-prose ul, .lesson-prose ol { padding-left: var(--space-6); }
+.lesson-prose ul { list-style: disc; }
+.lesson-prose ol { list-style: decimal; }
+.lesson-prose li + li { margin-top: var(--space-3); }
+.lesson-prose a { color: var(--accent-blue); text-decoration: underline; }
+.lesson-prose blockquote { margin-block: var(--space-6); padding-inline: var(--space-6); border-inline-start: 1px solid var(--rule-color); }
+.lesson-prose .katex { font-size: 1.05em; }
+.lesson-prose .katex-display { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding-block: var(--space-3); margin-block: var(--space-6); }
+.lesson-table-scroll { max-width: 100%; overflow-x: auto; margin-block: var(--space-6); }
+.lesson-prose table { width: 100%; border-collapse: collapse; font-size: 1rem; line-height: 1.6; }
+.lesson-prose th, .lesson-prose td { padding: var(--space-3); text-align: left; vertical-align: top; border-bottom: 1px solid var(--rule-color); }
+.lesson-prose th { font-weight: 600; background: var(--accent-soft); }
+.lesson-prose img { max-width: 100%; height: auto; }
+.worked-example { border-block: 1px solid var(--rule-color); padding-block: var(--space-8); margin-top: var(--space-6); }
+.worked-example > h3:first-child, .lesson-note > h3:first-child { margin-top: 0; }
+.lesson-note { margin-block: var(--space-8); padding: var(--space-6); background: var(--surface-paper); border-block: 1px solid var(--rule-color); }
+.force-diagram { margin-block: var(--space-8); }
+.force-diagram svg { width: 100%; max-width: 460px; height: auto; display: block; margin-inline: auto; }
+.force-diagram figcaption { margin-top: var(--space-4); color: var(--text-muted); font-size: 1rem; line-height: 1.7; }
+.practice-solution { margin-top: var(--space-8); border-block: 1px solid var(--rule-color); }
+.practice-solution summary { padding-block: var(--space-4); min-height: 44px; cursor: pointer; color: var(--accent-blue); font-weight: 600; }
+.practice-solution > div { padding-bottom: var(--space-6); }
+.lesson-navigation { margin-top: var(--space-16); border-top: 1px solid var(--rule-color); padding-top: var(--space-8); }
+.lesson-navigation > .project-note { margin-top: var(--space-4); }

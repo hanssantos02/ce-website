@@ -1,8 +1,8 @@
 # CEPath roadmap
 
-Updated: 2026-10-14. M0, M1, M2 Design Foundation, M3 Landing Page, M4 Subject Catalog, and M5 Module & Lesson Navigation are authorized. Later milestones remain proposals to scope and approve individually; no dates or launch commitments have been set.
+Updated: 2026-10-14. M0, M1, M2 Design Foundation, M3 Landing Page, M4 Subject Catalog, M5 Module & Lesson Navigation, and M6 Lesson Reader are authorized. Later milestones remain proposals to scope and approve individually; no dates or launch commitments have been set.
 
-CE-NAV-001 constrains implementation without authorizing future work. The Product Owner’s current milestone assignments take precedence over the original numbering: M02 Design Foundation, M03 Landing Page, M04 Subject Catalog, M05 Module & Lesson Navigation, and proposed M06 Lesson Reader. M05 takes the deferred M2a navigation scope and adds the explicitly approved metadata overview; M06 takes the deferred M3a reader scope. Original accounts and progress scopes remain unapproved as M5a and M6a; original practice stays M4a. These suffixes preserve deferred work without authorizing it. M7 dashboard and M8 hosting keep their existing scopes.
+CE-NAV-001 constrains implementation without authorizing future work. The Product Owner’s assignments supersede the original numbering: M06 is Lesson Reader; proposed M07 is Authentication and M08 is Progress Tracking. Deferred dashboard and hosting scopes retain M7a/M8a labels. M4a remains a proposal for broader practice functionality; the one static exercise explicitly approved in M06 does not authorize a quiz engine. Only M06 is authorized in this assignment.
 
 ## Phase 0 — Project context
 
@@ -53,34 +53,37 @@ CE-NAV-001 constrains implementation without authorizing future work. The Produc
 
 - Completion evidence (2026-10-14): npm run check passed with lint, strict route/types and nine native Node tests (four retained M04 tests, five new navigation tests). The production build explicitly prebuilt three representative module routes and one Forces and Vectors overview. Production HTTP assertions passed for all nine real pages, all local links/anchors, all 32 preserved topic entries, explicit lesson order and availability, immediate first/next references, ten invalid/mismatched/planned 404 cases, and ten unique compiled assets. Development module and sample-overview routes also returned 200. Fifteen final full-page captures at 1440, 1266 (the current user viewport), 768, 390, and 320px widths showed settled local fonts and no horizontal overflow; all measured main-navigation, breadcrumb, entry, prerequisite and return targets were at least 44px high. Keyboard flows passed for catalog → subject → module → overview, available prerequisite links, breadcrumb/back navigation, mobile MSTE/HGE empty states, native subject index focus, Tab/skip focus, and planned-lesson 404 recovery. Normal text contrast minimum measured 6.27:1 across four affected surfaces; no browser warnings/errors. One visual fix batch scoped ordered-row CSS to direct children so nested prerequisites keep normal readable bullets; the same capture matrix confirmed it. Impeccable detector returned no findings; independent finish review returned ship with no material fixes. Documenter updated DESIGN.md and the schemaVersion 2 sidecar; parent consistency checks confirmed unchanged primitive tokens/North Star, ten retained patterns, correct direct-child selectors and valid local documentation links. Targeted source review and inline reuse/quality/efficiency passes completed; the broad CE multi-agent/external-peer shipping pipeline was not run. Reduced-motion CSS was inspected only; screen-reader and official design-schema/live-panel audits were not run. No fully published lesson content, MDX, authentication, progress, services, dependencies or new client boundary. Local verification completed on codex/module-lesson-navigation; the Product Owner subsequently authorized committing and pushing this milestone to main. No deployment. M06 and later scopes remain Planned.
 
-### M6: Lesson Reader — Planned
+### M6: Lesson Reader — Completed
 
-- Outcome: a student can read one agreed lesson with prerequisites, objectives, explanation, defined variables/units, and a checked worked example.
-- Proposed scope: introduce MDX and KaTeX only if approved for this lesson; content remains separate from UI, with explicit editorial status and references.
-- Acceptance: calculation and dimensional checks recorded; review status is visible and truthful; math and any necessary diagram work on narrow screens; invalid lesson routes handled. Academic approval requirements must be agreed before calling content reviewed.
-- CE-NAV-001 acceptance (Lesson Reader): anonymous direct access to the published free sample lesson; curriculum breadcrumbs, module list, return navigation, and recommended previous/next links where published destinations exist. Prerequisite references are linked advice. Students can navigate elsewhere freely; missing neighbors do not justify generating unapproved lessons. Completion indicators wait for M6a.
+- Approved scope (2026-10-14): reusable trusted local MDX reader with KaTeX, one complete Forces and Vectors lesson at its existing stable ID/URL, measurable objectives, nine sections, proportional SVG, worked example, notes, one static self-study exercise with a revealed solution, and optional navigation. Product Owner selected a compact native section index.
+- Acceptance: strict content compilation and publication/body correspondence; checked 500 N/30° and 600 N/120° calculations; readable equations and diagram across device widths; public direct access, valid prerequisites and immediate neighbor references; planned routes stay unavailable. Existing catalog, subjects and modules remain functional; lint/types/tests/build and bounded visual review pass.
+- Editorial boundary: source and calculation checks are disclosed separately from independent academic review, which remains pending. Publication means complete content is available, not academic endorsement or learner completion.
+- No authentication, saved progress, completion controls, quiz engine, additional lessons, database, commit or push. Stop before proposed M07 Authentication.
 
-### M4a: Practice for the sample lesson — Planned
+- Completion evidence (2026-10-14): npm run check passed lint, strict types and 14 focused Node tests; npm run build validated authored content then statically built the existing Forces and Vectors route. Only that stable lesson ID is published; all 32 subject topics, three module overviews and other planned lessons remain intact. Shared MDX options compiled real content and notation fixtures with zero messages and detected an intentionally invalid equation. Independent component/magnitude/quadrant calculations passed for both examples. Production checks passed all nine real pages, ten invalid/mismatched/planned 404 cases, local links/anchors, 11 linked assets and 62 font assets. Development lesson returned 200 on the retained user server. Final full-page and detail captures at 1440, actual user 1280, 768, 390 and 320px showed loaded fonts, 56 MathML expressions, no math errors or page-wide overflow. One diagram refinement batch increased labels to at least 14.53px on narrow screens and cleared the force arrow. Native index/solution keyboard behavior, section focus, local equation scrolling, available prerequisite link, breadcrumbs, return navigation and planned 404 recovery passed; touch targets at least 44px and recorded text contrast minimum 5.89:1. Console warnings/errors and the one detector result were empty. Independent Impeccable finish review returned ship with no material fixes across 23 captures. Its documenter updated DESIGN.md and the sidecar; parent verified unchanged primitives/North Star, eight canonical headings, 11 bounded patterns, valid file links and parseable JSON. Runtime dependency audit reported zero vulnerabilities. Targeted source review completed; no broad CE shipping pipeline. Independent academic review remains pending and visible; screen-reader, official design-schema/live-panel and browser-emulated reduced-motion audits were not run. No additional lessons, authentication, saved progress, completion controls, quiz engine, database or new client boundary. Local verification completed on codex/lesson-reader; the Product Owner subsequently authorized committing and pushing this milestone to main. No deployment. Stop before M07 Authentication.
 
-- Outcome: a student attempts an agreed exercise and can reveal its checked solution and explanation.
+### M4a: Further practice functionality — Planned
+
+- M06 already supplies one static self-study exercise and checked revealed solution. This deferred scope concerns any further practice experience, which must be agreed separately; no interactive engine is authorized.
+- Outcome: a student attempts further agreed exercises and can read checked solutions and explanations.
 - Acceptance: correct answer, units, and reasoning independently checked; controls accessible; any answer-validation behavior handles relevant edge cases. No invented official exam questions or claim that a completed exercise proves mastery.
 
 ## Phase 2 — Reliable learning continuity
 
-### M5a: Accounts — Planned
+### M7: Authentication — Planned
 
 - Outcome: a student can sign up, sign in, and sign out.
 - Proposed scope: introduce Supabase Auth only after an approved plan covering credentials, sessions, errors, and required account behavior.
 - Acceptance: essential account flow works; protected access is enforced on the server; secrets remain private. Progress tables and dashboard features remain outside this milestone.
 
-### M6a: Complete and resume the sample lesson — Planned
+### M8: Progress Tracking — Planned
 
 - Outcome: a signed-in student can track Not Started, In Progress, and Completed for available lessons independently and retrieve progress after another session.
 - Proposed scope: minimal user-owned progress data with Supabase RLS; completion means self-reported study completion, not verified mastery.
 - Acceptance: persistence and duplicate actions behave correctly; one user cannot read or modify another user's progress; logged-out access and errors handled. Test authorization with separate users and direct data requests.
 - CE-NAV-001 acceptance (Progress Tracking): authenticated progress persists separately from curriculum order; out-of-order completion changes only the selected lesson. Calculate totals from actual completion records without inferring earlier completions; revisits preserve Completed. Reader/module indicators reflect actual status. Capture the visit information needed for later resumption, with schema and event rules agreed in this milestone; all published free lessons remain accessible anonymously and independent of progress. Verify with bounded lesson fixtures without expanding the published catalog.
 
-### M7: Study summary and resume action — Planned
+### M7a: Study summary and resume action — Planned
 
 - Outcome: a signed-in student can see completion across available content and navigate back to study.
 - Acceptance: summary reflects actual stored progress and available lessons; a new account has a helpful empty state; no fabricated analytics or unavailable-content completion totals.
@@ -88,7 +91,7 @@ CE-NAV-001 constrains implementation without authorizing future work. The Produc
 
 ## Phase 3 — Small pilot
 
-### M8: Hosted pilot of the sample path — Planned
+### M8a: Hosted pilot of the sample path — Planned
 
 - Outcome: the Product Owner and pilot learners can use the agreed sample path on a hosted preview.
 - Proposed scope: Vercel or another approved host, necessary environment configuration, and a bounded accessibility/responsive review of that path. Publishing requires authorization.

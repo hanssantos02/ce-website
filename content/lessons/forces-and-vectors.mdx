@@ -1,0 +1,236 @@
+export const lessonId = 'psad-statics-forces-vectors';
+
+export const editorialStatus = 'Source and calculation checks completed. Independent academic review pending.';
+
+export const learningObjectives = [
+  'Define a force as a vector quantity.',
+  'Identify the magnitude and direction of a force.',
+  'Distinguish between scalar and vector quantities.',
+  'Resolve a force into rectangular components.',
+  'Determine a vector’s magnitude from its components.',
+  'Determine direction using a quadrant-aware trigonometric relationship.',
+  'Explain how force vectors support basic statics analysis.'
+];
+
+export const sections = [
+  {id: 'introduction-to-forces', title: 'Introduction to forces'},
+  {id: 'scalars-and-vectors', title: 'Scalar and vector quantities'},
+  {id: 'representing-forces', title: 'Representing force vectors'},
+  {id: 'resolving-components', title: 'Resolving forces into components'},
+  {id: 'reconstructing-forces', title: 'Reconstructing a force'},
+  {id: 'worked-example', title: 'Worked engineering example'},
+  {id: 'common-mistakes', title: 'Common mistakes'},
+  {id: 'practice-exercise', title: 'Try it yourself'},
+  {id: 'summary', title: 'Summary and next steps'}
+];
+
+<LessonSection section={sections[0]}>
+
+A force describes a push or pull arising from an interaction between objects. A cable pulls on a connection; a support pushes against a beam. To describe either action, a numerical size alone is insufficient. A 500 N pull to the right has a different effect from a 500 N pull upward.
+
+**Force is a vector quantity:** it has both magnitude and direction. Magnitude tells us how large the force is. Direction tells us where it acts. An arrow is a useful representation: its orientation shows direction, and its length can show relative magnitude when a scale is specified.
+
+The SI unit of force is the **newton**, written N. In SI base units,
+
+$$
+1\,\mathrm{N} = 1\,\mathrm{kg}\cdot\mathrm{m}/\mathrm{s}^{2}.
+$$
+
+A kilonewton is 1,000 N. Mass, measured in kilograms, and force, measured in newtons, are different quantities; weight is a force associated with gravity.
+
+In statics, we examine bodies in equilibrium. Resolving inclined forces into horizontal and vertical components lets us account for their effects along chosen axes. This is a first step toward equilibrium equations, which later lessons will develop. Here, we focus on describing a force accurately rather than solving a complete structure.
+
+</LessonSection>
+
+<LessonSection section={sections[1]}>
+
+A **scalar** can be specified by a numerical value and its unit. A **vector** also needs direction. Compare distance, which describes how much ground was covered, with displacement, which describes the directed change in position.
+
+| Scalar quantity | Vector quantity |
+| --- | --- |
+| Mass: 12 kg | Force: 500 N directed 30° above the positive x-axis |
+| Elapsed time: 8 s | Displacement: 3 m east |
+| Distance traveled: 20 m | Velocity: 2 m/s north |
+
+A sign does not automatically make a quantity a vector. A scalar can be negative, such as temperature expressed on a Celsius scale. Likewise, a negative force component describes direction along a chosen axis; it does not mean that the force’s magnitude is negative.
+
+When a problem gives only “500 N,” it specifies a force magnitude. To identify the force vector in a two-dimensional problem, we also need its direction or its two rectangular components.
+
+</LessonSection>
+
+<LessonSection section={sections[2]}>
+
+Choose a Cartesian coordinate system before calculating. In this lesson, the positive x-axis points right and the positive y-axis points up. The axes are perpendicular. Other choices are possible, but changing the axes changes component values and signs.
+
+We write the force vector as $\mathbf{F}$ and its magnitude as $F$. The signed horizontal and vertical components are $F_x$ and $F_y$. The unit vectors $\mathbf{i}$ and $\mathbf{j}$ point along the positive x- and y-axes and have dimensionless magnitude one:
+
+$$
+\mathbf{F} = F_x\mathbf{i} + F_y\mathbf{j}.
+$$
+
+For example, $\mathbf{F} = (400\,\mathrm{N})\mathbf{i} + (300\,\mathrm{N})\mathbf{j}$ describes a force pointing right and up. These components are perpendicular projections of one force. They do not represent two additional physical forces applied alongside the original.
+
+For a rigid body, the point of application and line of action also matter, especially when calculating moments. A force’s magnitude and direction alone do not describe every aspect of its effect on a structure. This lesson develops the vector calculation; application points and moments will be addressed with rigid-body statics.
+
+</LessonSection>
+
+<LessonSection section={sections[3]}>
+
+Let $F$ be the nonnegative force magnitude, and let $\theta$ be its direction angle **measured counterclockwise from the positive x-axis**. With that convention,
+
+$$
+\begin{aligned}
+F_x &= F\cos\theta, \\
+F_y &= F\sin\theta.
+\end{aligned}
+$$
+
+The horizontal projection is adjacent to the angle’s reference axis, so it uses cosine. The vertical projection uses sine. Both components have the same force unit as $F$; the trigonometric factors are dimensionless.
+
+<LessonNote title="The angle reference matters">
+
+These equations use an angle measured from the positive x-axis. If a diagram gives an angle from the y-axis or from a negative axis, first convert it to the stated convention, or derive the projections using that reference. Do not assign sine and cosine from a memorized picture without checking which side is adjacent.
+
+</LessonNote>
+
+The trigonometric functions also determine the component signs:
+
+| Direction quadrant | Angle range | Sign of $F_x$ | Sign of $F_y$ |
+| --- | --- | --- | --- |
+| I: right and up | $0^\circ < \theta < 90^\circ$ | Positive | Positive |
+| II: left and up | $90^\circ < \theta < 180^\circ$ | Negative | Positive |
+| III: left and down | $180^\circ < \theta < 270^\circ$ | Negative | Negative |
+| IV: right and down | $270^\circ < \theta < 360^\circ$ | Positive | Negative |
+
+On an axis, one component is zero. For a force directed straight upward, $\theta = 90^\circ$, so $F_x = 0$ and $F_y = F$. A quick sketch and sign check help catch mistakes before the numerical calculation.
+
+</LessonSection>
+
+<LessonSection section={sections[4]}>
+
+If $F_x$ and $F_y$ are known in the same units, the magnitude follows from the Pythagorean relationship:
+
+$$
+F = \sqrt{F_x^2 + F_y^2}.
+$$
+
+Squaring the components removes their signs when calculating magnitude. A force pointing left can therefore have a negative horizontal component and a positive magnitude.
+
+For direction, use a **quadrant-aware inverse tangent**:
+
+$$
+\theta = \operatorname{atan2}(F_y,F_x).
+$$
+
+Here, `atan2` means the two-argument function that uses both component signs to identify the direction. With this notation, the y-component is the first argument and the x-component is the second. Check your software’s argument convention; some tools use a different order.
+
+Many programming libraries return radians. Convert radians to degrees by multiplying by $180^\circ/\pi$. If a result is negative and you want an angle between $0^\circ$ and $360^\circ$, add $360^\circ$.
+
+Using $\tan^{-1}(F_y/F_x)$ alone can identify the wrong quadrant, and its ratio is undefined when $F_x = 0$. If your calculator lacks `atan2`, determine the quadrant from the component signs and adjust the reference angle accordingly. For nonzero vertical forces, the direction is $90^\circ$ upward or $270^\circ$ downward. When both components are zero, magnitude is zero and direction is undefined.
+
+</LessonSection>
+
+<LessonSection section={sections[5]}>
+
+<WorkedExample id="example-components" title="Resolve a 500 N inclined force">
+
+#### Problem
+
+A force of **500 N** acts at **30° above the positive horizontal axis**. Determine its horizontal and vertical components.
+
+#### Given and required
+
+- Given: $F = 500\,\mathrm{N}$ and $\theta = 30^\circ$.
+- Coordinates: positive x to the right; positive y upward.
+- Angle: counterclockwise from the positive x-axis.
+- Required: signed components $F_x$ and $F_y$, in newtons.
+
+<ForceComponentsDiagram />
+
+#### Solution
+
+1. **Check the direction.** The force lies in quadrant I, so both components must be positive.
+2. **Choose the projections.** With the angle measured from the positive x-axis, use $F_x = F\cos\theta$ and $F_y = F\sin\theta$.
+3. **Substitute and calculate.** Use degree mode for the given angle:
+
+$$
+\begin{aligned}
+F_x &= (500\,\mathrm{N})\cos 30^\circ \\
+    &= (500\,\mathrm{N})\frac{\sqrt{3}}{2} \\
+    &\approx 433.01\,\mathrm{N}, \\
+F_y &= (500\,\mathrm{N})\sin 30^\circ \\
+    &= (500\,\mathrm{N})\frac{1}{2} \\
+    &= 250\,\mathrm{N}.
+\end{aligned}
+$$
+
+#### Answer and interpretation
+
+**The horizontal component is approximately 433.01 N to the right. The vertical component is 250 N upward.** Both signs agree with the sketch. The horizontal component is larger because the force is closer to the horizontal axis than to the vertical axis.
+
+As a check, the unrounded components give $\sqrt{F_x^2 + F_y^2} = 500\,\mathrm{N}$. They also give a direction of $30^\circ$. Keep intermediate values unrounded and round the reported answer; 433.01 N is a rounded projection, not a new force magnitude.
+
+</WorkedExample>
+
+</LessonSection>
+
+<LessonSection section={sections[6]}>
+
+- **Swapping sine and cosine.** Identify the reference axis and adjacent projection first. These formulas assign cosine to x because the angle starts at positive x.
+- **Dropping component signs.** A negative component means a force acts toward a negative axis. Check the quadrant before calculating.
+- **Using the wrong angle reference.** “30° from vertical” and “30° above horizontal” describe different directions. Read the diagram and statement together.
+- **Mixing units.** Convert all components to a common unit before combining them. Adding a numerical value in N to one in kN without conversion is incorrect.
+- **Using the wrong calculator angle mode.** A degree value entered in radian mode gives different trigonometric results. Check the mode before substitution.
+
+<LessonNote title="A useful calculation habit">
+
+Write the axes, angle reference, expected component signs and units before entering numbers. Then check whether the reconstructed magnitude matches the given force. This small routine checks both your setup and your arithmetic.
+
+</LessonNote>
+
+</LessonSection>
+
+<LessonSection section={sections[7]}>
+
+A **600 N** force acts at **120° counterclockwise from the positive x-axis**. Use the same axes as the worked example.
+
+1. Determine $F_x$ and $F_y$.
+2. State the physical direction of each component.
+3. Reconstruct the magnitude and check the direction from those components.
+
+Try the calculation before reading the solution. This is an optional self-study exercise; no answer or progress is recorded.
+
+<PracticeSolution>
+
+The direction lies in quadrant II: left and up. Expect a negative x-component and a positive y-component.
+
+$$
+\begin{aligned}
+F_x &= (600\,\mathrm{N})\cos 120^\circ = -300\,\mathrm{N}, \\
+F_y &= (600\,\mathrm{N})\sin 120^\circ \approx 519.62\,\mathrm{N}.
+\end{aligned}
+$$
+
+The horizontal component is **300 N to the left**, and the vertical component is **approximately 519.62 N upward**. Using unrounded values, $\sqrt{F_x^2 + F_y^2} = 600\,\mathrm{N}$ and $\operatorname{atan2}(F_y,F_x) = 120^\circ$ when expressed in degrees.
+
+A plain inverse tangent of $F_y/F_x$ gives $-60^\circ$, which points to quadrant IV. The component signs instead require quadrant II; the quadrant-aware result is $120^\circ$. If your calculator gives a reference angle of $60^\circ$, measure it into quadrant II as $180^\circ - 60^\circ$.
+
+</PracticeSolution>
+
+</LessonSection>
+
+<LessonSection section={sections[8]}>
+
+- Force is a vector with magnitude and direction. Its SI unit is the newton.
+- Components are signed projections along chosen axes. Always state those axes.
+- For an angle measured counterclockwise from positive x, $F_x = F\cos\theta$ and $F_y = F\sin\theta$.
+- Reconstruct magnitude using $F = \sqrt{F_x^2 + F_y^2}$.
+- Determine direction with a quadrant-aware method, and keep units and angle modes consistent.
+
+The recommended next topic is **Free Body Diagrams**, where a sketch identifies the forces acting on an isolated body. That lesson is planned and is not available yet. Return to the module to see the recommended sequence, or explore another subject freely.
+
+### References and editorial status
+
+These original explanations use standard vector conventions checked against [OpenStax: Coordinate Systems and Components of a Vector](https://openstax.org/books/university-physics-volume-1/pages/2-2-coordinate-systems-and-components-of-a-vector), [OpenStax: Forces](https://openstax.org/books/university-physics-volume-1/pages/5-1-forces), and [Engineering Statics: Vectors](https://engineeringstatics.org/Chapter_02-vectors.html). Worked and practice calculations have been independently recomputed. Independent academic review is pending. This lesson is CEPath-authored and is not an official PRC examination question or an endorsed learning resource.
+
+</LessonSection>

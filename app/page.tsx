@@ -27,7 +27,7 @@ export default function HomePage() {
               <Link className="primary-link" href="/curriculum">Explore the curriculum <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M3 10h14m-5-5 5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.5" /></svg></Link>
               <a className="text-link" href="#how-it-works">How it works</a>
             </div>
-            <p className="availability-note">In development. Lessons, practice, accounts, and progress tracking are not yet available.</p>
+            <p className="availability-note">One free sample lesson is available. Accounts, saved progress and interactive practice are still in development.</p>
           </div>
           <div className="hero-support">
             <EngineeringVisual />
@@ -49,7 +49,7 @@ export default function HomePage() {
             <h2 id="curriculum-title" className="section-title">Three subjects.<br />One solid foundation.</h2>
             <div className="reading-copy">
               <p>From the forces in a structure to the water and soil around it, explore the subject groups that shape civil engineering study.</p>
-              <p className="project-note">A preview of the planned curriculum. Subject overviews are available. Lessons are still to come.</p>
+              <p className="project-note">Explore subject overviews and one complete Forces and Vectors lesson in PSAD. The wider curriculum is in development.</p>
             </div>
           </div>
           <ul className="subject-previews">
@@ -81,7 +81,7 @@ export default function HomePage() {
           <div className="section-introduction">
             <h2 id="approach" className="section-title anchor-target" tabIndex={-1}>How CEPath will work.</h2>
             <p>A guided path, with room to make it your own.</p>
-            <p className="project-note">Explore subject overviews today. Lessons, practice, and personal progress are still in development.</p>
+            <p className="project-note">Explore subject overviews and the first complete sample lesson. Accounts, interactive practice and personal progress are still in development.</p>
           </div>
           <div>
             <ol className="approach-list">

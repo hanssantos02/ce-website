@@ -7,7 +7,7 @@ import { getSubjects, curriculumSource } from "../../content/curriculum";
 
 export const metadata: Metadata = {
   title: "Curriculum — CEPath",
-  description: "Explore PSAD, MSTE, and HGE subject overviews and representative learning areas. Choose any subject without an account; lessons are coming soon.",
+  description: "Explore PSAD, MSTE, and HGE subject overviews and representative learning areas. Choose any subject without an account and read the first sample lesson in PSAD.",
 };
 
 export default function CurriculumPage() {
@@ -18,7 +18,7 @@ export default function CurriculumPage() {
           <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Curriculum" }]} />
           <h1 className="catalog-title">Your civil engineering learning path.</h1>
           <p className="catalog-lead">Explore the three CELE subject groups. Follow the suggested study order, or start with the topics you need most.</p>
-          <p className="availability-note">Subject overviews are ready to explore. Lessons are coming soon.</p>
+          <p className="availability-note">Subject overviews are ready to explore. One complete sample lesson is available in PSAD; other lessons are being developed.</p>
         </PageContainer>
       </header>
       <section className="content-section catalog-subjects" aria-label="Choose a subject">
@@ -55,7 +55,7 @@ export default function CurriculumPage() {
           <h2 id="flexible-title" className="section-title">A recommended sequence.<br />Your own route.</h2>
           <div className="reading-copy">
             <p>Every subject overview is open. Study subjects in any order, jump to a topic description, or return to a previous concept whenever you need.</p>
-            <p>The future curriculum will offer recommended sequences and suggested prerequisites. These will guide your study without locks. Every published free lesson will remain available anonymously, regardless of what you’ve completed.</p>
+            <p>Recommended sequences and suggested prerequisites guide your study without locks. Every published free lesson will remain available anonymously, regardless of what you’ve completed.</p>
           </div>
         </PageContainer>
       </section>

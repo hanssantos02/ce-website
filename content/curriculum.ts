@@ -12,7 +12,7 @@ export type Topic = {
   readonly displayOrder: number;
 };
 
-// Full lesson publication and MDX rendering will be introduced with the lesson reader.
+// Publication describes content availability; it is independent of editorial review.
 export type ContentAvailability = "planned" | "overview";
 
 export type Lesson = {
@@ -23,7 +23,7 @@ export type Lesson = {
   readonly shortDescription: string;
   readonly displayOrder: number;
   readonly prerequisiteIds?: readonly string[];
-  readonly availability: ContentAvailability;
+  readonly availability: ContentAvailability | "published";
   readonly source?: { readonly label: string; readonly url: string };
 };
 
@@ -346,7 +346,7 @@ const staticsModule: Module = {
       id: "psad-statics-forces-vectors", slug: "forces-and-vectors", moduleId: "psad-statics",
       title: "Forces and Vectors",
       shortDescription: "Represent forces by their magnitude and direction, and combine them using vector components.",
-      displayOrder: 1, availability: "overview",
+      displayOrder: 1, availability: "published",
       source: { label: "OpenStax University Physics: Forces and vector algebra", url: "https://openstax.org/books/university-physics-volume-1/pages/2-3-algebra-of-vectors" },
     },
     {

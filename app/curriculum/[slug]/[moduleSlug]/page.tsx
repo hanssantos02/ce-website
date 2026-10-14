@@ -31,7 +31,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ModulePage({ params }: Props) {
   const { subject, module } = await resolveModule(params);
   const lessons = getOrderedLessons(module);
-  const overviewCount = lessons.filter(lesson => getLessonHref(subject, module, lesson)).length;
+  const overviewCount = lessons.filter(lesson => lesson.availability === "overview").length;
+  const publishedCount = lessons.filter(lesson => lesson.availability === "published").length;
   return (
     <>
       <header className="catalog-introduction">
@@ -39,14 +40,14 @@ export default async function ModulePage({ params }: Props) {
           <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Curriculum", href: "/curriculum" }, { label: subject.abbreviation, href: `/curriculum/${subject.slug}` }, { label: module.title }]} />
           <h1 className="catalog-title subject-page-title">{module.title}</h1>
           <p className="catalog-lead">{module.description}</p>
-          <p className="availability-note">Module overview · {lessons.length} lessons defined · {overviewCount} {overviewCount === 1 ? "overview" : "overviews"} available. Full lessons are not published yet.</p>
+          <p className="availability-note">Module overview · {lessons.length} lessons defined · {publishedCount} {publishedCount === 1 ? "lesson" : "lessons"} published · {overviewCount} {overviewCount === 1 ? "overview" : "overviews"} available.</p>
         </PageContainer>
       </header>
       <section className="content-section subject-content" aria-labelledby="lesson-sequence-title">
         <PageContainer>
           <div className="curriculum-reading">
             <h2 id="lesson-sequence-title" className="section-title">Recommended lesson sequence</h2>
-            <p className="topic-order-note project-note">This order is a guide. Open any available overview directly; prerequisites are optional recommendations.</p>
+            <p className="topic-order-note project-note">This order is a guide. Open any available lesson or overview directly; prerequisites are optional recommendations.</p>
             {lessons.length ? (
               <ol className="approach-list lesson-sequence" role="list">
                 {lessons.map(lesson => {
@@ -54,9 +55,9 @@ export default async function ModulePage({ params }: Props) {
                   return <li key={lesson.id}>
                     <span className="step-number" aria-hidden="true">{String(lesson.displayOrder).padStart(2, "0")}</span>
                     <div>
-                      <h3>{href ? <Link href={href} className="curriculum-entry-link">{lesson.title}<span className="entry-action">Open overview</span></Link> : lesson.title}</h3>
+                      <h3>{href ? <Link href={href} className="curriculum-entry-link">{lesson.title}<span className="entry-action">{lesson.availability === "published" ? "Open lesson" : "Open overview"}</span></Link> : lesson.title}</h3>
                       <p>{lesson.shortDescription}</p>
-                      <p className="entry-availability">{href ? "Overview available · full lesson coming later" : "Planned lesson · no overview available yet"}</p>
+                      <p className="entry-availability">{lesson.availability === "published" ? "Lesson available" : href ? "Overview available · full lesson coming later" : "Planned lesson · no overview available yet"}</p>
                       {!!lesson.prerequisiteIds?.length && <PrerequisiteRecommendations ids={lesson.prerequisiteIds} />}
                     </div>
                   </li>;

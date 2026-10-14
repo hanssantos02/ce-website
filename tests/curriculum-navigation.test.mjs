@@ -30,7 +30,7 @@ test("all subjects use ordered modules; only PSAD defines sample lessons", () =>
   assert.equal(new Set(modules.map(m => m.id)).size, modules.length);
 });
 
-test("one overview is navigable; planned lessons and mismatched parents have no destinations", () => {
+test("one available lesson is navigable; planned lessons and mismatched parents have no destinations", () => {
   const subject = psad(), module = statics(), lessons = getOrderedLessons(module);
   assert.deepEqual(lessons.map(l => l.title), ["Forces and Vectors", "Free Body Diagrams", "Equilibrium of Particles", "Equilibrium of Rigid Bodies"]);
   assert.deepEqual(lessons.map(l => l.displayOrder), [1, 2, 3, 4]);

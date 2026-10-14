@@ -9,7 +9,7 @@ export const learningJourney = [
   },
   {
     title: "Learn it. Then work it out.",
-    description: "Future lessons will connect clear concepts with engineering examples and practice, so each formula has a reason behind it.",
+    description: "The Forces and Vectors sample connects clear concepts with a worked example and a self-study exercise. More lessons are planned.",
   },
   {
     title: "Return and keep building.",
