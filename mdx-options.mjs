@@ -1,6 +1,9 @@
 // String plugin names and plain options remain serializable for Turbopack.
-/** @type {{ remarkPlugins: string[], rehypePlugins: [string, {strict: string, trust: boolean, output: string}][] }} */
+/** @type {import('katex').KatexOptions} */
+export const katexOptions = { strict: 'error', trust: false, output: 'htmlAndMathml' };
+
+/** @type {{ remarkPlugins: string[], rehypePlugins: [string, import('katex').KatexOptions][] }} */
 export const mdxOptions = {
   remarkPlugins: ['remark-gfm', 'remark-math'],
-  rehypePlugins: [['rehype-katex', { strict: 'error', trust: false, output: 'htmlAndMathml' }]],
+  rehypePlugins: [['rehype-katex', katexOptions]],
 };

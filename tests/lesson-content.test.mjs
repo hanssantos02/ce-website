@@ -5,6 +5,7 @@ import { readFile, readdir } from 'node:fs/promises';
 import { compile, evaluate } from '@mdx-js/mdx';
 import * as jsxRuntime from 'react/jsx-runtime';
 import { mdxOptions } from '../mdx-options.mjs';
+import { registeredLessonIds } from '../content/lesson-ids.ts';
 import { getSubjects, getLessonById, getLessonHref } from '../content/curriculum.ts';
 
 async function compilerOptions() {
@@ -56,6 +57,7 @@ test('published metadata has a real registered MDX body; no body invents an unkn
     ids.push(document.lessonId);
   }
   assert.equal(new Set(ids).size, ids.length);
+  assert.deepEqual([...Object.values(registeredLessonIds)].sort(), [...ids].sort());
   for (const subject of getSubjects()) for (const module of subject.modules) for (const lesson of module.lessons)
     if (lesson.availability === 'published') assert(ids.includes(lesson.id), lesson.id);
 });

@@ -1,3 +1,6 @@
+import { getProgressForLessons } from "../../../../lib/progress/store";
+import { ProgressStatus } from "../../../../components/progress/progress-status";
+import { getPublishedLesson } from "../../../../content/published-lessons";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -31,6 +34,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ModulePage({ params }: Props) {
   const { subject, module } = await resolveModule(params);
   const lessons = getOrderedLessons(module);
+  const publishedIds = lessons.filter(lesson => getPublishedLesson(lesson.id)).map(lesson => lesson.id);
+  const progress = publishedIds.length ? await getProgressForLessons(publishedIds) : undefined;
   const overviewCount = lessons.filter(lesson => lesson.availability === "overview").length;
   const publishedCount = lessons.filter(lesson => lesson.availability === "published").length;
   return (
@@ -48,6 +53,7 @@ export default async function ModulePage({ params }: Props) {
           <div className="curriculum-reading">
             <h2 id="lesson-sequence-title" className="section-title">Recommended lesson sequence</h2>
             <p className="topic-order-note project-note">This order is a guide. Open any available lesson or overview directly; prerequisites are optional recommendations.</p>
+            {progress?.kind === "unavailable" && <p className="progress-list-note" role="status">Saved progress is unavailable right now. Lesson availability is shown below; you can still open any published lesson.</p>}
             {lessons.length ? (
               <ol className="approach-list lesson-sequence" role="list">
                 {lessons.map(lesson => {
@@ -58,6 +64,7 @@ export default async function ModulePage({ params }: Props) {
                       <h3>{href ? <Link href={href} className="curriculum-entry-link">{lesson.title}<span className="entry-action">{lesson.availability === "published" ? "Open lesson" : "Open overview"}</span></Link> : lesson.title}</h3>
                       <p>{lesson.shortDescription}</p>
                       <p className="entry-availability">{lesson.availability === "published" ? "Lesson available" : href ? "Overview available · full lesson coming later" : "Planned lesson · no overview available yet"}</p>
+                      {progress?.kind === "ready" && getPublishedLesson(lesson.id) && <p className="progress-list-status"><ProgressStatus status={progress.statuses[lesson.id] ?? "not_started"} /></p>}
                       {!!lesson.prerequisiteIds?.length && <PrerequisiteRecommendations ids={lesson.prerequisiteIds} />}
                     </div>
                   </li>;

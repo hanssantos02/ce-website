@@ -1,6 +1,6 @@
 # CEPath product behavior
 
-Updated: 2026-10-14. The application has a design foundation and a landing page introducing CEPath, its planned curriculum, and its learning approach, plus a public subject catalog. Subject and module navigation and one complete Forces and Vectors lesson reader are implemented. Accounts and saved progress remain future behavior. See [STRATEGY.md](STRATEGY.md) for direction, [DESIGN.md](DESIGN.md) for the visual system, and [CE-NAV-001](docs/DECISIONS.md#ce-nav-001--guided-but-flexible-curriculum-navigation--approved) for curriculum rationale.
+Updated: 2026-10-17. The application has a design foundation and a landing page introducing CEPath, its planned curriculum, and its learning approach, plus a public subject catalog. Subject and module navigation and one complete Forces and Vectors lesson reader are implemented. The Supabase account foundation is implemented; the owner reports login/session/sign-out checks passed while email/recovery acceptance remains pending. M08 migration, saving and persistence were reported successful by the owner on 2026-10-17; hosted two-user isolation remains unverified. M09 adds a locally implemented private learning dashboard, pending authenticated hosted dashboard acceptance. M10 adds optional public interactive practice to the one published lesson. See [STRATEGY.md](STRATEGY.md) for direction, [DESIGN.md](DESIGN.md) for the visual system, and [CE-NAV-001](docs/DECISIONS.md#ce-nav-001--guided-but-flexible-curriculum-navigation--approved) for curriculum rationale.
 
 ## Design Foundation — Milestone 02
 
@@ -16,7 +16,7 @@ The three groups use full examination names and representative topics from PRC�
 
 The learning journey describes planned behavior: freely choose a subject, follow or skip the recommended sequence, read the first sample with explanations/examples/static practice, and later resume using account-backed progress. It explicitly says that prerequisites offer guidance without locks and every published free lesson will remain accessible anonymously, revisitable, and independent of subject order.
 
-The header offers Home, Curriculum, and How it works. Navigation remains visible and wraps on mobile. The hero includes a compact section index; native anchors move focus to real content. M2’s #approach and #about anchors remain meaningful. Values and closing sections explain the intended approach and link to the catalog. The footer includes working navigation, independent-platform/PRC non-affiliation language, and the temporary-name/development notice. Catalog, subject, representative module and one published lesson route are implemented; authentication, additional lesson content and legal-page routes remain absent.
+The header offers Home, Curriculum, and How it works. Navigation remains visible and wraps on mobile. The hero includes a compact section index; native anchors move focus to real content. M2’s #approach and #about anchors remain meaningful. Values and closing sections explain the intended approach and link to the catalog. The footer includes working navigation, independent-platform/PRC non-affiliation language, and the temporary-name/development notice. Catalog, subject, representative module and one published lesson route are implemented; account routes now exist; additional lesson content and legal-page routes remain absent.
 
 ## Subject Catalog — Milestone 04
 
@@ -44,7 +44,43 @@ Each new page enumerates complete route parameters from authoritative metadata a
 
 Forces and Vectors is complete at its existing URL and stable lesson ID. Trusted repository MDX owns objectives, nine section headings and educational prose; shared curriculum data continues to own titles, description, ordering and prerequisite references. KaTeX server output includes visual notation and MathML. A proportional 500 N/30° diagram, ruled worked example, quiet notes and one optional 600 N/120° exercise with a native solution disclosure support study. No grading or learner state is stored.
 
-The Product Owner selected a compact native section index. Its anchors focus real sections; reading content remains visible when the index is closed. All content is publicly accessible. Publication means a complete body is available; visible editorial status records source/calculation checks separately from pending independent academic review. Planned next lessons remain plain recommendations, with no active links. Authentication and progress require separate approval.
+The Product Owner selected a compact native section index. Its anchors focus real sections; reading content remains visible when the index is closed. All content is publicly accessible. Publication means a complete body is available; visible editorial status records source/calculation checks separately from pending independent academic review. Planned next lessons remain plain recommendations, with no active links. M07 and M08 extend this reader with optional account progress while keeping reading public.
+
+## Accounts and Authentication — Milestone 07
+
+Focused email/password forms extend the faculty bulletin with a short public-curriculum reminder. Signup requests, confirmation-pending feedback, login, recovery, password updates, local sign-out and a minimal private account page are implemented. No profiles, public directories, progress records or dashboard are introduced. The Product Owner chose to test email flows manually; positive live acceptance remains pending.
+
+The header receives verified server identity without exposing email; account pages use a fresh verified Supabase user. Published free lessons stay public. Token-hash email links first stage a short-lived private credential and ask for explicit confirmation; PKCE callbacks use the requesting browser's verifier. Redirects are limited to known internal destinations. Private responses are not publicly cached. Errors never claim that a request, verification or sign-out succeeded when it did not.
+
+See [authentication setup](docs/AUTHENTICATION.md) for required provider settings and remaining manual acceptance checks. M08 and M09 are authorized; M10 remains unapproved.
+
+## Persistent Lesson Progress — Milestone 08
+
+The owner selected a compact progress block before the lesson index/objectives. Anonymous students read freely and may sign in with a safe return to this exact published lesson. Verified students explicitly Start Learning, Mark as Complete, Mark In Progress or Reset progress. No row means Not Started; reading/revisiting never creates or changes a record, and any lesson can be completed directly without prior completion or a mandatory Start action. Completed is retained until an explicit change.
+
+Only published lessons backed by registered MDX have controls. Module lists fetch real relevant statuses once, separately from publication labels. Unknown/planned application mutations are rejected. Browser ownership is ignored; server verification and PostgreSQL ownership policies protect private records. Missing progress reads remain unavailable, never an invented Not Started. Saves show pending, confirmed results or retry/reload/session-expired guidance; private responses are not shared publicly.
+
+The owner reports applying the first application table migration and passing saving, refresh and sign-out/sign-in persistence checks on 2026-10-17. A read-only anonymous request was denied with 42501; this is not independent positive authenticated or hosted two-user verification. Local PostgreSQL policy tests and synthetic UI fixtures do not establish hosted persistence. See [progress setup and acceptance](docs/PROGRESS.md). M08 introduces no dashboard, aggregate percentages or new lessons; the separately approved M09 extension is described below.
+
+## Student Dashboard — Milestone 09
+
+`/dashboard` is a private learning hub, separate from `/account`. The owner selected a compact summary before learning actions. Its server read reuses M08 identity verification, one user-scoped progress query and the authoritative published-content registry. No schema or dependency is added. The authenticated header and account page link to the dashboard; explicit safe `/dashboard` returns work while the default `/account` and lesson/recovery returns remain compatible.
+
+Counts include distinct published lessons with registered content only. Subject percentages describe currently published content, not CELE mastery; a subject with no published lessons says Lessons coming soon and has no percentage. Failed loads show unavailable/retry rather than zeros. Newly registered students get a suggested starting lesson; students who complete all available content can review or browse without a false full-curriculum completion claim.
+
+Continue Learning uses the latest `updated_at` among eligible In Progress records, breaking equal timestamps by explicit curriculum order. Recommended Next is separate: prefer the Continue context, otherwise the latest saved activity, then choose the first incomplete published lesson within that module, that subject, or global order. With no records, use global order. Missing/invalid timestamps sort last with curriculum tie-breaking. The same lesson may serve both purposes when only one is available, and the interface explains that overlap. Prerequisites remain informational and every published free lesson stays publicly accessible.
+
+Recorded lesson lists show up to five latest progress updates per state. Confirmed progress actions invalidate the dashboard along with the lesson/module; personal data is request-scoped and never publicly cached. No visit tracking, study hours, scores, streaks, adaptive engine, account schema or M10 is introduced. Hosted authenticated dashboard and two-user browser acceptance remain unverified; see [dashboard verification](docs/DASHBOARD.md).
+
+## Interactive Practice — Milestone 10
+
+The published Forces and Vectors lesson adds five original single-answer questions after the MDX article and before the curriculum footer, reachable from the native section index. The owner chose one question at a time. Students may select/change an answer, submit for explicit correct/incorrect feedback and a worked explanation, retry only the current question, or navigate freely without submitting. Per-question attempts remain in component memory until refresh and never change saved lesson progress. Practice is open without an account.
+
+The typed repository bank owns stable question/lesson/option IDs, explicit order, separate publication/review states and original solution content. Lookup excludes invalid/draft/unchecked entries and requires an actual published registered lesson; lessons with no question bank have no empty practice region. The deterministic grader uses option IDs, independent of labels or position. Existing strict KaTeX settings render solution equations on the server with HTML/MathML; no client math engine, raw public HTML or arbitrary MDX is accepted.
+
+The component uses native radios/labels, disabled submission before selection and after grading, textual/SVG answer states and inline feedback. Submit focuses feedback; Previous/Next and Retry focus the question; the selector retains native keyboard focus. Initial reading focus is preserved. Source/calculation checks are explicit while independent academic review remains pending. These are educational CEPath examples, not official PRC questions or a secure assessment.
+
+There is no Supabase attempt write, score, saved quiz history, authentication change, automatic completion, timer, randomization, new service/dependency/schema, additional lesson or M11 implementation. See [practice architecture and authoring](docs/PRACTICE.md).
 
 ## Guided but flexible curriculum — CE-NAV-001
 
@@ -78,7 +114,7 @@ Revisiting a Completed lesson preserves its status. Accounts are needed for pers
 
 The eventual dashboard shows curriculum progress and provides distinct actions:
 
-- **Continue Learning:** return to the most recently visited unfinished lesson.
+- **Continue Learning:** in M09, return to the In Progress lesson with the most recent saved progress update; page visits are not tracked. A future visit-based behavior requires separate scope.
 - **Recommended Next:** offer the next lesson in the recommended curriculum sequence.
 - **Completed lessons:** reopen material for review without clearing completion.
 - **Curriculum subjects:** navigate freely to PSAD, MSTE, or HGE.
