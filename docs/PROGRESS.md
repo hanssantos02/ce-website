@@ -69,7 +69,7 @@ Use authorized development test identities, not real student records. Account/em
 4. Sign out. Confirm public content remains readable and private status/actions disappear. Sign back in and check the same saved status returns. Repeat with a separate browser/device using A.
 5. In a separate profile as B, confirm A's records are not visible or writable. Exercise SELECT/INSERT/UPDATE/DELETE and ownership reassignment against the hosted Data API using only each authorized user's normal credentials; no privileged key or real student row. Repeat anonymous denial. Local policy tests do not replace this provider-boundary acceptance.
 6. Interrupt a save or expire the session. Check pending, failure/retry/reload and sign-in feedback, with no false success or locked reading. On a phone, verify labels, focus and touch targets.
-7. Confirm module status matches the saved row; other planned lessons retain planned publication labels. The repository currently publishes only one lesson: independent multi-lesson/out-of-order behavior is tested with isolated synthetic rows, not a fabricated additional lesson.
+7. Confirm module status matches the saved row; other planned lessons retain planned publication labels. The repository now publishes Forces and Vectors and Free Body Diagrams. Complete Free Body Diagrams first and confirm Forces and Vectors remains independently Not Started; then reset only one and confirm the other is preserved. Isolated service tests cover this real pair; live hosted multi-lesson acceptance remains a manual check.
 
 ## Boundaries and references
 

@@ -20,7 +20,7 @@ function Solution({ question }: { question: PracticeQuestion }) {
   </div>;
 }
 
-export function PracticeSection({ questions }: { questions: readonly PracticeQuestion[] }) {
+export function PracticeSection({ questions, source = practiceSource }: { questions: readonly PracticeQuestion[]; source?: { label: string; url: string } }) {
   if (!questions.length) return null;
   return <section id="interactive-practice" tabIndex={-1} className="lesson-practice" aria-labelledby="interactive-practice-title">
     <h2 id="interactive-practice-title">Practice what you’ve learned</h2>
@@ -31,7 +31,7 @@ export function PracticeSection({ questions }: { questions: readonly PracticeQue
       id: question.id, prompt: question.prompt, given: question.given, options: question.options,
       correctOptionId: question.correctOptionId, solution: <Solution question={question} />,
     }))} />
-    <p className="practice-source">Vector conventions: <a href={practiceSource.url}>{practiceSource.label}</a>.</p>
+    <p className="practice-source">Reference: <a href={source.url}>{source.label}</a>.</p>
     <a className="practice-return" href="#learning-objectives">Return to the lesson content</a>
     <noscript><p>Interactive practice needs JavaScript. The lesson and its worked examples remain available to read.</p></noscript>
   </section>;

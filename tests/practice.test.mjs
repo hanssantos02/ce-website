@@ -6,14 +6,15 @@ import { initialAttempt, updateAttempt, gradeAnswer } from '../lib/practice/stat
 import { renderPracticeMath } from '../lib/practice/math.ts';
 
 const lessonId='psad-statics-forces-vectors';
-test('five original questions have valid stable metadata and deterministic lesson-scoped order',()=>{
- assert.equal(practiceQuestions.length,5);
+test('seven original questions have valid stable metadata and deterministic lesson-scoped order',()=>{
+ assert.equal(practiceQuestions.length,7);
  assert.deepEqual(validatePracticeBank(practiceQuestions),[]);
  const questions=getPracticeQuestions(lessonId);
  assert.equal(questions.length,5);
  assert.deepEqual(questions.map(q=>q.displayOrder),[1,2,3,4,5]);
+ assert.deepEqual(getPracticeQuestions('psad-statics-free-body-diagrams').map(q=>q.displayOrder),[1,2]);
  assert.deepEqual(getPracticeQuestions(lessonId,[...practiceQuestions].reverse()).map(q=>q.id),questions.map(q=>q.id));
- for(const id of ['missing','constructor','psad-statics-free-body-diagrams','mste-mathematics'])assert.deepEqual(getPracticeQuestions(id),[]);
+ for(const id of ['missing','constructor','psad-statics-equilibrium-particles','mste-mathematics'])assert.deepEqual(getPracticeQuestions(id),[]);
 });
 test('invalid, duplicate, unchecked and unpublished questions are rejected or excluded',()=>{
  const source=practiceQuestions[0];

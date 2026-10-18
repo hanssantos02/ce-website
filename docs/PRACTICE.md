@@ -2,9 +2,11 @@
 
 Milestone 10 adds five original single-answer multiple-choice questions to the existing Forces and Vectors lesson. Practice is public, optional and independent of authentication, saved lesson progress and the dashboard. There is no new route, dependency, database migration, backend endpoint or attempt storage.
 
+M11A publication (2026-10-19) adds two Free Body Diagrams questions, for seven across two published lessons. The stable IDs and checked solutions are unchanged from academic preview. Independent academic review remains pending.
+
 ## Question architecture
 
-`content/practice-questions.ts` owns the repository-managed bank and its TypeScript types. A question has a stable ID, stable parent lesson ID, explicit display order, the single supported question type, publication/review states, a prompt, given context, stable option IDs/text, one `correctOptionId`, an explanation and a structured solution. The solution records the required unknown, explained steps with optional TeX equations, final answer and interpretation. It contains no HTML or executable content.
+`content/practice-questions.ts` owns the repository-managed bank and its TypeScript types. The Free Body Diagrams entries live in `content/free-body-diagrams-questions.ts` and are composed into that authoritative bank. A question has a stable ID, stable parent lesson ID, explicit display order, the single supported question type, publication/review states, a prompt, given context, stable option IDs/text, one `correctOptionId`, an explanation and a structured solution. The solution records the required unknown, explained steps with optional TeX equations, final answer and interpretation. It contains no HTML or executable content.
 
 Publication and editorial checks are distinct. `draft` questions are excluded. Published questions must pass source/calculation checks; the public notice separately states that independent academic review is pending. This is not a professional-review claim. The questions are CEPath-authored educational examples, not official PRC items or copied textbook questions.
 
@@ -12,7 +14,7 @@ Publication and editorial checks are distinct. `draft` questions are excluded. P
 
 ## Rendering and lesson integration
 
-The Server Component reader queries the bank using its existing stable lesson ID, adds a real section-index anchor only when questions exist, and places practice after the existing MDX article and before the curriculum footer. The original nine MDX sections, static self-study exercise, math, diagram, progress controls and lesson navigation remain intact. An empty question array renders no practice section. Only one lesson currently has complete published content; no fake second lesson was created to demonstrate the empty case.
+The Server Component reader queries the bank using its existing stable lesson ID, adds a real section-index anchor only when questions exist, and places practice after the existing MDX article and before the curriculum footer. The original nine MDX sections, static self-study exercise, math, diagram, progress controls and lesson navigation remain intact. An empty question array renders no practice section. Both approved Statics lessons now have published content and their own question sets; lessons without questions still have no empty practice region.
 
 `components/practice/practice-section.tsx` prepares solution content on the server. `lib/practice/math.ts` uses the existing KaTeX package; `mdx-options.mjs` shares strict, `trust:false`, HTML-plus-MathML settings with MDX. The HTML insertion boundary accepts only KaTeX output from trusted repository equations. Raw question text is escaped by React; public HTML/MDX input is not accepted. KaTeX is not imported by the client engine. Equation containers scroll locally and are keyboard-focusable when narrow.
 
@@ -46,7 +48,7 @@ Node tests independently recompute the four numerical results and compare the ke
 2. Add a `PracticeQuestion` object to the bank with a new stable question ID and stable option IDs. Use `draft` / `unchecked` during authoring. Give it an explicit display order; never change IDs just to rename text.
 3. Write the original prompt/context and distinct choices. Set `correctOptionId` to exactly one existing option. Fill the explanation, required unknown, solution steps, answer/units and interpretation. Optional step equations use `String.raw` TeX strings; the existing server renderer handles them.
 4. Independently check the reasoning, calculations, units, signs, conventions and distractors. Set the truthful source/calculation review state, then publish. Independent academic review must still be disclosed unless actually performed.
-5. Extend the numerical/content tests and the intentionally current five-question scope assertions for approved expansion. Run `npm run check` and `npm run build`, then verify the actual lesson on a phone and with the keyboard.
+5. Extend the numerical/content tests and the current lesson-scoped question-count assertions for approved expansion. Run `npm run check` and `npm run build`, then verify the actual lesson on a phone and with the keyboard.
 
 No reader or engine rewrite is needed to add questions to another approved published lesson. Unsupported question types, question randomization, authoring tools and persistent attempts require separate scope.
 

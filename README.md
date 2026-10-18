@@ -133,3 +133,7 @@ Milestone 08 adds explicit private per-lesson progress without restricting publi
 ## Interactive lesson practice
 
 The published Forces and Vectors lesson now includes five optional multiple-choice questions after the main article. Answers and worked solutions are checked on the page, require no account, reset on refresh and never change lesson completion. No new package, database table, service or environment variable is needed. The [practice guide](docs/PRACTICE.md) explains the typed bank, stable-ID grading, server KaTeX, verification limits and how to add approved questions without rewriting the engine. Independent academic review remains pending.
+
+## Free Body Diagrams
+
+Publication was approved on 2026-10-19. Open `/curriculum/psad/engineering-mechanics-statics/free-body-diagrams` locally or through Curriculum → PSAD → Engineering Mechanics — Statics. The textbook-style lesson includes three worked examples, six SVG figures and two interactive practice questions. It is publicly readable; signed-in students can save independent lesson progress. The old `/review/free-body-diagrams` bookmark redirects to this public route. Independent academic review remains pending; see [the editorial record](docs/CONTENT_REVIEW.md).

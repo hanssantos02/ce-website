@@ -14,7 +14,7 @@ function gateway(identity={kind:'authenticated',userId:'verified-user'}){
 }
 test('published eligibility uses stable IDs and actual registered content, without requiring earlier progress',()=>{
  assert(getPublishedLesson(lesson));
- for(const id of ['unknown','psad-statics-free-body-diagrams','constructor',''])assert.equal(getPublishedLesson(id),undefined);
+ for(const id of ['unknown','psad-statics-equilibrium-particles','constructor',''])assert.equal(getPublishedLesson(id),undefined);
 });
 test('no record is Not Started; explicit updates and resets return confirmed statuses',async()=>{
  const db=gateway();assert.deepEqual((await loadProgress([lesson],db)).statuses,{});
@@ -29,7 +29,7 @@ test('no record is Not Started; explicit updates and resets return confirmed sta
 });
 test('malformed, unknown and unpublished mutations never reach storage',async()=>{
  const db=gateway();
- for(const fields of [{lessonId:'unknown',intent:'completed'},{lessonId:'psad-statics-free-body-diagrams',intent:'completed'},{lessonId:lesson,intent:'not_started'},{lessonId:[lesson],intent:'completed'}])assert.equal((await performProgress(fields,db)).kind,'error');
+ for(const fields of [{lessonId:'unknown',intent:'completed'},{lessonId:'psad-statics-equilibrium-particles',intent:'completed'},{lessonId:lesson,intent:'not_started'},{lessonId:[lesson],intent:'completed'}])assert.equal((await performProgress(fields,db)).kind,'error');
  assert.equal(db.calls.length,0);
 });
 test('anonymous/expired and unavailable identity have distinct safe feedback and no database calls',async()=>{
@@ -70,4 +70,15 @@ test('reload only reads; independent published lessons can complete out of order
 test('a session expiring between identity verification and storage cannot report a save',async()=>{
  const db=gateway();db.upsert=async()=>{throw {status:401};};
  assert.equal((await performProgress({lessonId:lesson,intent:'completed'},db)).kind,'unauthenticated');
+});
+
+test('published Free Body Diagrams can complete first without changing Forces and Vectors progress',async()=>{
+ const db=gateway();const second='psad-statics-free-body-diagrams';
+ assert(getPublishedLesson(second));
+ assert.equal((await performProgress({lessonId:second,intent:'completed'},db)).status,'completed');
+ assert(!db.rows.has(lesson));
+ await performProgress({lessonId:lesson,intent:'in_progress'},db);
+ await performProgress({lessonId:second,intent:'reset'},db);
+ assert.equal(db.rows.get(lesson),'in_progress');
+ assert(!db.rows.has(second));
 });

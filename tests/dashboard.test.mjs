@@ -17,16 +17,16 @@ function catalog(){
 }
 test('real published registry gives accurate new-student counts and zero-content subjects',()=>{
  const view=deriveDashboard([]);
- assert.equal(view.available,1);assert.equal(view.completed,0);assert.equal(view.inProgress,0);
+ assert.equal(view.available,2);assert.equal(view.completed,0);assert.equal(view.inProgress,0);
  assert.equal(view.continueLesson,undefined);assert.equal(view.recommendedLesson.lesson.id,currentId);
  assert.equal(view.hasProgress,false);assert.equal(view.allCompleted,false);
- assert.deepEqual(view.subjects.map(s=>[s.subject.id,s.available,s.completed,s.percentage]),[['psad',1,0,0],['mste',0,0,null],['hge',0,0,null]]);
+ assert.deepEqual(view.subjects.map(s=>[s.subject.id,s.available,s.completed,s.percentage]),[['psad',2,0,0],['mste',0,0,null],['hge',0,0,null]]);
 });
 test('completed published content is counted once; stale/planned records do not inflate totals',()=>{
- const view=deriveDashboard([row(currentId,'completed'),row(currentId,'completed'),row('psad-statics-free-body-diagrams','completed'),row('gone','completed')]);
- assert.equal(view.completed,1);assert.equal(view.available,1);assert.equal(view.inProgress,0);
- assert.equal(view.subjects[0].percentage,100);assert.equal(view.allCompleted,true);
- assert.equal(view.recommendedLesson,undefined);assert.equal(view.continueLesson,undefined);
+ const view=deriveDashboard([row(currentId,'completed'),row(currentId,'completed'),row('psad-statics-equilibrium-particles','completed'),row('gone','completed')]);
+ assert.equal(view.completed,1);assert.equal(view.available,2);assert.equal(view.inProgress,0);
+ assert.equal(view.subjects[0].percentage,50);assert.equal(view.allCompleted,false);
+ assert.equal(view.recommendedLesson.lesson.id,'psad-statics-free-body-diagrams');assert.equal(view.continueLesson,undefined);
  assert.equal(view.completedLessons.length,1);assert.equal(view.ignoredRecords,2);
 });
 test('out-of-order completion never fills earlier lessons or requires prerequisites',()=>{

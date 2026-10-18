@@ -7,7 +7,6 @@ import { Breadcrumbs } from "../curriculum/breadcrumbs";
 import { LessonNavigation } from "./lesson-navigation";
 import { getLessonDocument } from "../../content/lesson-documents";
 import { getModuleHref, getOrderedLessons, type Subject, type Module, type Lesson } from "../../content/curriculum";
-
 export function LessonReader({ subject, module, lesson }: { subject: Subject; module: Module; lesson: Lesson }) {
   const document = getLessonDocument(lesson.id);
   if (!document) throw new Error(`Published lesson ${lesson.id} has no registered MDX document.`);
@@ -41,7 +40,7 @@ export function LessonReader({ subject, module, lesson }: { subject: Subject; mo
           <ol>{document.learningObjectives.map(objective => <li key={objective}>{objective}</li>)}</ol>
         </section>
         <article className="lesson-prose" aria-label={`${lesson.title} lesson content`}><Content /></article>
-        <PracticeSection questions={questions} />
+        <PracticeSection questions={questions} source={lesson.source} />
         <LessonNavigation subject={subject} module={module} lesson={lesson} />
       </div></PageContainer>
     </div>

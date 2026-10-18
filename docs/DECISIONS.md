@@ -176,3 +176,43 @@ Keep the typed bank separate from presentation. Stable question/lesson/option ID
 Reuse strict KaTeX settings from MDX for server-rendered worked solutions, passing nodes into a small client interaction boundary. Only trusted renderer output reaches the HTML insertion point; text is React-escaped, and no public HTML/MDX execution is exposed. Client-delivered answer keys are acceptable for low-stakes self-study and provide no secure-examination guarantee.
 
 Integrate after the existing article and before the lesson footer; add a native index target only when questions exist. Preserve existing MDX, diagram, static exercise, progress, auth and dashboard behavior. Native radios, inline announced feedback, per-question retry, retained selector focus and heading focus for Previous/Next keep the interaction accessible. Add focused content/state/calculation tests and actual anonymous browser checks instead of a new quiz framework. Earlier M09 private hosted acceptance remains explicitly pending; it is independent of this public practice slice.
+
+## D020 — Review-ready drafts remain separate from publication — Established
+
+Approved 2026-10-18: M11A authors only Free Body Diagrams and two original questions using the existing stable ID and combined Engineering Mechanics — Statics module. Preserve planned curriculum availability, the published registry and draft question status until explicit publication approval. No new lifecycle enum or database is necessary: readiness is an editorial record, not public availability or student progress.
+
+The Product Owner selected a development-only preview including interactive practice. A fixed `/review/free-body-diagrams` entry rejects production before dynamically importing trusted draft content. The shared reader accepts an explicit trusted review packet, supplies the same layout/math/navigation, replaces progress controls with a draft notice, and cites the correct statics reference in practice. No browser parameter enables draft content. No public navigation links to review material. This is a local reviewer convenience, not a deployed editorial system or authentication boundary.
+
+Use original precise SVG geometry under the existing figure styles, with text alternatives and explicit physical models. A concise [editorial checklist](CONTENT_REVIEW.md) records independent recomputation and remaining human academic/publication decisions. Existing counts, progress eligibility, account data, RLS and schema remain unchanged. Publication, commit/push/deployment and M11B are not authorized by this implementation.
+
+## CE-CONTENT-001 — Full Textbook-Style Lessons — Approved
+
+Approved by the Product Owner on 2026-10-19. CEPath should provide comprehensive, original, textbook-style civil engineering lessons rather than short board-exam reviewer notes. Prioritize conceptual depth and engineering correctness, not arbitrary word count.
+
+Each substantial lesson includes, where appropriate:
+
+1. Introduction and engineering relevance.
+2. Learning objectives.
+3. Recommended prerequisites.
+4. Detailed foundational explanations.
+5. Progressive development of engineering concepts.
+6. Mathematical equations with defined variables.
+7. Derivations and assumptions.
+8. Accurate engineering diagrams.
+9. Multiple worked examples of increasing difficulty.
+10. Common mistakes and misconceptions.
+11. Conceptual and computational practice.
+12. Detailed solutions.
+13. Board-exam applications.
+14. Chapter summaries.
+15. Verifiable academic references.
+
+Apply the standard with judgment: an introductory FBD lesson develops the mechanics needed for isolation and elementary equilibrium without prebuilding later design chapters. Original board-exam-style applications must not be represented as official PRC items, predictions, scope claims or endorsement.
+
+Audit existing lessons first; preserve correct, sufficiently developed sections and make targeted improvements to real gaps. Check every new calculation, variable, unit, assumption and diagram against a reproducible solution and real references. Preserve curriculum IDs/routes/order/prerequisites, question IDs where possible, publication state, student records and the existing MDX/KaTeX/component architecture. Source/calculation checks do not equal independent professional review. Publication or replacement of public content requires the applicable Product Owner approval; approving this standard does not publish the M11A draft.
+
+## D021 — Publish the reviewed Free Body Diagrams lesson — Approved
+
+Approved 2026-10-19 by the Product Owner: “Approve, add this to our website now and push to main.” This supersedes D020’s publication hold for this lesson only. Publish its CE-CONTENT-001 improvements and two source/calculation-checked questions, preserving stable lesson/question IDs, order and advisory prerequisite. Independent academic review remains pending and is disclosed publicly; Product Owner publication approval is not professional certification.
+
+Use the existing canonical lesson URL, explicit trusted MDX registration and typed practice bank. The old review URL redirects to the public lesson, and the temporary draft injection path is removed from the shared reader. The authoritative registry automatically yields two available lessons, seven questions across those lessons, safe authentication returns and per-lesson progress eligibility. No database migration, authentication changes, hosted data operations or M11B implementation. Commit and push to main are authorized; deployment is not performed as part of this change.

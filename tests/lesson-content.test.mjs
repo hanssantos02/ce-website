@@ -20,9 +20,9 @@ async function compilerOptions() {
 }
 const lessonUrl = new URL('../content/lessons/forces-and-vectors.mdx', import.meta.url);
 
-test('only the existing Forces and Vectors ID is published, at its original public URL', () => {
+test('the two approved Statics lessons are published at their stable public URLs', () => {
   const published = getSubjects().flatMap(s => s.modules.flatMap(m => m.lessons.filter(l => l.availability === 'published')));
-  assert.deepEqual(published.map(l => l.id), ['psad-statics-forces-vectors']);
+  assert.deepEqual(published.map(l => l.id), ['psad-statics-forces-vectors','psad-statics-free-body-diagrams']);
   const {subject, module, lesson} = getLessonById(published[0].id);
   assert.equal(getLessonHref(subject, module, lesson), '/curriculum/psad/engineering-mechanics-statics/forces-and-vectors');
   assert.equal(getLessonById('constructor'), undefined);

@@ -1,0 +1,335 @@
+export const lessonId = 'psad-statics-free-body-diagrams';
+
+export const editorialStatus = 'Source and calculation checks completed. Independent academic review pending.';
+
+export const learningObjectives = [
+  'Explain what a free body diagram represents.',
+  'Identify the body or system being analyzed.',
+  'Distinguish external forces from interactions internal to the chosen system.',
+  'Identify the idealized reactions of planar roller, pin and fixed supports.',
+  'Represent applied forces and reaction couples on an isolated body.',
+  'Choose and label a consistent coordinate system.',
+  'Construct a clear free body diagram for a simple two-dimensional problem.',
+  'Recognize omitted forces, double counting and other isolation errors.',
+  'Relate a free body diagram to force and moment equilibrium equations.'
+];
+
+export const sections = [
+  {id: 'fbd-introduction', title: 'What a free body diagram represents'},
+  {id: 'external-forces', title: 'Which forces belong on the body?'},
+  {id: 'planar-supports', title: 'Common two-dimensional supports'},
+  {id: 'drawing-an-fbd', title: 'How to draw a free body diagram'},
+  {id: 'block-example', title: 'Worked example: a block on a smooth surface'},
+  {id: 'beam-example', title: 'Worked example: a simply supported beam'},
+  {id: 'fbd-common-mistakes', title: 'Common mistakes and checks'},
+  {id: 'fbd-summary', title: 'Summary and next steps'}
+];
+
+<LessonSection section={sections[0]}>
+
+A beam transfers a load to its supports. Before calculating how much each support carries, identify **the body being analyzed and every external action on it**. A free body diagram (FBD) is the resulting mechanical model: an isolated outline of the body, with arrows for external forces and couple moments, plus the dimensions needed to interpret them.
+
+“Free” means separated in the drawing, not unsupported in the real world. When a support is removed from the sketch, its action on the body remains as a reaction force or couple. The FBD is different from a picture of the beam still sitting on its supports.
+
+For example, to study a temporary platform beam, isolate the beam from the supporting connections. Draw the applied loads and replace each connection by the reactions permitted by its model. A missing reaction produces an incomplete equation; an invented reaction solves a different physical problem. Drawing comes before solving.
+
+This lesson uses idealized rigid bodies in **planar statics**. It introduces moment balance only as needed to check a beam FBD; it does not develop internal shear or bending-moment diagrams, deformation, or structural design rules.
+
+### Recommended preparation
+
+Review [Forces and Vectors](/curriculum/psad/engineering-mechanics-statics/forces-and-vectors) if you need practice with force magnitude, direction, rectangular components or signed axes. Basic algebra is also useful for the equilibrium calculations below. This is a recommendation, not an access requirement or a requirement to complete that lesson first.
+
+### Choose a model that keeps the important geometry
+
+A **particle model** ignores the body's size when only its overall force balance matters. A **rigid-body model** retains its geometry while treating distances between its points as unchanged under loading. A beam needs that geometry: the same downward load near one support and at the midpoint generally gives different support reactions. Keeping only the force magnitude would lose the information needed to predict rotation.
+
+The rigid-body assumption does not mean that real beams never deform. It means deformation is neglected for this particular external-equilibrium model. Support reactions alone do not establish that a beam is strong or stiff enough for use.
+
+</LessonSection>
+
+<LessonSection section={sections[1]}>
+
+An external force crosses the boundary of the selected body or system. Ask, “What other object exerts this force on the body I kept?”
+
+- **Applied forces** are specified loads, such as a downward point load representing a localized load on a beam. Keep their application points and directions.
+- **Weight** is the gravitational force on the body. Near the Earth’s surface, $W=mg$, where $m$ is mass in kilograms and $g$ is gravitational acceleration in metres per second squared. Weight is measured in newtons, not kilograms. For a uniform block in a uniform gravitational field, draw it through the centre of mass.
+- **Normal reaction** acts perpendicular to a contacting surface. A smooth, frictionless surface provides no tangential friction force.
+- **Friction** acts along a rough contacting surface, opposing actual or impending relative sliding at the contact. Its direction follows that tendency, not a rule that it always points left. Static friction is not automatically its limiting value.
+- **Tension** in an ideal taut, flexible, massless cable acts along the cable and pulls away from the attached body. That cable does not push; a slack cable supplies no tension.
+- **Support reactions** model the forces and couples that connections can exert. The allowed reactions depend on what motion the idealized connection restrains.
+
+Also include any specified **applied couple moment**. A couple has rotational effect and units such as N·m or kN·m; it is not an extra point force.
+
+<LessonNote title="The boundary decides what is external">
+
+When two connected parts are kept as one system, their mutual contact forces are internal and cancel in the whole-system force balance. Do not add them to that system’s FBD. If you isolate one part by cutting the connection, the other part’s forces and couples across the cut become external to the chosen part and must be represented. Forces already internal to that part are still omitted.
+
+</LessonNote>
+
+Newton’s third-law forces act on **different bodies**. If a floor pushes upward on a block, the block pushes downward on the floor. Only the floor-on-block force belongs on the block’s FBD. Drawing both on the block would confuse two separate bodies.
+
+### Magnitude and direction are not the whole force description
+
+For a rigid body, identify the **point of application** and the **line of action**, the straight line through that point along the force direction. A vertical force at the left of a beam and an equal vertical force at its right have different moments about the midpoint. Equal force vectors at different locations therefore need not produce the same external effect.
+
+For external rigid-body equilibrium, a force can be slid **along its own line of action** without changing its moment. Sliding it sideways to a different parallel line changes the lever arm and generally changes the moment. This equivalence is limited to external rigid-body effects; it does not assert identical internal stresses or local contact effects in a deformable member.
+
+</LessonSection>
+
+<LessonSection section={sections[2]}>
+
+Use positive x to the right and positive y upward in the following sketches. Unknown arrows show assumed directions. Solving may give zero or a negative value; negative means reverse the assumed direction, subject to the contact model remaining physically possible.
+
+### Why restraints produce these reactions
+
+A rigid body in a plane can translate horizontally, translate vertically and rotate. These are its three planar **degrees of freedom**. In the ideal model, a support can exert a reaction associated with a motion it restrains. A smooth contact restrains movement into the supporting surface, so its reaction is normal to that surface; the absence of tangential restraint rules out a friction reaction. A pin restrains both translations but permits rotation. A fixed connection restrains all three motions and can also exert a couple.
+
+These observations determine the possible **unknowns**, not their values. The actual loads and equilibrium equations determine whether each possible reaction is engaged. Counting unknowns alone also does not prove stability: the directions and locations of the restraints matter. A more detailed stability and determinacy study belongs with later rigid-body equilibrium work.
+
+### Frictionless roller
+
+A roller on a smooth surface supplies **one reaction normal to that surface**. For a horizontal surface the reaction is vertical; for an inclined surface it is inclined. The ideal roller does not resist tangential sliding or rotation and supplies no reaction couple. A roller resting without an anchor can push against a body, but cannot pull it back toward the surface if contact is lost.
+
+### Ideal pin or hinge
+
+A frictionless planar pin prevents translation in both in-plane directions while allowing rotation. Represent its action by independent components $A_x$ and $A_y$. Do not add a reaction couple. Both components are possible unknowns even when one later evaluates to zero.
+
+### Ideal fixed support
+
+A planar fixed support restrains horizontal translation, vertical translation and rotation. Represent it by $A_x$, $A_y$ and a reaction couple $M_A$. Force components have force units; $M_A$ has force-times-length units. Three possible reactions do not mean all three must be nonzero in every loading case.
+
+<SupportReactionsDiagrams />
+
+These are **ideal connection models**, not a claim that every bolted, welded or bearing connection behaves exactly this way. A real support model must be justified by its geometry and behavior. Here the idealization is given; selecting models for real designs is beyond this introductory lesson.
+
+</LessonSection>
+
+<LessonSection section={sections[3]}>
+
+1. **Name the body.** Decide whether it is one block, the entire beam or a separated part. State any neglected self-weight.
+2. **Isolate it.** Draw a simple outline without surrounding supports, cables or adjacent bodies. Retain the important contact and load locations.
+3. **Choose axes.** Label positive x and y. When moments are used here, take counterclockwise as positive.
+4. **Add external applied actions.** Include known loads, weight where applicable and applied couples. Keep specified directions and points of application.
+5. **Replace contacts and supports.** Add only the forces and couples allowed by each support assumption. Give each unknown a symbol and an assumed direction.
+6. **Label useful geometry.** Show distances, angles, force magnitudes and units. Moments require perpendicular distances to force lines of action.
+7. **Audit the boundary.** For every removed connection, check what it exerts on this body. Check for omissions and double counting.
+
+The FBD is now the input to equilibrium, not the answer itself. For a rigid body at rest under coplanar loads,
+
+$$
+\sum F_x=0,\qquad \sum F_y=0,\qquad \sum M_O=0.
+$$
+
+$F_x$ and $F_y$ denote signed components of **all external forces** along the chosen axes; $M_O$ denotes their moments plus any external couple moments about a chosen point $O$. For a force with signed components $F_x,F_y$ applied at position $(x,y)$ relative to $O$, its signed moment is $xF_y-yF_x$. Distances are in metres when moments use N·m or kN·m. A force whose line of action passes through $O$ has zero moment about $O$.
+
+Use one consistent force unit throughout an equation. The moment condition is essential for an extended beam: zero net force alone does not prevent rotation.
+
+### From a lever arm to the moment equation
+
+Let $F$ be a nonnegative force magnitude and $d_\perp$ the shortest distance from the moment centre $O$ to the force's line of action. The **moment magnitude** is
+
+$$
+|M_O|=F d_\perp.
+$$
+
+Assign its sign separately: counterclockwise is positive here, and clockwise is negative. A force can be nonzero yet have zero moment about a point on its line of action, because $d_\perp=0$ there. The lever arm is a perpendicular distance to a line, not automatically the distance to the arrow's tail.
+
+The component form follows by resolving the force at its actual application point. For a point $(x,y)$ measured from $O$, the vertical component contributes $xF_y$ and the horizontal component contributes $-yF_x$. Their signed moments add:
+
+$$
+M_O=xF_y-yF_x.
+$$
+
+For example, when $x>0$ and $F_y>0$, the vertical component tends to turn the body counterclockwise about $O$. When $y>0$ and $F_x>0$, the horizontal component tends to turn it clockwise. Signed coordinates and components extend this reasoning to the other directions. Both products have units of force times length.
+
+The expression above is the moment of **one force**. For several forces, sum their signed moments and then add any externally applied couples. A couple consists of equal, opposite, parallel forces on separated lines: their net force is zero but their moments do not cancel. Its moment is independent of the chosen moment centre. An applied couple must therefore remain in $\sum M_O$ even though it contributes nothing to $\sum F_x$ or $\sum F_y$.
+
+The conditions $\sum F_x=\sum F_y=0$ express absence of translational acceleration in the chosen inertial frame; $\sum M_O=0$ supplies the rotational balance for a body already at rest. They do not replace the support/contact assumptions or guarantee adequate strength. This distinction is why an FBD records both forces and couples before any algebra starts.
+
+</LessonSection>
+
+<LessonSection section={sections[4]}>
+
+<WorkedExample id="fbd-block-example" title="Isolate a stationary block">
+
+#### Problem, given and required
+
+A uniform **20 kg** block rests at equilibrium on a **smooth horizontal surface**. There are no cables or other applied loads. Use $g=9.81\,\mathrm{m/s^2}$, positive x rightward and positive y upward. Construct the block’s FBD and determine its normal reaction.
+
+#### Identify the forces
+
+Keep the block; remove the floor. Earth exerts weight $W$ downward through the centre of mass. The smooth floor exerts the normal reaction $N$ upward. The resultant normal is taken on the same vertical line as weight for this non-tipping symmetric case. No friction force appears because the surface is frictionless. Do not draw the block’s downward force on the removed floor.
+
+<BlockFreeBodyDiagram />
+
+#### Calculate and check
+
+$$
+W=mg=(20\,\mathrm{kg})(9.81\,\mathrm{m/s^2})=196.20\,\mathrm{N}.
+$$
+
+Vertical equilibrium gives
+
+$$
+\sum F_y=N-W=0\quad\Rightarrow\quad N=196.20\,\mathrm{N}.
+$$
+
+There are no horizontal forces, so $\sum F_x=0$. Both vertical forces share a line of action; their net moment about the centre is zero. With $N=W$, their moments also cancel about any other point.
+
+**Answer: the FBD has two forces, weight 196.20 N downward and normal reaction 196.20 N upward.** Their equality follows from equilibrium in this problem, not from Newton’s third law. Different applied loads or acceleration would require a different balance.
+
+</WorkedExample>
+
+</LessonSection>
+
+<LessonSection section={sections[5]}>
+
+<WorkedExample id="fbd-beam-example" title="A 6 m beam with a midpoint load">
+
+#### Problem, given and required
+
+A horizontal beam spans **6 m** from an ideal pin at **A** on the left to a frictionless roller at **B** on a horizontal surface on the right. A **12 kN** concentrated force acts vertically downward at the midpoint, **3 m from each support**. Neglect the beam’s self-weight and any other loads. Assume equilibrium and maintained support contact.
+
+Required: construct the FBD and find $A_x$, $A_y$ and $B_y$, in kilonewtons. Use positive x rightward, positive y upward and counterclockwise moments positive.
+
+#### Isolate and replace
+
+Remove both support symbols from the isolated beam. At A, assume $A_x$ rightward and $A_y$ upward. At B, assume $B_y$ upward, normal to the horizontal surface. Retain the downward 12 kN load and both 3 m dimensions. Neither ideal support supplies a reaction couple; no horizontal reaction is permitted at B.
+
+<BeamFreeBodyDiagram />
+
+#### 1. Balance horizontal forces
+
+$$
+\sum F_x=A_x=0\quad\Rightarrow\quad A_x=0\,\mathrm{kN}.
+$$
+
+The pin permits two reaction components in the model; this loading requires no horizontal component.
+
+#### 2. Balance moments about A
+
+The forces at A pass through A and have zero moment about it. The load causes clockwise rotation; the upward roller reaction causes counterclockwise rotation. Their perpendicular lever arms are 3 m and 6 m respectively:
+
+$$
+\begin{aligned}
+\sum M_A &= B_y(6\,\mathrm{m})-(12\,\mathrm{kN})(3\,\mathrm{m})=0,\\
+B_y &= \frac{36\,\mathrm{kN}\!\cdot\!\mathrm{m}}{6\,\mathrm{m}}=6\,\mathrm{kN}.
+\end{aligned}
+$$
+
+#### 3. Balance vertical forces
+
+$$
+\begin{aligned}
+\sum F_y &= A_y+B_y-12\,\mathrm{kN}=0,\\
+A_y &= 12\,\mathrm{kN}-6\,\mathrm{kN}=6\,\mathrm{kN}.
+\end{aligned}
+$$
+
+#### Answer and independent equilibrium checks
+
+**Aₓ = 0 kN; Aᵧ = 6 kN upward; Bᵧ = 6 kN upward.** Positive values confirm the assumed upward directions, and the roller reaction is compatible with contact. The symmetry is a useful check, but it does not replace the equations.
+
+- Horizontal residual: $0\,\mathrm{kN}$.
+- Vertical residual: $(6+6-12)\,\mathrm{kN}=0\,\mathrm{kN}$.
+- Moment residual about A: $(6\,\mathrm{kN})(6\,\mathrm{m})-(12\,\mathrm{kN})(3\,\mathrm{m})=0$.
+- As a second moment check, about B: $-(6\,\mathrm{kN})(6\,\mathrm{m})+(12\,\mathrm{kN})(3\,\mathrm{m})=0$.
+
+Both reactions carry half the load because the geometry and loading are symmetric. Moving the load generally changes that split. Solving support reactions is not yet a calculation of the beam’s internal stresses, strength or deflection.
+
+</WorkedExample>
+
+<WorkedExample id="fbd-off-centre-example" title="Move the load: a beam without symmetry">
+
+#### Problem and assumptions
+
+Keep the same **6 m horizontal beam**, ideal pin A and frictionless roller B on a horizontal surface, but place the **12 kN downward point load 2 m from A**, so it is **4 m from B**. Neglect self-weight and all other loads and couples. Assume static equilibrium and maintained contact. Use positive x rightward, positive y upward and counterclockwise moments positive.
+
+Required: construct the new FBD and determine $A_x$, $A_y$ and $B_y$. Before calculating, predict which support will carry more load. The midpoint diagram above describes the earlier problem; the following diagram shows this changed load location.
+
+<BeamFreeBodyDiagram offCentre />
+
+#### Construct the model, then solve
+
+The unknown reaction types have not changed: draw $A_x$ rightward, $A_y$ upward and $B_y$ upward, with no reaction couples and no horizontal reaction at B. Retain the load at its new position. Moving a load changes its moment arm even when its magnitude and direction are unchanged.
+
+Horizontal equilibrium gives $A_x=0\,\mathrm{kN}$. Taking moments about A eliminates both pin-force moments:
+
+$$
+\begin{aligned}
+\sum M_A &= B_y(6\,\mathrm{m})-(12\,\mathrm{kN})(2\,\mathrm{m})=0,\\
+B_y &= \frac{24\,\mathrm{kN}\!\cdot\!\mathrm{m}}{6\,\mathrm{m}}=4\,\mathrm{kN},\\
+\sum F_y &= A_y+B_y-12\,\mathrm{kN}=0,\\
+A_y &= 12\,\mathrm{kN}-4\,\mathrm{kN}=8\,\mathrm{kN}.
+\end{aligned}
+$$
+
+**Answer: Aₓ = 0 kN, Aᵧ = 8 kN upward and Bᵧ = 4 kN upward.** A carries more because the load is closer to A. Both positive vertical reactions agree with the assumed contact model.
+
+#### Verify independently and interpret
+
+Vertical balance gives $(8+4-12)\,\mathrm{kN}=0$. Taking moments about B checks the geometry from the other end:
+
+$$
+-(8\,\mathrm{kN})(6\,\mathrm{m})+(12\,\mathrm{kN})(4\,\mathrm{m})=0.
+$$
+
+The load is left of B and downward, so its moment about B is counterclockwise. An incorrect equal split of 6 kN at each end would satisfy vertical force balance but leave a nonzero $(36-24)\,\mathrm{kN}\!\cdot\!\mathrm{m}=12\,\mathrm{kN}\!\cdot\!\mathrm{m}$ moment about A. That is a rotating tendency, not equilibrium.
+
+#### Derive the reaction shares for this model
+
+Let $P$ be the downward point-load magnitude, $L$ the support span, and $a$ its distance from A. For this same ideal pin/roller beam with no other loads or couples, $P>0$, $L>0$ and $0\leq a\leq L$. Moment and vertical-force balance give
+
+$$
+\begin{aligned}
+B_yL-Pa&=0\quad\Rightarrow\quad B_y=\frac{Pa}{L},\\
+A_y&=P-B_y=\frac{P(L-a)}{L}.
+\end{aligned}
+$$
+
+The length ratio is dimensionless, so the reactions have the same force unit as $P$. At the midpoint, $a=L/2$, both reactions are $P/2$. As the load approaches A, $a$ approaches zero, $B_y$ approaches zero and $A_y$ approaches $P$. These limits agree with the physical picture. Do not transfer these formulas to a different support arrangement, an overhang or additional loads without rebuilding and checking the FBD.
+
+</WorkedExample>
+
+</LessonSection>
+
+<LessonSection section={sections[6]}>
+
+- **Omitting weight without saying so.** Include it, or state that it is neglected as in the beam example.
+- **Inventing balancing forces.** Draw forces with physical sources. “The body needs a leftward force” is not a source.
+- **Using the wrong support reactions.** A horizontal smooth roller supplies a vertical force, not two independent components; a fixed support also permits a reaction couple.
+- **Drawing an action–reaction pair on one body.** The block-on-floor force belongs on the floor’s FBD, not the block’s.
+- **Changing the body mid-solution.** A whole-beam FBD and a cut segment have different boundaries and external actions. State which one you keep.
+- **Forgetting an applied couple.** A curved applied-moment arrow survives isolation even if it is not represented by a point force.
+- **Mixing assumed and solved directions.** Retain one sign convention; a negative answer reverses an unknown arrow. For a contact-only support, also check that the reaction is physically possible.
+- **Omitting distances.** Force balance cannot detect every wrong load position. Moment balance needs the correct perpendicular lever arm.
+- **Double counting a force.** Show either a force vector or its rectangular components, not both as additional forces. Likewise, show reactions in place of removed supports, not a second set beside intact supports.
+- **Adding internal interactions to a whole system.** Only expose cut interactions when the selected body is actually separated into parts.
+
+</LessonSection>
+
+<LessonSection section={sections[7]}>
+
+An FBD is a boundary decision made visible. Name the body, remove its surroundings, replace contacts by their allowed reactions and label all external actions and needed geometry. In planar statics, an ideal smooth roller supplies one normal reaction, a pin two force components, and a fixed support two components plus a couple.
+
+Choose axes before signs. Check force balance and moment balance with consistent units. A correct FBD connects a physical model to equations; a correct calculation cannot repair an incorrect model.
+
+The three examples progress from two collinear forces, to symmetric beam reactions, to an asymmetric load. In each case the body and supports determine the FBD, while geometry and loading determine the reaction values. Use $|M_O|=F d_\perp$ or $M_O=xF_y-yF_x$ consistently; include applied couples separately. Equal reaction shares follow from the particular symmetric model, not from the phrase “simply supported.”
+
+### Applying the method to board-exam-style problems
+
+When a short statics problem supplies support symbols, a point load and dimensions, translate those details into a model before choosing an answer. Identify the isolated body, read whether the roller surface is inclined, record any neglected self-weight, and distinguish a force from a couple. Then choose a moment centre that removes convenient unknowns, solve with units, and check both the force residuals and another moment equation.
+
+The asymmetric example shows why checking only the sum of vertical forces is insufficient: an attractive equal-share answer can pass that check and still fail rotational balance. Use this reasoning to assess a numerical choice, rather than relying on a memorized support-reaction formula. The two original practice questions below let you check both support modeling and calculation. These are educational applications, not official PRC items, predictions of exam content or claims about prescribed examination coverage.
+
+The recommended next topic is **Equilibrium of Particles**, followed by **Equilibrium of Rigid Bodies**. Those lessons are planned; no complete content is available for them yet. Forces and Vectors remains available for review. The suggested Forces and Vectors prerequisite remains a recommendation, never an access condition.
+
+### References and review boundary
+
+These original explanations use ideal support and equilibrium conventions checked against [Engineering Statics: Free-Body Diagrams](https://engineeringstatics.org/Chapter_05-free-body-diagrams.html), [University of Alberta: Free Body Diagram](https://engcourses-uofa.ca/books/statics/free-body-diagram/) and [Engineering Statics: 2D Rigid Body Equilibrium](https://engineeringstatics.org/Chapter_05-2d-rigid-body-equilibrium.html). The block, beam and practice calculations have been independently recomputed. The diagrams are original exact SVG geometry, not extracted textbook figures.
+
+The moment-definition and component-development additions were checked on 2026-10-19 against [Engineering Statics: Moment of Force](https://engineeringstatics.org/moment-of-force.html) and [Engineering Statics: Varignon’s Theorem](https://engineeringstatics.org/varignons-theorem.html). These references support the conventions; the explanations, beam variations and solutions here are original CEPath content.
+
+**Publication approved by the Product Owner on 2026-10-19. Source and calculation checks are complete; independent academic review remains pending.** It is not an official PRC lesson, examination item, engineering design approval or professionally reviewed resource.
+
+</LessonSection>

@@ -1,6 +1,6 @@
 # CEPath product behavior
 
-Updated: 2026-10-17. The application has a design foundation and a landing page introducing CEPath, its planned curriculum, and its learning approach, plus a public subject catalog. Subject and module navigation and one complete Forces and Vectors lesson reader are implemented. The Supabase account foundation is implemented; the owner reports login/session/sign-out checks passed while email/recovery acceptance remains pending. M08 migration, saving and persistence were reported successful by the owner on 2026-10-17; hosted two-user isolation remains unverified. M09 adds a locally implemented private learning dashboard, pending authenticated hosted dashboard acceptance. M10 adds optional public interactive practice to the one published lesson. See [STRATEGY.md](STRATEGY.md) for direction, [DESIGN.md](DESIGN.md) for the visual system, and [CE-NAV-001](docs/DECISIONS.md#ce-nav-001--guided-but-flexible-curriculum-navigation--approved) for curriculum rationale.
+Updated: 2026-10-19. The application has a design foundation and a landing page introducing CEPath, its planned curriculum, and its learning approach, plus a public subject catalog. Subject and module navigation are implemented, with complete Forces and Vectors and Free Body Diagrams lessons in the shared reader. The Supabase account foundation is implemented; the owner reports login/session/sign-out checks passed while email/recovery acceptance remains pending. M08 migration, saving and persistence were reported successful by the owner on 2026-10-17; hosted two-user isolation remains unverified. M09 adds a locally implemented private learning dashboard, pending authenticated hosted dashboard acceptance. Optional public interactive practice now covers both published lessons. See [STRATEGY.md](STRATEGY.md) for direction, [DESIGN.md](DESIGN.md) for the visual system, and [CE-NAV-001](docs/DECISIONS.md#ce-nav-001--guided-but-flexible-curriculum-navigation--approved) for curriculum rationale.
 
 ## Design Foundation — Milestone 02
 
@@ -16,7 +16,7 @@ The three groups use full examination names and representative topics from PRC�
 
 The learning journey describes planned behavior: freely choose a subject, follow or skip the recommended sequence, read the first sample with explanations/examples/static practice, and later resume using account-backed progress. It explicitly says that prerequisites offer guidance without locks and every published free lesson will remain accessible anonymously, revisitable, and independent of subject order.
 
-The header offers Home, Curriculum, and How it works. Navigation remains visible and wraps on mobile. The hero includes a compact section index; native anchors move focus to real content. M2’s #approach and #about anchors remain meaningful. Values and closing sections explain the intended approach and link to the catalog. The footer includes working navigation, independent-platform/PRC non-affiliation language, and the temporary-name/development notice. Catalog, subject, representative module and one published lesson route are implemented; account routes now exist; additional lesson content and legal-page routes remain absent.
+The header offers Home, Curriculum, and How it works. Navigation remains visible and wraps on mobile. The hero includes a compact section index; native anchors move focus to real content. M2’s #approach and #about anchors remain meaningful. Values and closing sections explain the intended approach and link to the catalog. The footer includes working navigation, independent-platform/PRC non-affiliation language, and the temporary-name/development notice. Catalog, subject, representative module and two published lesson routes are implemented; account routes now exist; additional lesson content and legal-page routes remain absent.
 
 ## Subject Catalog — Milestone 04
 
@@ -134,3 +134,17 @@ These are future verification cases, not tests that have run:
 - A learner completes Lesson 5 first; Lessons 1–4 remain unfinished and progress reflects only actual completions.
 - Revisiting Lesson 5 preserves Completed.
 - A learner's latest unfinished visit is out of order; Continue Learning opens that lesson while Recommended Next stays a separate optional action.
+
+## Published curriculum content — Milestone 11A
+
+Free Body Diagrams was approved for publication on 2026-10-19 at its existing PSAD/Statics ID and order. Its textbook-style lesson has nine objectives, three worked examples, six SVG figures and two original practice questions. It is the second published lesson and uses the shared reader, public practice, safe sign-in return destinations and independent progress eligibility. No prerequisites restrict access. Source/calculation checks do not claim independent professional review; that review remains pending.
+
+The former development preview now redirects to the canonical public lesson. IDs, ordering and advisory prerequisites are preserved. No authentication, database schema, RLS or saved progress records were changed. See [the content review record](docs/CONTENT_REVIEW.md). M11B is not authorized.
+
+## Educational content — CE-CONTENT-001
+
+Approved 2026-10-19: CEPath teaches through comprehensive, original, textbook-style civil engineering lessons. Short board-exam reviewer notes do not substitute for foundational teaching. Conceptual depth and correctness determine scope; no minimum word count applies.
+
+Each substantial lesson develops concepts progressively with the relevant objectives/prerequisites, defined variables, equations, assumptions/derivations, accurate diagrams, increasingly demanding worked examples, conceptual and computational practice with detailed solutions, misconceptions, board-exam applications, chapter summaries and verifiable references. Apply the fifteen-part [approved standard](docs/DECISIONS.md#ce-content-001--full-textbook-style-lessons--approved) where appropriate to the topic. Board-exam-style applications are original teaching examples, not claims about official items, scope, frequency or endorsement.
+
+Audit existing content before expanding it. Preserve sections that already meet the standard, stable identifiers and saved progress. Standards approval does not authorize publication, a redesign or unrelated curriculum expansion. Source/calculation checking remains distinct from independent academic review. Free Body Diagrams was audited as an unpublished draft, then separately approved for publication by the Product Owner on 2026-10-19; see [the audit and review checklist](docs/CONTENT_REVIEW.md#ce-content-001-audit--free-body-diagrams).

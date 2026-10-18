@@ -36,5 +36,11 @@ test('configuration rejects privileged keys and requires a trusted canonical pro
 test('login return paths include only canonical published lesson destinations',()=>{
  const lesson='/curriculum/psad/engineering-mechanics-statics/forces-and-vectors';
  assert.equal(safeDestination(lesson),lesson);
- for(const bad of [lesson+'?next=//evil.example',lesson+'#section',lesson+'/',lesson.replace('forces-and-vectors','free-body-diagrams'),'/curriculum/psad/unknown','/curriculum/%70sad/engineering-mechanics-statics/forces-and-vectors'])assert.equal(safeDestination(bad),'/account');
+ for(const bad of [lesson+'?next=//evil.example',lesson+'#section',lesson+'/',lesson.replace('forces-and-vectors','equilibrium-of-particles'),'/curriculum/psad/unknown','/curriculum/%70sad/engineering-mechanics-statics/forces-and-vectors'])assert.equal(safeDestination(bad),'/account');
+});
+
+test('new published lesson is a safe exact post-login return destination',()=>{
+ const href='/curriculum/psad/engineering-mechanics-statics/free-body-diagrams';
+ assert.equal(safeDestination(href),href);
+ assert.equal(safeDestination(href+'?next=//evil.example'),'/account');
 });

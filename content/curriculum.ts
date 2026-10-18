@@ -352,7 +352,8 @@ const staticsModule: Module = {
     {
       id: "psad-statics-free-body-diagrams", slug: "free-body-diagrams", moduleId: "psad-statics",
       title: "Free Body Diagrams", shortDescription: "Isolate a body and identify the external forces acting on it.",
-      displayOrder: 2, availability: "planned", prerequisiteIds: ["psad-statics-forces-vectors"],
+      displayOrder: 2, availability: "published", prerequisiteIds: ["psad-statics-forces-vectors"],
+      source: { label: "Engineering Statics: Free-Body Diagrams", url: "https://engineeringstatics.org/Chapter_05-free-body-diagrams.html" },
     },
     {
       id: "psad-statics-equilibrium-particles", slug: "equilibrium-of-particles", moduleId: "psad-statics",

@@ -1,3 +1,4 @@
+import { freeBodyDiagramQuestions } from "./free-body-diagrams-questions.ts";
 import { registeredLessonIds } from "./lesson-ids.ts";
 
 export type PracticeQuestion = {
@@ -147,4 +148,5 @@ export const practiceQuestions: readonly PracticeQuestion[] = [
       interpretation: "When resolving forces, retain signs and directions as well as units. No numerical calculation is needed to distinguish a vector from a scalar.",
     },
   },
+  ...freeBodyDiagramQuestions,
 ];
