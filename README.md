@@ -6,7 +6,7 @@ for the CELE. CEPath is a working title.
 Milestones 01–05 established the application, faculty bulletin design, landing page,
 public subject catalog, and representative module navigation. Milestone 06 adds a
 complete Forces and Vectors lesson with MDX, equations, a diagram and one static
-exercise. Milestone 07 adds the Supabase account foundation; positive live account/email checks remain pending manual verification. The owner reports Milestone 08 migration and basic persistence checks passed. Milestone 09 adds a private learning dashboard; its hosted authenticated acceptance remains pending. Interactive quizzes remain future work.
+exercise. Milestone 07 adds the Supabase account foundation; positive live account/email checks remain pending manual verification. The owner reports Milestone 08 migration and basic persistence checks passed. Milestone 09 adds a private learning dashboard; its hosted authenticated acceptance remains pending. Milestones 10–11B add optional interactive practice and three published textbook lessons across PSAD and MSTE.
 
 ## Run locally
 
@@ -137,3 +137,7 @@ The published Forces and Vectors lesson now includes five optional multiple-choi
 ## Free Body Diagrams
 
 Publication was approved on 2026-10-19. Open `/curriculum/psad/engineering-mechanics-statics/free-body-diagrams` locally or through Curriculum → PSAD → Engineering Mechanics — Statics. The textbook-style lesson includes three worked examples, six SVG figures and two interactive practice questions. It is publicly readable; signed-in students can save independent lesson progress. The old `/review/free-body-diagrams` bookmark redirects to this public route. Independent academic review remains pending; see [the editorial record](docs/CONTENT_REVIEW.md).
+
+## Simple and Compound Interest
+
+Publication was approved on 2026-10-20. Run `npm run dev -- --hostname 127.0.0.1` and open [the chapter](http://127.0.0.1:3000/curriculum/mste/engineering-economy/simple-and-compound-interest), or use Curriculum → MSTE → Engineering Economy. The chapter includes four worked examples, six tables and three interactive questions in the shared V2 reader. Reading and practice are public; signed-in students can save independent lesson progress. The old `/review/simple-and-compound-interest` bookmark redirects to the published lesson in development and production. Independent academic review remains pending; see [the editorial record](docs/CONTENT_REVIEW.md#m11b-review-packet--simple-and-compound-interest). Stop the development server with Ctrl+C when finished.

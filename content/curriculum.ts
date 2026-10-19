@@ -368,7 +368,21 @@ const staticsModule: Module = {
   ],
 };
 
-// One representative module per subject. Reuse existing topic copy for empty overviews;
+const economyModule: Module = {
+  id: "mste-engineering-economy", slug: "engineering-economy", subjectId: "mste",
+  title: "Engineering Economy",
+  description: "Time value of money and the economic comparison of engineering alternatives.",
+  displayOrder: 4, availability: "overview",
+  lessons: [{
+    id: "mste-economy-simple-compound-interest", slug: "simple-and-compound-interest",
+    moduleId: "mste-engineering-economy", title: "Simple and Compound Interest",
+    shortDescription: "Develop interest models, match rates with periods, and move a single amount between present and future dates.",
+    displayOrder: 1, availability: "published",
+    source: { label: "OpenStax Contemporary Mathematics: Compound Interest", url: "https://openstax.org/books/contemporary-mathematics/pages/6-4-compound-interest" },
+  }],
+};
+
+// Representative modules plus the explicitly approved economy chapter. Reuse topic copy for empty overviews;
 // these are not an automatically populated curriculum or a complete module sequence.
 const subjects: readonly Subject[] = subjectOverviews.map(subject => {
   if (subject.id === "psad") return { ...subject, modules: [staticsModule] };
@@ -386,7 +400,7 @@ const subjects: readonly Subject[] = subjectOverviews.map(subject => {
       displayOrder: 1,
       availability: "overview",
       lessons: [],
-    }],
+    }, ...(subject.id === "mste" ? [economyModule] : [])],
   };
 });
 

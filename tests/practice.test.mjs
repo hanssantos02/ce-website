@@ -6,8 +6,8 @@ import { initialAttempt, updateAttempt, gradeAnswer } from '../lib/practice/stat
 import { renderPracticeMath } from '../lib/practice/math.ts';
 
 const lessonId='psad-statics-forces-vectors';
-test('seven original questions have valid stable metadata and deterministic lesson-scoped order',()=>{
- assert.equal(practiceQuestions.length,7);
+test('ten original questions have valid stable metadata and deterministic lesson-scoped order',()=>{
+ assert.equal(practiceQuestions.length,10);
  assert.deepEqual(validatePracticeBank(practiceQuestions),[]);
  const questions=getPracticeQuestions(lessonId);
  assert.equal(questions.length,5);

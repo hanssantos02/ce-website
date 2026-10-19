@@ -1,3 +1,4 @@
+import { interestQuestions } from "./interest-questions.ts";
 import { freeBodyDiagramQuestions } from "./free-body-diagrams-questions.ts";
 import { registeredLessonIds } from "./lesson-ids.ts";
 
@@ -149,4 +150,5 @@ export const practiceQuestions: readonly PracticeQuestion[] = [
     },
   },
   ...freeBodyDiagramQuestions,
+  ...interestQuestions,
 ];

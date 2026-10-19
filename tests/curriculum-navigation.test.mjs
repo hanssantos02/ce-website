@@ -9,16 +9,16 @@ import {
 const psad = () => getSubjectBySlug("psad");
 const statics = () => getModuleBySlug(psad(), "engineering-mechanics-statics");
 
-test("all subjects use ordered modules; only PSAD defines sample lessons", () => {
+test("subjects preserve existing modules and add only the approved MSTE economy chapter", () => {
   const modules = getSubjects().flatMap(subject => {
     const ordered = getOrderedModules(subject);
-    assert.equal(ordered.length, 1);
+    assert.equal(ordered.length, subject.id === "mste" ? 2 : 1);
+    assert.deepEqual(ordered.map(m => m.displayOrder), subject.id === "mste" ? [1, 4] : [1]);
     for (const module of ordered) {
       assert.equal(module.subjectId, subject.id);
-      assert.equal(module.displayOrder, 1);
       assert.equal(getModuleBySlug(subject, module.slug), module);
       assert.equal(getModuleHref(subject, module), `/curriculum/${subject.slug}/${module.slug}`);
-      if (subject.id !== "psad") {
+      if (module.id === "mste-mathematics" || subject.id === "hge") {
         assert.deepEqual(getOrderedLessons(module), []);
         assert.equal(getRecommendedNeighbors(module, "missing"), undefined);
       }

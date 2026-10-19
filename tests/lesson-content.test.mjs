@@ -4,6 +4,7 @@ import { URL } from 'node:url';
 import { readFile, readdir } from 'node:fs/promises';
 import { compile, evaluate } from '@mdx-js/mdx';
 import * as jsxRuntime from 'react/jsx-runtime';
+import { renderToStaticMarkup } from 'react-dom/server';
 import { mdxOptions } from '../mdx-options.mjs';
 import { registeredLessonIds } from '../content/lesson-ids.ts';
 import { getSubjects, getLessonById, getLessonHref } from '../content/curriculum.ts';
@@ -20,9 +21,9 @@ async function compilerOptions() {
 }
 const lessonUrl = new URL('../content/lessons/forces-and-vectors.mdx', import.meta.url);
 
-test('the two approved Statics lessons are published at their stable public URLs', () => {
+test('the three approved lessons are published at their stable public URLs', () => {
   const published = getSubjects().flatMap(s => s.modules.flatMap(m => m.lessons.filter(l => l.availability === 'published')));
-  assert.deepEqual(published.map(l => l.id), ['psad-statics-forces-vectors','psad-statics-free-body-diagrams']);
+  assert.deepEqual(published.map(l => l.id), ['psad-statics-forces-vectors','psad-statics-free-body-diagrams','mste-economy-simple-compound-interest']);
   const {subject, module, lesson} = getLessonById(published[0].id);
   assert.equal(getLessonHref(subject, module, lesson), '/curriculum/psad/engineering-mechanics-statics/forces-and-vectors');
   assert.equal(getLessonById('constructor'), undefined);
@@ -84,6 +85,10 @@ $$
   const result = await compile(fixture, options);
   assert.deepEqual(result.messages, []);
   assert(String(result).includes('table'));
+  const document = await evaluate(fixture, {...options, ...jsxRuntime});
+  const html = renderToStaticMarkup(document.default());
+  assert.match(html, /<span(?=[^>]*class="katex-display")(?=[^>]*tabindex="0")(?=[^>]*role="region")(?=[^>]*aria-label="Equation")/);
+
   assert(String(result).includes('katex-display'));
   assert(String(result).includes('katex-mathml'));
   const invalid = await compile(String.raw`$\notARealKatexCommand$`, options);

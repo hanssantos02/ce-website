@@ -5,35 +5,37 @@ import { getPracticeQuestions } from "../../lib/practice/questions";
 import { PageContainer } from "../layout/page-container";
 import { Breadcrumbs } from "../curriculum/breadcrumbs";
 import { LessonNavigation } from "./lesson-navigation";
+import { LessonIndex } from "./lesson-index";
 import { getLessonDocument } from "../../content/lesson-documents";
 import { getModuleHref, getOrderedLessons, type Subject, type Module, type Lesson } from "../../content/curriculum";
 export function LessonReader({ subject, module, lesson }: { subject: Subject; module: Module; lesson: Lesson }) {
   const document = getLessonDocument(lesson.id);
   if (!document) throw new Error(`Published lesson ${lesson.id} has no registered MDX document.`);
+  if (document.lessonId !== lesson.id) throw new Error("Lesson content does not match curriculum metadata.");
   const Content = document.default;
   const number = getOrderedLessons(module).findIndex(item => item.id === lesson.id) + 1;
   const questions = getPracticeQuestions(lesson.id);
-  return <>
-    <header className="catalog-introduction">
-      <PageContainer><div className="lesson-reading-column">
+  const sections = [{ id: "learning-objectives", title: "Learning objectives" }, ...document.sections,
+    ...(questions.length ? [{ id: "interactive-practice", title: "Interactive practice" }] : [])];
+  return <div className="lesson-reader">
+    <header className="chapter-header">
+      <PageContainer className="lesson-workspace-container">
         <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Curriculum", href: "/curriculum" }, { label: subject.abbreviation, href: `/curriculum/${subject.slug}` }, { label: module.title, href: getModuleHref(subject, module) }, { label: lesson.title }]} />
-        <h1 className="catalog-title subject-page-title">{lesson.title}</h1>
-        <p className="catalog-lead">{lesson.shortDescription}</p>
-        <p className="lesson-context">{subject.abbreviation} · {module.title} · Lesson {number} of {module.lessons.length}</p>
-        <p className="availability-note">{document.editorialStatus}</p>
-      </div></PageContainer>
+        <div className="chapter-introduction">
+          <h1 className="chapter-title">{lesson.title}</h1>
+          <p className="chapter-description">{lesson.shortDescription}</p>
+          <div className="chapter-metadata">
+            <p className="chapter-context">{subject.abbreviation} · {module.title} <span>Lesson {number} of {module.lessons.length}</span></p>
+            <p className="chapter-editorial">{document.editorialStatus}</p>
+          </div>
+        </div>
+      </PageContainer>
     </header>
-    <div className="content-section subject-content">
-      <PageContainer><div className="lesson-reading-column">
-        <LessonProgress lessonId={lesson.id} />
-        <details className="topic-index lesson-index">
-          <summary>On this page</summary>
-          <nav aria-label="Lesson sections"><ol role="list">
-            <li><a href="#learning-objectives">Learning objectives</a></li>
-            {document.sections.map(section => <li key={section.id}><a href={`#${section.id}`}>{section.title}</a></li>)}
-            {!!questions.length && <li><a href="#interactive-practice">Interactive practice</a></li>}
-          </ol></nav>
-        </details>
+    <div className="chapter-content">
+      <PageContainer className="lesson-workspace-container"><div className="lesson-workspace">
+        <div className="lesson-progress-placement"><LessonProgress lessonId={lesson.id} /></div>
+        <LessonIndex sections={sections} />
+        <div className="lesson-reading-column">
         <section id="learning-objectives" tabIndex={-1} className="lesson-objectives lesson-prose" aria-labelledby="objectives-title">
           <h2 id="objectives-title">Learning objectives</h2>
           <p>After this lesson, you should be able to:</p>
@@ -42,7 +44,8 @@ export function LessonReader({ subject, module, lesson }: { subject: Subject; mo
         <article className="lesson-prose" aria-label={`${lesson.title} lesson content`}><Content /></article>
         <PracticeSection questions={questions} source={lesson.source} />
         <LessonNavigation subject={subject} module={module} lesson={lesson} />
+        </div>
       </div></PageContainer>
     </div>
-  </>;
+  </div>;
 }

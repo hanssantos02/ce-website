@@ -1,0 +1,475 @@
+export const lessonId = "mste-economy-simple-compound-interest";
+export const editorialStatus = "Source and calculation checks completed. Independent academic review pending.";
+export const learningObjectives = [
+  "Explain how engineering economy supports civil engineering decisions.",
+  "Explain the time value of money without treating interest, inflation and risk as interchangeable.",
+  "Define principal, interest, interest rate and interest period.",
+  "Distinguish simple-interest and compound-interest accumulation.",
+  "Derive the basic simple-interest and compound-interest formulas.",
+  "Calculate simple interest and a future amount using consistent periods.",
+  "Calculate compound interest and a future amount.",
+  "Determine present worth for one future payment under compound interest.",
+  "Distinguish nominal annual rates from effective annual rates.",
+  "Convert between common annual and compounding-period rate conventions.",
+  "Compare simple and compound interest under matched assumptions.",
+  "Solve introductory engineering-oriented interest problems.",
+  "Interpret monetary results with correct units, dates and rounding.",
+];
+export const sections = [
+  { id: "economy-introduction", title: "Engineering decisions involve money and time" },
+  { id: "time-value-of-money", title: "Time value of money and a cash-flow timeline" },
+  { id: "interest-terminology", title: "Terminology, symbols and units" },
+  { id: "simple-interest", title: "Simple interest: growth on the original principal" },
+  { id: "compound-interest", title: "Compound interest: growth on the accumulated balance" },
+  { id: "present-and-future-worth", title: "Moving a single amount between dates" },
+  { id: "compounding-frequency", title: "Compounding frequency and equivalent rates" },
+  { id: "comparing-interest-models", title: "Comparing the two interest models" },
+  { id: "engineering-applications", title: "Applying the models in civil engineering" },
+  { id: "interest-common-mistakes", title: "Common mistakes and useful checks" },
+  { id: "interest-exam-applications", title: "Approaching board-exam-style problems" },
+  { id: "interest-summary", title: "Chapter summary and academic references" },
+];
+
+<LessonSection section={sections[0]}>
+
+A contractor can pay for a surveying instrument today or set aside money for a planned purchase several years from now. A project team may also have to decide how much capital to reserve for a future replacement. The amounts alone do not describe these choices: **the dates on which money is paid or received matter too**.
+
+Engineering economy studies the economic consequences of engineering alternatives. Engineers first identify technically feasible options and the services each provides, then describe their costs, benefits and timing under stated assumptions. An alternative with a smaller initial price is not automatically the economically preferable one if its service life, operating costs or future obligations differ.
+
+This chapter develops one foundation for those comparisons: how **one amount** changes between a present date and a future date under a specified interest model. You will derive the models, examine their assumptions and use them to interpret peso amounts. You will not yet evaluate complete projects, payment schedules or recurring annual costs. Those require more than a single-payment formula.
+
+### Recommended background
+
+Basic algebra, percentages and ratios, exponents, and solving equations will help. In particular, be comfortable converting 8% to 0.08, interpreting a power such as $1.06^4$, and dividing both sides of an equation by the same nonzero quantity. These are advisory background skills. No prerequisite lesson or completion requirement restricts this chapter; no unavailable background lesson is presented as a link.
+
+### A working discipline
+
+Before calculating, write down the **amount, date, interest model, rate convention and required unknown**. A correct formula applied to the wrong dates or rate answers a different question. The worked cases here are original educational scenarios, not quoted financing offers or recommendations to buy a financial product.
+
+</LessonSection>
+
+<LessonSection section={sections[1]}>
+
+An amount available now can be used now or committed to an alternative use. Receiving the same number of pesos later gives up that present availability. An interest model assigns an accumulation factor to the delay: it tells us what future amount is equivalent to a present amount **at a specified rate and under specified conditions**.
+
+Interest is the additional amount associated with the use of money over time. From a lender's or depositor's viewpoint, it may be a receipt; from a borrower's viewpoint, it is a cost. A stated interest rate is not a guarantee that every investment will earn that return. Inflation affects purchasing power, opportunity cost concerns the next-best alternative, and risk concerns uncertain outcomes. These concepts can influence the rate chosen for an analysis, but they are not identical to interest and are not separately modeled by the basic equations below.
+
+### Read the dates before the amounts
+
+Let **time 0** mean the present decision date, not necessarily the start of a calendar year. A period is the interval to which the rate applies. With annual compounding, time 1 is one year after time 0; with monthly compounding, one period is one month.
+
+The following chronological table is a cash-flow timeline for an investor who deposits ₱100,000 now and withdraws everything at the end of year 4. Positive cash flow means money received by the investor; negative cash flow means money paid. The future receipt $F$ has not yet been calculated.
+
+| Time from deposit (years) | Investor cash flow (PHP) | Meaning |
+| --- | --- | --- |
+| 0 | −100,000.00 | One initial deposit: money leaves the investor. |
+| 1 | 0.00 | No deposit or withdrawal. |
+| 2 | 0.00 | No deposit or withdrawal. |
+| 3 | 0.00 | No deposit or withdrawal. |
+| 4 | +F | One final withdrawal, including accumulated interest. |
+
+A balance credited with interest can grow even when no cash is withdrawn. Do not insert annual interest receipts into this timeline if the problem says interest stays invested; that would describe a different transaction. For a borrower, the initial receipt and final repayment have the opposite cash-flow signs.
+
+<LessonNote title="Cash-flow signs and amount magnitudes">
+
+In this chapter, $P$ and $F$ are **nonnegative amount magnitudes** in PHP. The timeline separately shows whether the corresponding cash flow is paid or received. Thus an investment can have a negative time-0 cash flow while its principal magnitude $P$ is positive. Keep that convention consistent rather than changing the sign of $P$ midway through a calculation.
+
+</LessonNote>
+
+</LessonSection>
+
+<LessonSection section={sections[2]}>
+
+The notation below will be used consistently. A currency amount must have a date, and an interest rate must have a period. “8%” by itself does not identify whether the rate is annual, monthly, simple or compounded.
+
+| Term and symbol | Meaning in this chapter | Example or unit |
+| --- | --- | --- |
+| Principal, $P$ | Original amount on which the simple-interest charge is based; also the present amount at time 0 in a single-payment compound model. | ₱60,000 at time 0. |
+| Interest, $I$ | Increase above the principal, with no intervening payments in these models: $I=F-P$. | PHP, not a percentage. |
+| Interest rate, $i$ | Decimal rate for one stated interest period. | 0.08 per year means 8% per year. |
+| Number of periods, $n$ | Duration expressed in the same periods as $i$. | 2.5 years for an annual simple rate; 48 months for a monthly compound rate over four years. |
+| Present worth, $P$ | Equivalent amount at the chosen present date, using the specified model and rate. | Amount needed now for a future expenditure. |
+| Future worth, $F$ | Equivalent accumulated amount at a specified later date. | Balance at the end of year 4. |
+| Maturity value | Amount due or available at the stated end date; here the future amount $F$. | Principal plus applicable accumulated interest. |
+| Compounding period | Interval at whose end interest is added to the balance. | One month under monthly compounding. |
+| Nominal annual rate, $j$ | Quoted annual rate accompanied by a compounding frequency. | 12% nominal annually, compounded monthly. |
+| Compounds per year, $m$ | Number of equal compounding intervals in one year. | 12 for monthly compounding. |
+| Duration in years, $t$ | Elapsed years, converted to compounding periods when needed. | Four years gives $n=12(4)=48$ monthly periods. |
+
+Percentages must be converted before multiplication: $8\%=8/100=0.08$, whereas $0.08\%=0.0008$. The number of periods is a count or a duration ratio; it does not carry monetary units. Multiplying an amount by an accumulation factor therefore leaves an amount in PHP.
+
+An **effective rate for a period** describes the actual fractional growth over that period within the model. It is not interchangeable with a nominal annual quotation. We develop that distinction after the basic accumulation formulas.
+
+</LessonSection>
+
+<LessonSection section={sections[3]}>
+
+Under simple interest, each full period's interest is calculated on the **original principal**, not on prior interest. Suppose the principal is $P$ and the decimal rate is $i$ per period. Interest for one period is $Pi$. If the rate and principal basis remain unchanged for $n$ periods, adding the equal interest amounts gives
+
+$$
+I=\underbrace{Pi+Pi+\cdots+Pi}_{n\text{ full periods}}=Pin.
+$$
+
+For a fractional period, this chapter uses proportional simple interest: half a period earns half of $Pi$. This is an explicit time convention, not a rule for every financial contract. Adding the original amount gives
+
+$$
+\begin{aligned}
+F&=P+I,\\
+F&=P+Pin=P(1+in).
+\end{aligned}
+$$
+
+Here $P$, $I$ and $F$ are monetary magnitudes in PHP, $i$ is the decimal rate per stated period, and $n$ measures elapsed time in those periods. With an annual simple rate, use years. For 9 months, $n=9/12=0.75$ years; do not multiply an annual rate by 9 as though nine years had elapsed. If a problem is stated in days, obtain its day-count convention before converting; this chapter does not assume a 360-day or 365-day basis.
+
+### Linear growth and its assumptions
+
+For a positive constant $P$ and $i$, every additional full period adds the same amount $Pi$. The future amount is linear in time: the graph begins at $F=P$ when $n=0$, with a constant increase per period. This model assumes no additional deposits, withdrawals or principal repayments, a constant rate, and no compounding, fees or taxes. It can represent a transaction explicitly specified as simple interest. It should not be substituted for a loan schedule whose outstanding principal changes after repayments.
+
+<WorkedExample id="interest-simple-example" title="Set aside a contractor's short-term reserve">
+
+#### Problem, given and required
+
+A contractor deposits **₱60,000 at 8% simple annual interest for 2.5 years**. Find the total interest and the future value at maturity. Given: $P=60{,}000$ PHP, $i=0.08$ per year, and $n=2.5$ years. Required: $I$ and $F$, in PHP.
+
+#### Assumptions and applicable formulas
+
+The annual simple rate is constant; interest is retained but does not earn interest. There are no additional cash flows, fees or taxes. Fractional years receive proportional simple interest. Thus $I=Pin$ and $F=P+I$. The duration 2.5 years is **30 months**, not two years and five months.
+
+#### Solution
+
+1. Convert the percentage: $i=8/100=0.08$ per year.
+2. Match the duration to the annual rate: $n=30/12=2.5$ years.
+3. Multiply the principal by the interest factor:
+
+$$
+I=(60{,}000)(0.08)(2.5)=12{,}000\ \text{PHP}.
+$$
+
+4. Add the principal once:
+
+$$
+F=60{,}000+12{,}000=72{,}000\ \text{PHP}.
+$$
+
+**Final answer: interest = ₱12,000.00; future value = ₱72,000.00.** A full year adds ₱4,800; the final half-year adds ₱2,400. That check explains the result rather than relying only on calculator entry.
+
+#### Engineering interpretation
+
+The modeled reserve grows by ₱12,000 over the specified 30 months. ₱72,000 is the total available at maturity, not the interest alone. It does not establish that the reserve will cover a future purchase whose price has not been estimated.
+
+</WorkedExample>
+
+For the same case, the running totals are:
+
+| Elapsed time (years) | Accumulated simple interest (PHP) | Future amount (PHP) |
+| --- | --- | --- |
+| 0 | 0.00 | 60,000.00 |
+| 1 | 4,800.00 | 64,800.00 |
+| 2 | 9,600.00 | 69,600.00 |
+| 2.5 | 12,000.00 | 72,000.00 |
+
+The smaller last increase reflects a shorter interval, not a change in the rate. This table reports balances and accumulated interest; it is not a schedule of withdrawals.
+
+</LessonSection>
+
+<LessonSection section={sections[4]}>
+
+Compound interest changes the base on which the next period's interest is calculated. At the end of each period, interest is added to the accumulated balance. If it stays invested, the next period earns interest on both the original principal and the interest already credited.
+
+Let $F_k$ be the balance immediately after compounding at the end of period $k$, with $F_0=P$. At a constant decimal rate $i$ per compounding period,
+
+$$
+\begin{aligned}
+F_1&=P+Pi=P(1+i),\\
+F_2&=F_1+F_1i=F_1(1+i)=P(1+i)^2,\\
+F_3&=F_2(1+i)=P(1+i)^3.
+\end{aligned}
+$$
+
+Each step multiplies the preceding balance by the same growth factor $1+i$. Repeating that process for $n$ full compounding periods gives
+
+$$
+F=P(1+i)^n,\qquad I=F-P.
+$$
+
+The exponent is the **number of compounding periods**, not automatically the number of years. Under monthly compounding for three years, $n=36$ and $i$ must be monthly. The recurrence above assumes complete periods, a constant rate and no intervening payments. Do not use a fractional exponent to settle a partial-period contract unless that convention is specified.
+
+For positive $i$, the balance grows exponentially with the number of periods. The interest increment itself grows because the balance used as its base grows. Exponential growth does not mean the balance doubles each period; here each period multiplies it by $1+i$.
+
+<WorkedExample id="interest-compound-example" title="Accumulate an equipment investment for four years">
+
+#### Problem, given and required
+
+An engineering firm invests **₱100,000 at 6% compounded annually for four years**. Determine its future amount. Given: $P=100{,}000$ PHP, $i=0.06$ per annual period, $n=4$ annual periods. Required: $F$ at the end of year 4.
+
+#### Assumptions and applicable formula
+
+Interest stays invested; the rate is constant and compounds at each year-end. No deposits, withdrawals, fees or taxes occur. The single-payment compound formula applies: $F=P(1+i)^n$.
+
+#### Solution
+
+1. Identify a full year as one compounding period. The annual periodic rate is 0.06 and there are four periods.
+2. Form the accumulation factor without rounding intermediate powers:
+
+$$
+(1.06)^4=1.26247696.
+$$
+
+3. Apply the factor to the principal, then round the final monetary amount to centavos:
+
+$$
+F=100{,}000(1.26247696)=126{,}247.696\ \text{PHP}.
+$$
+
+**Final answer: future amount ≈ ₱126,247.70.** Accumulated interest is approximately ₱26,247.70, obtained by subtracting the principal once.
+
+#### Engineering interpretation and check
+
+At the same principal and 6% annual simple rate for four years, the future amount would be $100{,}000[1+0.06(4)]=124{,}000$ PHP. The compound balance exceeds that by approximately ₱2,247.70 because credited interest also earns interest. This is a model comparison, not evidence of an actual investment offer or purchasing-power gain.
+
+</WorkedExample>
+
+The period-by-period calculation independently reproduces the power formula. Displayed amounts are rounded to centavos; calculations carry the unrounded balance into the next period.
+
+| End of year | Opening balance (PHP) | Interest for that year (PHP) | Closing balance (PHP) |
+| --- | --- | --- | --- |
+| 1 | 100,000.00 | 6,000.00 | 106,000.00 |
+| 2 | 106,000.00 | 6,360.00 | 112,360.00 |
+| 3 | 112,360.00 | 6,741.60 | 119,101.60 |
+| 4 | 119,101.60 | 7,146.10 | 126,247.70 |
+
+</LessonSection>
+
+<LessonSection section={sections[5]}>
+
+Future worth moves a present amount forward to a later date. Present worth asks the reverse question: what amount at time 0 would accumulate to one specified future amount under the same rate and timing assumptions?
+
+Starting with the compound relationship, divide both sides by the nonzero factor $(1+i)^n$:
+
+$$
+\begin{aligned}
+F&=P(1+i)^n,\\
+\frac{F}{(1+i)^n}&=P,\\
+P&=F(1+i)^{-n}.
+\end{aligned}
+$$
+
+This operation is **discounting**. It reverses accumulation; it does not subtract a simple-interest charge from the future amount. With a positive rate and a positive future receipt after at least one period, its present worth is less than that future amount. With a zero rate, the factor is one and the two amounts are equal.
+
+<WorkedExample id="interest-present-worth-example" title="Work back from a future project expenditure">
+
+#### Problem, given and required
+
+A team models one **₱150,000 equipment expenditure three years from now**. How much must be set aside today to accumulate to that amount at **5% compounded annually**? Given: $F=150{,}000$ PHP, $i=0.05$ per year and $n=3$ years. Required: the present amount $P$.
+
+#### Assumptions and applicable formula
+
+The future expenditure is the stated estimate, not a current price to inflate again. The reserve earns the modeled constant rate for three complete years, with no other cash flows, fees or taxes. Use $P=F/(1+i)^n$. The question determines a reserve under assumptions; it does not establish that a 5% return is available or certain.
+
+#### Solution
+
+1. Match the annual rate with three annual compounding periods.
+2. Calculate the future-to-present factor: $(1.05)^3=1.157625$.
+3. Divide the future requirement by that factor:
+
+$$
+P=\frac{150{,}000}{1.157625}\approx129{,}575.6397797\ \text{PHP}.
+$$
+
+**Final answer: present worth ≈ ₱129,575.64.** Check the unrounded answer by multiplying it by $1.157625$: it returns ₱150,000. Rounding to centavos introduces only a small numerical residual; do not require exact equality from rounded displayed amounts.
+
+#### Engineering interpretation
+
+The reserve supplies part of the future expenditure through modeled interest earnings. Present worth places an amount at a comparison date; it is not automatically an asset's market price, a budget approval or a prediction that a future cost will stay unchanged.
+
+</WorkedExample>
+
+### One payment is different from a series
+
+The formula above represents **one** future amount at **one** date. If a problem includes monthly repayments or several annual expenditures, a single future amount with the final date cannot simply stand in for all those flows. Their dates matter individually. This chapter does not derive annuity factors, installment-loan payments or complete project cash-flow analysis.
+
+</LessonSection>
+
+<LessonSection section={sections[6]}>
+
+Compounding frequency specifies when interest is credited. Annual, semiannual, quarterly and monthly compounding divide a year into 1, 2, 4 and 12 periods respectively. A quoted **nominal annual rate $j$ compounded $m$ times per year** assigns the periodic rate
+
+$$
+i=\frac{j}{m}.
+$$
+
+Here $j$ is a decimal annual quotation, $m$ counts equal periods per year, and $i$ is the decimal rate for one such period. For an integer number of years $t$, there are $n=mt$ complete periods. More generally, the count must still correspond to complete periods under the specified convention; partial-period treatment needs its own assumption.
+
+| Compounding convention | $m$ (periods/year) | Periodic rate for $j=12\%$ | Periods in $t$ years |
+| --- | --- | --- | --- |
+| Annual | 1 | 12% per year | $t$ |
+| Semiannual | 2 | 6% per half-year | $2t$ |
+| Quarterly | 4 | 3% per quarter | $4t$ |
+| Monthly | 12 | 1% per month | $12t$ |
+
+Under these fixed-rate, reinvestment assumptions, a full year's accumulation is $(1+j/m)^m$. Subtract the original unit principal to get the **effective annual rate**, abbreviated EAR:
+
+$$
+\mathrm{EAR}=\left(1+\frac{j}{m}\right)^m-1.
+$$
+
+### An annual quotation is not an annual yield
+
+For **12% nominal annually, compounded monthly**, $j=0.12$, $m=12$ and $i=0.01$ per month. In one year there are twelve compounding steps:
+
+$$
+\mathrm{EAR}=(1.01)^{12}-1\approx0.1268250301=12.68250301\%.
+$$
+
+Thus EAR ≈ **12.6825%**, while the nominal quotation remains 12%. For an illustrative principal of ₱100,000, the one-year amount is approximately ₱112,682.50. The extra growth is a consequence of compounding within the year; it is not an additional fee or a second rate added to the nominal rate. EAR here measures interest accumulation only, not a fee-inclusive contractual cost.
+
+### Converting an effective annual rate
+
+If the given rate is already an effective annual rate $r$, dividing it by $m$ would generally change the economic rate. Instead find the periodic rate that produces the same full-year factor:
+
+$$
+(1+i)^m=1+r\quad\Longrightarrow\quad i=(1+r)^{1/m}-1.
+$$
+
+For example, 8% **effective annually** corresponds to approximately 1.942655% effective per quarter, not 2%. In contrast, 8% **nominal annually compounded quarterly** assigns 2% per quarter and an EAR of 8.243216%. Always retain the quoted convention when recording a rate. In this section, “nominal annual” identifies a compounding quotation; it does not mean that the rate has been adjusted for inflation.
+
+</LessonSection>
+
+<LessonSection section={sections[7]}>
+
+A meaningful comparison fixes the same principal, start date, end date, periodic rate and cash-flow assumptions. For annual simple interest and annual compounding with positive principal $P$, positive annual rate $i$, and an integer $n$ years,
+
+$$
+F_{\text{simple}}=P(1+in),\qquad F_{\text{compound}}=P(1+i)^n.
+$$
+
+The balances agree at $n=0$ and $n=1$. For two or more full years, the compound balance is larger under these assumptions: prior interest stays in the balance and earns additional interest. This statement does not compare unmatched nominal quotations, fees or partial-year contracts. In both models, doubling the principal doubles the future amount; it does not double the percentage rate. A longer horizon makes the reinvestment mechanism increasingly important.
+
+<WorkedExample id="interest-comparison-example" title="Compare equal initial reserves under matched assumptions">
+
+#### Problem, given and required
+
+An initial **₱50,000 earns 8% per year for three years**. Compare annual simple interest with annual compound interest. Given: $P=50{,}000$ PHP, $i=0.08$ per annual period and $n=3$ years for both models. Required: the two future amounts and their difference.
+
+#### Assumptions and applicable formulas
+
+Use the same initial date, three complete years, fixed annual rates and retained interest, with no intervening cash flows, fees or taxes. Only the interest mechanism changes. Use $F_s=P(1+in)$ for simple interest and $F_c=P(1+i)^n$ for compound interest.
+
+#### Solution
+
+1. Simple interest adds $50{,}000(0.08)=4{,}000$ PHP each year:
+
+$$
+F_s=50{,}000[1+0.08(3)]=62{,}000\ \text{PHP}.
+$$
+
+2. Compound interest multiplies the balance by 1.08 each year:
+
+$$
+F_c=50{,}000(1.08)^3=62{,}985.60\ \text{PHP}.
+$$
+
+3. Compare values at the **same year-3 date**:
+
+$$
+F_c-F_s=62{,}985.60-62{,}000=985.60\ \text{PHP}.
+$$
+
+**Final answer: simple future amount = ₱62,000.00; compound future amount = ₱62,985.60; difference = ₱985.60.** In year 2 the first year's ₱4,000 earns an additional ₱320; by year 3, earlier interest and the additional accumulated interest both contribute. The original principal is the same in each comparison.
+
+#### Engineering interpretation
+
+The compound reserve is ₱985.60 larger at year 3 under this matched model. A higher modeled amount alone is not a recommendation between real products with potentially different risks, withdrawal terms, fees or tax treatment. Those conditions must be identified before applying the comparison to an actual decision.
+
+</WorkedExample>
+
+The year-by-year table makes the change of base visible without relying on a colored chart:
+
+| End of year | Simple balance (PHP) | Compound balance (PHP) | Compound minus simple (PHP) |
+| --- | --- | --- | --- |
+| 0 | 50,000.00 | 50,000.00 | 0.00 |
+| 1 | 54,000.00 | 54,000.00 | 0.00 |
+| 2 | 58,000.00 | 58,320.00 | 320.00 |
+| 3 | 62,000.00 | 62,985.60 | 985.60 |
+
+</LessonSection>
+
+<LessonSection section={sections[8]}>
+
+### Construction equipment financing
+
+A simplified financing problem may state a principal, a fixed interest model and one maturity payment. That information supports a single-payment calculation. An actual equipment loan with monthly principal repayments is a different cash-flow pattern; computing interest on the original amount for the entire term would not automatically describe its outstanding balance.
+
+### Project capital planning and future expenditures
+
+A team can model the present reserve needed for one future expenditure, as in the ₱150,000 example, or the future balance produced by a current reserve. First establish whether the given expenditure is already a future-date estimate. Inflating an amount that already represents the future price and then treating the result as that same estimate would count an adjustment twice. No inflation forecast is introduced here.
+
+### Engineering investments and alternative comparisons
+
+Interest factors can place single amounts at a common comparison date. But alternatives must also have comparable service, timing and assumptions. A cheap instrument that cannot perform the required work is not an equivalent engineering alternative; neither is a balance received at year 1 automatically comparable to one received at year 4 without a time model.
+
+These examples show where the mathematical tools fit, not a complete decision procedure. Uncertainty, service requirements, safety, procurement rules, cash availability and actual contract terms may matter. This chapter supplies no borrowing or investment recommendation and does not calculate taxes, fees, recurring payments, depreciation or project profitability.
+
+</LessonSection>
+
+<LessonSection section={sections[9]}>
+
+- **Using a percentage as a whole number.** Enter 0.08 for 8%. A result based on $i=8$ uses 800% per period, not 8%.
+- **Leaving the interest period unstated.** Record “0.06 per year” or “0.01 per month,” then match the duration to that period. A rate and an exponent are a pair.
+- **Treating months as years.** For annual simple interest over 9 months, use $n=9/12$. For monthly compounding over three years, use $n=36$ with a monthly rate.
+- **Dividing an effective annual rate as though it were nominal.** $i=j/m$ applies to the specified nominal quotation; an equivalent periodic rate from EAR requires a root.
+- **Using an annual rate directly in monthly compounding.** The nominal 12% monthly-compounding case has $i=0.01$ and $n=12$ for one year, not $i=0.12$ and $n=12$.
+- **Choosing a model from the calculator rather than the statement.** Simple interest keeps the original principal as its interest base. Compound interest uses the accumulated balance. Identify the model before choosing multiplication or a power.
+- **Confusing future amount with interest.** $F$ includes the principal. For these no-payment cases, interest is $I=F-P$, not $F$.
+- **Discounting by subtracting a simple charge.** To reverse compound growth, divide by $(1+i)^n$. Subtracting $Fin$ from $F$ does not undo compounding.
+- **Rounding every intermediate balance.** Keep sufficient internal precision and round monetary answers to two decimals at the end for these exercises. A real contract may prescribe different rounding; state it before using a schedule.
+- **Dropping currency units or dates.** ₱62,985.60 at year 3 is an amount; 8% is a rate. Never add a percentage directly to a peso amount, and never combine values at different dates without a consistent model.
+
+<LessonNote title="Checks before accepting an answer">
+
+At a nonnegative rate, accumulation should not reduce the initial amount. At a positive rate over a positive duration, discounting a single future amount should give a smaller present amount. At $n=0$ or $i=0$, the compound factor is one. Check these limits, estimate the order of magnitude, and reverse the calculation when possible. Such checks catch many entry errors but cannot repair a wrong model or an ambiguous rate convention.
+
+</LessonNote>
+
+</LessonSection>
+
+<LessonSection section={sections[10]}>
+
+An original board-exam-style interest problem can test whether you recognize a model and organize given information, not merely whether you remember an equation. Use this sequence:
+
+1. **Read the required quantity.** Is it interest alone, a future total, present worth, or an effective rate? Mark the comparison date.
+2. **Extract the convention.** Distinguish “simple annually,” “compounded annually,” “nominal annually compounded monthly” and “effective annually.” If a necessary condition is missing, identify the ambiguity rather than inventing it.
+3. **Match rate and duration.** Write $i$ and $n$ with their period meanings beside the equation. Convert a percent to its decimal form before evaluation.
+4. **Apply and interpret.** Substitute with units, retain precision, and state the monetary result at its correct date or the rate over its correct period.
+5. **Check the answer.** Reverse a present-worth calculation, compare first-year balances, or test whether a distractor is only the interest when the question asks for the total.
+
+The three original interactive questions below cover a simple-interest calculation, a compound future amount and the nominal/effective distinction. Their full solutions explain the reasoning and identify the relevant period. They are educational practice, not official PRC items, predictions of examination coverage or evidence of PRC endorsement.
+
+</LessonSection>
+
+<LessonSection section={sections[11]}>
+
+Start with the transaction, not a formula list: identify one initial amount and one future date, then ask whether the interest base stays fixed or grows. Simple interest adds equal amounts for equal periods; compound interest repeatedly applies a growth factor to the evolving balance. Present worth reverses that compound accumulation to a chosen earlier date.
+
+- **Simple interest:** $I=Pin$ and $F=P(1+in)$, with a constant original principal and matched rate/duration. Fractional periods require a specified proportional convention.
+- **Compound future worth:** $F=P(1+i)^n$, with a constant effective periodic rate, complete compounding periods, retained interest and no intervening payments.
+- **Compound present worth:** $P=F/(1+i)^n$, using the same period convention as accumulation.
+- **Nominal-to-periodic conversion:** $i=j/m$, and $n=mt$ for the stated full-year horizon.
+- **Effective annual rate:** $\mathrm{EAR}=(1+j/m)^m-1$ under the same reinvestment assumptions. From an effective annual rate $r$, use $i=(1+r)^{1/m}-1$ for an equivalent periodic rate.
+
+The variables carry distinct jobs: $P$ and $F$ are PHP amount magnitudes at different dates, $I$ is PHP interest, $i$ is the decimal rate per period, $n$ counts those periods, $j$ is the nominal annual quotation, $m$ is compounds per year, and $t$ is elapsed years. Use the model named in the question, compare matched assumptions, and round only after solving. Single-payment formulas do not by themselves represent an installment loan or a complete engineering project.
+
+For further study, review the algebra and rate conversions whenever they are unclear. Additional Engineering Economy chapters are not published through this milestone; no unavailable next lesson is linked or required.
+
+### Academic references and review boundary
+
+The notation, convention checks and further-reading links were verified on **2026-10-20** against these real open educational texts:
+
+- [OpenStax, Contemporary Mathematics, §6.3 Simple Interest](https://openstax.org/books/contemporary-mathematics/pages/6-3-simple-interest): simple-interest terminology and period matching.
+- [OpenStax, Contemporary Mathematics, §6.4 Compound Interest](https://openstax.org/books/contemporary-mathematics/pages/6-4-compound-interest): single-payment accumulation and discounting.
+- [OpenStax, Principles of Finance 2e, §7.1 Now versus Later Concepts](https://openstax.org/books/principles-finance-2e/pages/7-1-now-versus-later-concepts): the role of timing and single cash flows.
+- [OpenStax, Principles of Finance 2e, §8.4 Stated versus Effective Rates](https://openstax.org/books/principles-finance-2e/pages/8-4-stated-versus-effective-rates): nominal and effective rate distinctions.
+
+CEPath's explanations, engineering scenarios, tables and practice are original; no textbook passages, figures or official examination questions are reproduced. Referenced books may use different symbols; this chapter's definitions above govern its calculations. Its formulas and examples have undergone source and calculation checks, **not independent professional academic review**. The Product Owner has approved publication of this chapter and its questions. Publication approval is separate from independent academic review, which remains pending.
+
+</LessonSection>

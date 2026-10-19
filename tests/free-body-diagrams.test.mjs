@@ -27,7 +27,7 @@ test('approved FBD publication preserves identity and enables public navigation,
  assert.equal(lesson.slug,'free-body-diagrams');assert.equal(lesson.displayOrder,2);
  assert.equal(lesson.availability,'published');assert.deepEqual(lesson.prerequisiteIds,['psad-statics-forces-vectors']);
  assert.equal(getLessonHref(subject,module,lesson),'/curriculum/psad/engineering-mechanics-statics/free-body-diagrams');assert(getPublishedLesson(id));
- assert.equal(getPublishedLessons().length,2);assert.deepEqual(getPracticeQuestions(id),freeBodyDiagramQuestions);
+ assert.equal(getPublishedLessons().length,3);assert.deepEqual(getPracticeQuestions(id),freeBodyDiagramQuestions);
  assert.equal(getRecommendedNeighbors(module,lesson.id).previous.id,'psad-statics-forces-vectors');
 });
 test('trusted published lesson compiles with nine measurable objectives, eight sections and review status',async()=>{

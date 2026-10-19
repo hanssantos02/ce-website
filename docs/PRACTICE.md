@@ -2,7 +2,9 @@
 
 Milestone 10 adds five original single-answer multiple-choice questions to the existing Forces and Vectors lesson. Practice is public, optional and independent of authentication, saved lesson progress and the dashboard. There is no new route, dependency, database migration, backend endpoint or attempt storage.
 
-M11A publication (2026-10-19) adds two Free Body Diagrams questions, for seven across two published lessons. The stable IDs and checked solutions are unchanged from academic preview. Independent academic review remains pending.
+M11A publication (2026-10-19) adds two Free Body Diagrams questions, for seven across two published lessons at that checkpoint. The stable IDs and checked solutions are unchanged from academic preview. Independent academic review remains pending.
+
+M11B publication (2026-10-20) adds three Simple and Compound Interest questions, bringing the current bank to ten across three published lessons. All IDs, answers and complete solutions are preserved from the checked draft; publication approval does not claim independent academic review.
 
 ## Question architecture
 

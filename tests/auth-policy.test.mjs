@@ -40,7 +40,8 @@ test('login return paths include only canonical published lesson destinations',(
 });
 
 test('new published lesson is a safe exact post-login return destination',()=>{
- const href='/curriculum/psad/engineering-mechanics-statics/free-body-diagrams';
- assert.equal(safeDestination(href),href);
- assert.equal(safeDestination(href+'?next=//evil.example'),'/account');
+ for(const href of ['/curriculum/psad/engineering-mechanics-statics/free-body-diagrams','/curriculum/mste/engineering-economy/simple-and-compound-interest']){
+  assert.equal(safeDestination(href),href);
+  for(const suffix of ['?next=//evil.example','#section','/'])assert.equal(safeDestination(href+suffix),'/account');
+ }
 });

@@ -82,3 +82,15 @@ test('published Free Body Diagrams can complete first without changing Forces an
  assert.equal(db.rows.get(lesson),'in_progress');
  assert(!db.rows.has(second));
 });
+
+test('published interest progress is independent of PSAD and uses the verified identity',async()=>{
+ const db=gateway(),interest='mste-economy-simple-compound-interest';
+ assert(getPublishedLesson(interest));
+ assert.equal((await performProgress({lessonId:interest,intent:'completed',user_id:'forged'},db)).status,'completed');
+ assert.equal(db.rows.size,1);assert(!db.rows.has(lesson));
+ await performProgress({lessonId:lesson,intent:'in_progress'},db);
+ assert.equal((await loadProgress([interest,lesson],db)).statuses[interest],'completed');
+ await performProgress({lessonId:interest,intent:'reset'},db);
+ assert(!db.rows.has(interest));assert.equal(db.rows.get(lesson),'in_progress');
+ assert(db.calls.every(c=>c[1]==='verified-user'));
+});

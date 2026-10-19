@@ -2,28 +2,40 @@
 version: 1
 slug: "app-curriculum-slug-moduleslug-lessonslug-page-tsx"
 primary_target: "app/curriculum/[slug]/[moduleSlug]/[lessonSlug]/page.tsx"
-related_targets: ["app/globals.css","content/curriculum.ts","content/lesson-documents.ts","content/lessons/forces-and-vectors.mdx","components/lesson/lesson-reader.tsx","components/lesson/educational-components.tsx","components/lesson/force-components-diagram.tsx"]
+related_targets: ["app/globals.css","content/curriculum.ts","content/lesson-documents.ts","content/lessons/forces-and-vectors.mdx","content/lessons/free-body-diagrams.mdx","components/lesson/lesson-reader.tsx","components/lesson/lesson-index.tsx","components/lesson/educational-components.tsx","components/lesson/force-components-diagram.tsx","mdx-options.mjs","rehype-equation-accessibility.mjs"]
 ---
 
-# Milestone 06: Engineering lesson reader
+# CE-DESIGN-002: Textbook and engineering lesson workspace
 
-Mode: Read. Filipino civil engineering students learn forces and vectors beside review notes in ordinary study light. Code-led extension of the existing faculty bulletin. The supplied lesson structure fixes the scope; the Product Owner selected a compact native section index. Preserve the established URL and every planned curriculum entry.
+Mode: Read. Filipino civil engineering students read substantial textbook lessons, inspect figures and equations, and practice beside review notes. Code-led refinement of the existing engineering faculty bulletin. The Product Owner selected the right-hand contextual section index on wide screens. Existing lesson IDs, routes, publication state and learning behavior remain authoritative.
 
 ## Direction contract
 
-THESIS: A complete, sourced introductory lesson connects vector meaning, sign conventions, a proportional diagram and checked calculations in one calm reading sheet.
+THESIS: A calm engineering textbook connects chapter context, conceptual explanations, exact figures, worked examples and optional practice with contextual desktop chapter navigation.
 
-OWN-WORLD: Existing white reading sheets, deep blue ink, Source Serif academic headings and Source Sans prose, square geometry and measured neutral rules. Existing tokens and 68ch reading measure remain authoritative.
+OWN-WORLD: Inherit M02's faculty blue and white reading sheets, Source Serif academic headings and Source Sans prose, square geometry and measured neutral rules. Preserve every existing color, spacing and typography primitive, the 68ch reading measure and 18px prose at line-height 1.8. Refine the shared reader without replacing its identity.
 
-STORY: Recognize the lesson and advisory sequence, inspect its objectives, read or jump through nine sections, follow the 500 N worked example, try one optional static exercise and reveal its solution, then return to the module. Publication never implies academic endorsement or student completion.
+STORY: Identify the chapter, subject/module, advisory sequence and honest editorial status; optionally inspect or explicitly change personal progress; read or jump to any section, inspect figures and equations, reveal solutions and practice freely. Section location is reading position, never student progress. Published free lessons remain publicly accessible regardless of prerequisites, completion or index state.
 
-FIRST VIEWPORT: Real hierarchy breadcrumbs, a 32px serif lesson title and existing description align with a centered reading column. Context/order and an honest academic-review note follow. The compact native index precedes learning objectives; no marketing hero or sidebar. Below, clear headings and open prose lead into readable equations, a proportional 500 N/30-degree vector SVG, ruled worked-example blocks and quiet notes. Mobile retains the same reading order and uses local equation/table scrolling when needed.
+FIRST VIEWPORT: Real wider wrapping breadcrumbs precede a 48px serif chapter heading (38px at and below 48rem), description and grouped subject/module, sequence and editorial metadata. Below, a textbook reading column and optional progress region sit beside a 240px right index at and above 72rem, separated by 4rem. Below that breakpoint, one closed native disclosure occupies the linear flow above objectives and below progress; no duplicate mobile index. The client opens the disclosure at wide widths and resets opening when the breakpoint changes. Sustained prose stays within 68ch. Cool Paper insets distinguish worked examples; exact SVG figures receive sequential blue “Figure N.” caption prefixes; equations retain local scrolling and named keyboard-focusable regions.
 
-FORM: Inherited faculty bulletin, candidate 5 / seed 1f41974b from M02. No new world, seed or raster comp. Signature interactions: native section anchors transfer focus to actual reading sections; a keyboard-accessible disclosure reveals the static practice solution. Math is server-compiled, diagrams are exact SVG geometry, and available hierarchy links remain freely accessible.
+FORM: Code-led refinement, incumbent candidate 5 / seed 1f41974b from M02. No new assets or world replacement. Keep the existing page container, header and footer. The small client index enhances server-rendered native anchors with passive, animation-frame-coalesced scroll observation and `aria-current="location"`, without writes or forced sequence. Without JavaScript, the disclosure and links remain usable. Strict server KaTeX HTML/MathML preserves notation; a repository rehype plugin adds `tabIndex={0}`, `role="region"` and the name “Equation” to display math. Existing practice and explicit progress controls retain their own behavior.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
 
-Scope: trusted local MDX, build-time KaTeX/MathML, one complete Forces and Vectors lesson at its existing route, reusable reading/educational components, honest published/planned states and unchanged stable IDs. Check all calculations and angle/unit assumptions, strict compilation, actual routes/assets, native focus/navigation and desktop/mobile/tablet/narrow/user-width rendering. No progress, authentication, quiz engine, CMS, new curriculum lessons, commit or push. Stop before M07.
+Scope: shared reader presentation and the bounded equation-accessibility plugin. Preserve lesson content/calculations, IDs, routes, metadata, question keys/engine, authentication, progress, database and RLS. Free Body Diagrams was already published by D021; `/review/free-body-diagrams` remains a redirect to its canonical public lesson. No draft status, new draft-review system, packages, curriculum expansion, commit, push or deployment is introduced by this refinement.
+
+## Current implementation and evidence — 2026-10-19
+
+The chapter header and responsive workspace are implemented in the shared reader and stylesheet. One native lesson index includes objectives, actual document sections and interactive practice only when questions exist. On desktop it is sticky at 1.5rem, capped at `calc(100dvh - 3rem)` with local overflow; on phones/tablets it uses native disclosure behavior. Objectives end with a neutral rule and 2rem padding. Existing lesson sections retain 4rem top margins and 1.5rem anchor clearance. Worked-example padding is 1.5rem, reducing to 1rem at and below 48rem; shared figure captions use a per-lesson counter. No progress writes are triggered by reading or index tracking.
+
+Reported verification from the implementation and visual-review agents: 59 tests, lint, strict types and production build passed; 16 production HTTP cases and responsive checks at 1440, 1266, 768, 390 and 320px were checked. The independent visual reviewer opened all 12 captures under `.impeccable/review/design-v2` and reported no material UI defects. Capture files use `.jpg` for their actual native JPEG bytes. This evidence covers presentation and exercised local behavior; it does not establish hosted private-progress behavior, screen-reader acceptance or independent academic review.
+
+DESIGN.md and schemaVersion 2 `.impeccable/design.json` record the finished refinement. All existing frontmatter primitives and 15 incumbent sidecar preview objects are preserved. A sixteenth, explicitly static workspace specimen shows the new chapter/contextual-index composition; it does not simulate live scroll observation, progress writes, practice grading or KaTeX. Earlier preview specimens and the milestone evidence below are historical/source-derived records, not assertions that the current reader retains its old centered/no-sidebar composition.
+
+## Historical evidence
+
+The following M05/M06 records describe their original implementation boundaries and checks. CE-DESIGN-002 above supersedes their 32px chapter title, centered reader and all-width collapsed-index layout. Subsequent milestones already introduced optional progress and practice and published Free Body Diagrams; historical “no client boundary,” “no progress,” “no authentication,” “planned” and “stop before M07” statements are not current constraints.
 
 Historical M05 record:
 
